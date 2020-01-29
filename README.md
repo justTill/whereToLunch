@@ -173,6 +173,8 @@ docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collect
 Create an admin
 docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser
 
+Our application can be accessed via: http://localhost:1337/
+
 Licences
 Copyright © 2020 Pilarczyk Till
 
