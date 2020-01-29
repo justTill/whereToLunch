@@ -52,7 +52,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: print
-      run: ${{ BUILD_NUMBER }}
+      run: ${{ steps.buildnumber.outputs.build_number }}
       
     - name: Log into registry
       run: docker login -u ${{ secrets.DOCKERNAME }} -p ${{ secrets.DOCKERPASSWORD }}
