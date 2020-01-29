@@ -38,4 +38,4 @@ jobs:
       - name: Push image
         if: github.ref == 'refs/heads/master'
         run: |
-          docker-compose push
+          docker-compose -f docker-compose.prod.yml push
