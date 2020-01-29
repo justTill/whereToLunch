@@ -16,11 +16,11 @@ jobs:
       - name: Intall dependencies
         run: |
           pip3 install setuptools wheel
-          pip3 install -r requirements.txt
+          pip3 install -r ./app/requirements.txt
           pip3 install unittest-xml-reporting
           
       - name: Run test
-        run: python3 manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
+        run: python3 ./app/manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
         
   buildAndPush:
     needs: healtcheck
@@ -34,7 +34,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERNAME }} -p ${{ secrets.DOCKERPASSWORD }}
 
       - name: Build images
-        run: docker-compose build
+        run: docker-compose -f docker-compose.prod.yml build
         
       - name: Push image
         if: github.ref == 'refs/heads/master'
