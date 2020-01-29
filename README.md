@@ -1,5 +1,3 @@
-Github Read Me
-![enter image description here](https://api.travis-ci.org/%7B%7BjustTill%7D%7D/%7B%7BTestForLightningLunch%7D%7D.png?branch=%7B%7Bmaster%7D%7D)
 [Docker Hub](https://hub.docker.com/)
 # Where To Lunch ?
 
