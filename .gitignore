@@ -1,0 +1,11 @@
+__pycache__
+polls/static/polls/CACHE
+/app/polls/static/polls/CACHE/
+/app/CACHE
+/app/CACHE/
+.env.prod
+.env.prod.db
+/app/deployment
+/app/mediafiles
+/app/staticfiles
+/app/database

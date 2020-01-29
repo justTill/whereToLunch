@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de" class="background">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {{website_name}}
+    </title>
+    {% load static %}
+    {% load compress %}
+    {% compress css %}
+        <link type="text/x-scss" href="{% static 'index.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'header.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'weather.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'voteForm.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'statistics.scss' %}" rel="stylesheet" media="screen">
+        <style>
+            .background{
+                background-image: url({{  background_image_url }} );
+            }
+        </style>
+    {% endcompress %}
+</head>
+<nav>
+    <div class="header">
+        {% include "./header.html" %}
+    </div>
+</nav>
+<body>
+    <div class="choiceOfTheDay">
+        {% include "./choiceOfTheDay.html" %}
+    </div>
+<main>
+    <div class="voteStats">
+        {% include "votesStatistic.html" %}
+    </div>
+    <div class="voteForm">
+        {% include "./restaurantVoteForm.html" %}
+    </div>
+</main>
+    <div class="choicesStats">
+        {% include "choiceStatistic.html" %}
+    </div>
+</body>
+</html>

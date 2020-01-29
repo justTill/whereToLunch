@@ -1,0 +1,23 @@
+<h1>Enter absence</h1>
+
+<form class="saveNewAbsence" action="{% url 'absenceCalendar:save_new_absence' %}" method="post">
+    {% csrf_token %}
+    {{ absence_form.non_field_errors }}
+    <div class="fieldWrapper">
+        <label>Startdate:</label>
+        <br>
+        {{ absence_form.absenceFrom }}
+    </div>
+    <br>
+    <div class="fieldWrapper">
+        <label>Enddate:</label>
+        <br>
+        {{ absence_form.absenceTo }}
+    </div>
+    <br>
+    {% if user.is_authenticated %}
+        <input class="save" type="submit" value="Enter Absence">
+    {% else %}
+        <input class="save" type="submit" value="Please Login">
+    {% endif %}
+</form>

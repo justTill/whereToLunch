@@ -1,0 +1,9 @@
+.weather {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  .weatherIcon {
+    align-self:flex-start;
+  }
+}

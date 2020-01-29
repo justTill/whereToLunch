@@ -1,0 +1,48 @@
+.voteForm {
+  tbody, thead tr { display: block; }
+  tbody {
+    height: 400px;
+    overflow: auto;
+    overflow-y: scroll;
+  }
+  th {
+    font-size: 20px;
+  }
+  tbody td, thead th {
+    width: 140px;
+  }
+  th, td {
+    border-bottom: 1px solid #ddd;
+    height: 50px;
+    vertical-align: bottom;
+    padding-right: 50px;
+  }
+  .radioButton {
+    border-bottom: none;
+    vertical-align: middle;
+    width: 0px;
+  }
+
+  .vote{
+    margin-top: 15px;
+    font-size: 30px;
+  }
+
+  .iAmOut {
+    font-size: 24px;
+  }
+  .doNotCare {
+    font-size: 24px;
+  }
+
+  form {
+    display: inline;
+  }
+
+  a {
+    color: black;
+  }
+  .userThatNotVoted {
+    margin-right: 10px;
+  }
+}

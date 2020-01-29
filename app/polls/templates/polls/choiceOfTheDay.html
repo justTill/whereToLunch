@@ -1,0 +1,12 @@
+<p>
+    {% if choice_of_the_day|length == 1 %}
+        <span class="choiceOfTheDay">Choice of the Day:</span> {{ choice_of_the_day.0 }}
+        <span class="supportedBy">Supported by: {{ supporters|join:", " }}</span>
+
+    {% elif choice_of_the_day|length >= 1 %}
+        <span class="choiceOfTheDay">head to head race between: </span>{{ choice_of_the_day|join:", " }}
+
+    {% else %}
+        <span class="choiceOfTheDay">There is no Choice of the Day</span>
+    {% endif %}
+</p>

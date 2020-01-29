@@ -1,0 +1,187 @@
+Github Read Me
+![enter image description here](https://api.travis-ci.org/%7B%7BjustTill%7D%7D/%7B%7BTestForLightningLunch%7D%7D.png?branch=%7B%7Bmaster%7D%7D)
+[Docker Hub](https://hub.docker.com/)
+# Where To Lunch ?
+
+"Where To Lunch" is a Web application, to end the daily team discussions in the morning on the topic "where are we going today for lunch ?"
+
+
+## How
+
+### Basic Features
+* Each day all users can vote for restaurants where they want to eat.
+* Votes gets deleted daily at 12.30 after that you can vote for the next date.
+
+An admin needs to create Users (as staff member, so they can log in).
+Admin can give users the right to create/change/view Restaurants. User should have not more rights than this.
+To vote you need to be logged in.
+Admin should customize the application (more details below)
+
+
+ ### Special Features
+ * Weather Forecast for the current/next day.
+	* Based on what time it is. (if it is after noon) 
+	* Weather forecast is pulled from: [https://openweathermap.org/forecast5](https://openweathermap.org/forecast5)
+
+*  Slack notifications from a slack app (UTC+01:00 Time)
+	* Notifications at 11am for: Users That have not voted yet. 
+	* Notification at 15 pm if tomorrow is bad weather.
+
+* Statistics: 
+	* for the current vote status.
+	* restaurant choices of the past.
+
+* Absence calendar
+	* Users can enter an absent if they know they are unavailable on a specific date or  period.
+
+* You can customize specific things (only the admin can do this)
+	* For slack notifications you need to add the "Bot User OAuth Access Token".
+		* you need to enter the name of the slack channel that should get the notification too.
+		* you can enter the Slack Member ID from a slack user to his profile, so the message is more personalized
+	* To show the forecast you need to add an API key from: [https://openweathermap.org/](https://openweathermap.org/)
+		* A free API Key is sufficient.
+		* You need to enter a City.
+			* You can find your city here [https://openweathermap.org/find?q=](https://openweathermap.org/find?q=)
+				* if you found your city copy the name e.q London, Cologne....
+	* You can change the title of the application.
+	* You can change the background image.
+# Technologies
+
+* [Django](https://www.djangoproject.com/)
+* [Chartjs.org](https://www.chartjs.org/)
+
+# Build and run locally
+First we need to install [python](https://www.python.org/downloads/).
+   
+After that we need to Install [pip](https://pip.pypa.io/en/stable/installing/),
+pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4 downloaded from [python.org](https://www.python.org/downloads/) or if you are working in a Virtual Environment created by virtualenv or pyvenv.
+
+Now pip need to install all dependencies for the project.
+```
+pip install requirements.txt
+```
+After that we can run following command to start our application.
+```
+python3 manage.py runserver --settings=LightningLunch.local_settings
+
+```
+Our application can be accessed via: [`http://127.0.0.1:8000`](http://127.0.0.1:8000)
+
+If you want to run your production environment with your locally code changes you need to run following commands
+
+Take down old volume
+```docker-compose down -v```
+
+Build Images
+```  SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build ```
+
+**If you use the old volume you do not need to do following steps**
+Migrate new database scheme
+```docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput ```
+
+Collect all static files
+```docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear```
+
+Create an admin
+```docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser```
+
+
+# Licences
+
+Copyright (c) 2020 Pilarczyk Till
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+enter image description here
+Docker Hub
+
+Where To Lunch ?
+“Where To Lunch” is a Web application, to end the daily team discussions in the morning on the topic “where are we going today for lunch ?”
+
+How
+Basic Features
+Each day all users can vote for restaurants where they want to eat.
+Votes gets deleted daily at 12.30 after that you can vote for the next date.
+An admin needs to create Users (as staff member, so they can log in).
+Admin can give users the right to create/change/view Restaurants. User should have not more rights than this.
+To vote you need to be logged in.
+Admin should customize the application (more details below)
+
+Special Features
+Weather Forecast for the current/next day.
+
+Based on what time it is. (if it is after noon)
+Weather forecast is pulled from: https://openweathermap.org/forecast5
+Slack notifications from a slack app (UTC+01:00 Time)
+
+Notifications at 11am for: Users That have not voted yet.
+Notification at 15 pm if tomorrow is bad weather.
+Statistics:
+
+for the current vote status.
+restaurant choices of the past.
+Absence calendar
+
+Users can enter an absent if they know they are unavailable on a specific date or period.
+You can customize specific things (only the admin can do this)
+
+For slack notifications you need to add the “Bot User OAuth Access Token”.
+you need to enter the name of the slack channel that should get the notification too.
+you can enter the Slack Member ID from a slack user to his profile, so the message is more personalized
+To show the forecast you need to add an API key from: https://openweathermap.org/
+A free API Key is sufficient.
+You need to enter a City.
+You can find your city here https://openweathermap.org/find?q=
+if you found your city copy the name e.q London, Cologne…
+You can change the title of the application.
+You can change the background image.
+Technologies
+Django
+Chartjs.org
+Build and run locally
+First we need to install python.
+
+After that we need to Install pip,
+pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4 downloaded from python.org or if you are working in a Virtual Environment created by virtualenv or pyvenv.
+
+Now pip need to install all dependencies for the project.
+
+pip install requirements.txt
+After that we can run following command to start our application.
+
+python3 manage.py runserver --settings=LightningLunch.local_settings
+
+Our application can be accessed via: http://127.0.0.1:8000
+
+If you want to run your production environment with your locally code changes you need to run following commands
+
+Take down old volume
+docker-compose down -v
+
+Build Images
+SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build
+
+If you use the old volume you do not need to do following steps
+Migrate new database scheme
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+
+Collect all static files
+docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+
+Create an admin
+docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+
+Licences
+Copyright © 2020 Pilarczyk Till
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Markdown selection 22 bytes 3 words 0 lines Ln 72, Col 25HTML 3484 characters 654 words 63 paragraphs

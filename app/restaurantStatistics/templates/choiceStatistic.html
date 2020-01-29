@@ -1,0 +1,73 @@
+{% include "polls/js.html" %}
+<div class="choicesChart">
+    <span>Statistics of the past:</span>
+    <canvas id="choicesStatistics"></canvas>
+</div>
+
+
+
+<script>
+    var restaurant_names = []
+    var votes = []
+    var background_color = []
+    {% block jquery %}
+        var endpoint = '/api/chart/choices'
+        $.ajax({
+            method:"GET",
+            url: endpoint,
+            success: function (choicestatistic) {
+                restaurants = choicestatistic.choices_of_the_past
+                for (var index in restaurants) {
+                    restaurant_names.push(restaurants[index].name)
+                    votes.push(restaurants[index].votes)
+                    background_color.push(restaurants[index].color + 'B3')
+                }
+                choicesChart()
+            },
+            error: function (error_data) {
+                console.log(error_data)
+            }
+        })
+    {% endblock %}
+
+function choicesChart() {
+    var ctxChoices = document.getElementById('choicesStatistics').getContext('2d');
+    var choicesChart = new Chart(ctxChoices, {
+        type: 'bar',
+        data: {
+            labels: restaurant_names,
+            datasets: [{
+                label: '',
+                data: votes,
+                backgroundColor: background_color,
+                borderWidth: 2
+
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        fontStyle: "bold",
+                        fontSize: 18
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontStyle: "bold",
+                        fontSize: 18
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: false
+            },
+        }
+    });
+}
+</script>

@@ -1,0 +1,55 @@
+.absence {
+  display :flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: baseline;
+  input[type=submit]  {
+    font-size: 24px;
+  }
+}
+.absenceForm {
+  text-align: center;
+  li {
+    list-style-type: none;
+    color: red;
+    font-weight: bold;
+    margin-right: 30px;
+  }
+  .fieldWrapper{
+    margin: 10px;
+    font-size: 24px;
+    input[type=date] {
+      font-size: 20px;
+    }
+  }
+
+}
+.absenceLists {
+  b {
+    font-size: 24px;
+  }
+  .oneAbsence {
+    padding: 4px;
+    margin: 4px;
+    text-align: left;
+    .from {
+      margin-left: 40px;
+    }
+    .to {
+      margin-left: 42px;
+    }
+    .fromWithBox {
+      margin-left: 19px;
+    }
+  }
+  .absences {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .userAbsences {
+      padding: 15px;
+    }
+  }
+}
+

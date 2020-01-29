@@ -1,0 +1,106 @@
+{% load static %}
+{% if restaurant_list %}
+    <form action="{% url 'polls:vote' %}" method="post">
+        {% csrf_token %}
+        {% if not_voted %}
+            <b class="userThatNotVoted">
+                {% for user in not_voted %}
+                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
+                    {% if row %}{% endif %}
+                        {% if forloop.last %}
+                            {{ user }}
+                        {% else %}
+                            {{ user }},&nbsp;
+                        {% endif %}
+                    {% if not row %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </b>
+            <br>
+            <span>{% if not_voted|length == 1%} need {% else %} needs {% endif %} to vote.</span>
+            <br>
+        {% endif %}
+        {% if user_that_do_not_care %}
+            <br>
+            <b class="userThatAreOut">
+                {% for user in user_that_do_not_care %}
+                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
+                    {% if row %}{% endif %}
+                        {% if forloop.last %}
+                            {{ user }}
+                        {% else %}
+                            {{ user }},&nbsp;
+                        {% endif %}
+                    {% if not row %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </b>
+            <br>
+            <span>do not care where they will have lunch.</span>
+        {% endif %}
+        <br>
+        <br>
+        {% if user_that_are_out %}
+            <b class="userThatAreOut">
+                {% for user in user_that_are_out %}
+                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
+                    {% if row %}{% endif %}
+                        {% if forloop.last %}
+                            {{ user }}
+                        {% else %}
+                            {{ user }},&nbsp;
+                        {% endif %}
+                    {% if not row %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </b>
+            <br>
+            <span>{% if user_that_are_out|length == 1%} is {% else %} are {% endif %} out for {% if is_after_noon %}tomorrow {% else %}today {% endif %}</span>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Restaurants
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurant in restaurant_list %}
+                    <tr>
+                        <td>
+                            <a{% if restaurant.restaurant_menu_link %} href="{{ restaurant.restaurant_menu_link }}" target="_blank" {% endif %}> {{ restaurant.restaurant_name }} </a>
+                        </td>
+                        <td class="radioButton">
+                            {% if user.is_authenticated %}
+                                <input type="checkbox" name="voteButton" value="{{ restaurant.restaurant_name }}" {% if restaurant in voted_restaurants %} checked="checked" {% endif %} >
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if not user.is_authenticated %}
+            <input class="vote" type="submit" value="Please Login first">
+        {% else %}
+            <input class="vote" type="submit" value="Vote now">
+        {% endif %}
+    </form>
+    {% if user.is_authenticated %}
+        <form class="iamOutForm" action="{% url 'polls:iAmOut' %}" method="post">
+            {% csrf_token %}
+            <br>
+            <input class="iAmOut" type="submit" value="I am out">
+        </form>
+        <form class="doNotCare" action="{% url 'polls:doNotCare' %}" method="post">
+            {% csrf_token %}
+            <br>
+            <input class="doNotCare" type="submit" value="Do not care">
+        </form>
+    {% endif %}
+{% else %}
+    <p>No restaurants available</p>
+{% endif %}

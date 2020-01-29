@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de" class="background">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {{website_name}}
+    </title>
+    {% load static %}
+    {% load compress %}
+    {% compress css %}
+        <link type="text/x-scss" href="{% static 'index.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'header.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'weather.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'absence.scss' %}" rel="stylesheet" media="screen">
+        <style>
+            .background{
+                background-image: url( {{ django_static_url }}{{  background_image_url }} );
+            }
+        </style>
+    {% endcompress %}
+</head>
+<nav>
+    <div class="header">
+        {% include "polls/header.html" %}
+    </div>
+</nav>
+<body>
+<div class="absence">
+    <div class="absenceForm">
+        {% include "absenceCalendar/absenceForm.html" %}
+    </div>
+    <div class="absenceLists">
+        {% include "absenceCalendar/absenceLists.html" %}
+    </div>
+</div>
+</body>
+</html>
