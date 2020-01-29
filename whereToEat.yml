@@ -39,7 +39,7 @@ services:
     ports:
       - 1337:80
     depends_on:
-      - web
+      - lunchApp
 
 volumes:
   postgres_data:
