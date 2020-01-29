@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  web:
-    image: justtill/test-repo:where_to_eat_latest
+  lunchApp:
+    image: justtill/where_to_eat:where_to_eat_latest
     build:
       context: ./app
       dockerfile: Dockerfile.prod
