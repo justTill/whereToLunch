@@ -34,7 +34,7 @@ services:
       - POSTGRES_PASSWORD=${SQL_PASSWORD}
       - POSTGRES_DB=${DATABASE}
   nginx:
-    image: justtill/test-repo:nginx_latest
+    image: justtill/where_to_eat:nginx_latest
     build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
