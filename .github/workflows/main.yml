@@ -37,4 +37,4 @@ jobs:
       - name: Push image
         if: github.ref == 'refs/heads/master'
         run: |
-          docker-compose -f docker-compose.prod.yml push
+          DATABASE_NAME=where_to_eat SQL_USER=where_to_eat SQL_PASSWORD=where_to_eat docker-compose -f docker-compose.prod.yml push
