@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  lunchApp:
+  lunchapp:
     image: justtill/where_to_eat:where_to_eat_latest
     build:
       context: ./app
@@ -42,7 +42,7 @@ services:
     ports:
       - 1337:80
     depends_on:
-      - lunchApp
+      - lunchapp
 
 volumes:
   postgres_data:
