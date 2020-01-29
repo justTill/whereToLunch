@@ -45,8 +45,8 @@ Admin should customize the application (more details below)
 	* You can change the background image.
 # Technologies
 
-* [Django](https://www.djangoproject.com/){:target="_blank"}
-* [Chartjs.org](https://www.chartjs.org/){:target="_blank"}
+* [Django](https://www.djangoproject.com/)
+* [Chartjs.org](https://www.chartjs.org/)
 
 # Build and run locally
 First we need to install [python](https://www.python.org/downloads/).
