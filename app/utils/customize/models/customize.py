@@ -10,6 +10,7 @@ class Customize(models.Model):
         (CustomizeChoices.SLACK_APP_API_KEY.value, 'slack_app_api_key'),
         (CustomizeChoices.SLACK_CHANNEL.value, 'slack_channel'),
         (CustomizeChoices.CITY_FOR_WEATHER.value, 'city_for_weather'),
+        (CustomizeChoices.WEBSITE_URL.value, 'website_url')
     ]
     key_name = models.CharField(choices=CHOICES, default=CHOICES, max_length=50, unique=True)
     string_property = models.CharField(max_length=500, null=True, blank=True)

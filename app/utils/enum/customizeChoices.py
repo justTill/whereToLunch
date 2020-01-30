@@ -8,3 +8,4 @@ class CustomizeChoices(Enum):
     BACKGROUND_IMAGE = 'background_image'
     SLACK_CHANNEL = 'slack_channel'
     CITY_FOR_WEATHER = 'city_for_weather'
+    WEBSITE_URL = 'website_url'

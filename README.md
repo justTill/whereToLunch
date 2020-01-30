@@ -75,13 +75,13 @@ Build Images
 
 **If you use the old volume you do not need to do following steps**
 Migrate new database scheme
-```docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput ```
+```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput ```
 
 Collect all static files
-```docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear```
+```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collectstatic --no-input --clear```
 
 Create an admin
-```docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser```
+```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser```
 
 Our application can be accessed via: [`http://localhost:1337/`](http://localhost:1337/)
 
