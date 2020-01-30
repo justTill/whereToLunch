@@ -33,7 +33,7 @@ class CustomizeLogic:
         return self.get_customize_string_property(city_object)
 
     def get_website_url(self):
-        website_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.CITY_FOR_WEATHER)
+        website_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.WEBSITE_URL)
         return self.get_customize_string_property(website_object)
 
     def get_customize_string_property(self, customize):
