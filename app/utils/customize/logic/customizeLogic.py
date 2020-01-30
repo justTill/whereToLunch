@@ -28,11 +28,15 @@ class CustomizeLogic:
         slack_channel_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.SLACK_CHANNEL)
         return self.get_customize_string_property(slack_channel_object)
 
+    def get_city_for_weather(self):
+        city_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.CITY_FOR_WEATHER)
+        return self.get_customize_string_property(city_object)
+
+    def get_website_url(self):
+        website_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.CITY_FOR_WEATHER)
+        return self.get_customize_string_property(website_object)
+
     def get_customize_string_property(self, customize):
         if customize and customize.get().string_property:
             return customize.get().string_property
         return ''
-
-    def get_city_for_weather(self):
-        city_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.CITY_FOR_WEATHER)
-        return self.get_customize_string_property(city_object)

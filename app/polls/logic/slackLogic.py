@@ -32,7 +32,7 @@ class SlackLogic:
         user_that_voted = self.userLogic.get_users_that_not_voted_yet()
         message = self.get_random_slack_message_with_users(user_that_voted)
 
-        self.send_message_to_slack_channel(message)
+        self.send_message_to_slack_channel(message + self.customize_logic.get_website_url)
 
     def send_weather_forecast_to_slack_channel(self):
         current_weather_forecast = weather_context()
@@ -47,7 +47,7 @@ class SlackLogic:
                 .format(temp=current_weather_forecast.get('temperature_in_c').__str__(),
                         desc=current_weather_forecast.get('description'))
 
-            self.send_message_to_slack_channel(message)
+            self.send_message_to_slack_channel(message + self.customize_logic.get_website_url)
 
     def send_message_to_slack_channel(self, message):
         api_key = self.customize_logic.get_slack_api_key()
