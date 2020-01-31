@@ -9,10 +9,7 @@ class UserLogicTest(SetUpTests):
     today = datetime.date.today()
 
     def test_get_users_that_not_voted_yet(self):
-        users = self.userLogic.get_users_that_not_voted_yet()
-        for user in users:
-            self.assertEquals(user, [])
-
+        self.assertFalse(self.userLogic.get_users_that_not_voted_yet().exists())
         user = User.objects.create(username='user', is_staff=True)
         user.set_password('12345')
         user.save()
