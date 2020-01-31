@@ -90,14 +90,14 @@ The application contains 2 Rest Endpoints.
 
 1. /api/charts/votes 
     
-    gives back all Restaurant names that have Votes. Including all Supporters,
-    Images from the Supporters if they have one and the color of the Restaurant so that the statistics can be in Color
+    gives back all restaurant names that have votes. Including all supporters,
+    Images from the supporters if they have one and the color of the restaurant so that the statistics can be in color
  
     
 2. /api/charts/votes
     
-    gives back all Restaurants names with the number of Times the Restaurant won the
-    voting and the Color.
+    gives back all restaurants names with the number of times the restaurant won the
+    voting and the color.
 
 # Licences
 
