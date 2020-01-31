@@ -136,6 +136,17 @@ class AbsenceLogicTest(TestCase):
         absences = self.absence_logic.get_sorted_absent_absences()
         self.assertEqual(absences, {'test_user': [absence], 'test_user_second': [absence_two]})
 
+    def test_delete_vote_absence_for_user(self):
+        self.refresh_absence_databse()
+        user = User.objects.get(username='test_user')
+        absence = Absence.objects.create(user=user,
+                                         absenceFrom=self.today,
+                                         absenceTo=self.today,
+                                         reason=Reasons.OUT.value)
+
+        self.absence_logic.delete_vote_absence_for_user(user, self.yesterday)
+        self.assertEqual(list(Absence.objects.all()), [])
+
     def refresh_absence_databse(self):
         for a in Absence.objects.all():
             a.delete()

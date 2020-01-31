@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from polls.models import Restaurant, Vote
 from restaurantStatistics.models import ChoicesOfTheWeek
-
+from polls.models import Profile
 
 class SetUpTests(TestCase):
     def setUp(self):
@@ -15,4 +15,9 @@ class SetUpTests(TestCase):
         testUser = User.objects.create(username='testUser', is_staff=True)
         testUser.set_password('12345')
         testUser.save()
+
+        profile = Profile.objects.get(user=testUser)
+        profile.slack_member_id = "member_id"
+        profile.userImage = "image_url"
+        profile.save()
         Vote.objects.create(restaurant=offenbach, user=testUser)

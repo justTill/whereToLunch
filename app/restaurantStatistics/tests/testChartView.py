@@ -8,7 +8,7 @@ class ChartView(SetUpTests):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.data), 1)
         self.assertEquals(response.data['restaurants_with_votes'],
-                          [{'name': 'Offenbach', 'supporters': [' testUser'], 'color': '#ffffff', 'images': [None]}])
+                          [{'name': 'Offenbach', 'supporters': [' testUser'], 'color': '#ffffff', 'images': ['/mediafiles/image_url']}])
 
     def test_ChoicesChart(self):
         response = self.client.get(reverse('restaurantStatistics:api-charts-choices'))

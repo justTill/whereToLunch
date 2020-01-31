@@ -13,7 +13,7 @@ def get_forecast_json():
     city = customize_logic.get_city_for_weather()
     if key and city:
         url = 'http://api.openweathermap.org/data/2.5/forecast'
-        r = requests.get('{0}?q={1}&lang={2}&APPID={3}'.format(
+        r = requests.get('{0}?q={1}&APPID={2}'.format(
             url,
             city,
             key))
