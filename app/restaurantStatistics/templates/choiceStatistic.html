@@ -11,7 +11,7 @@
     var votes = []
     var background_color = []
     {% block jquery %}
-        var endpoint = '/api/chart/choices'
+        var endpoint = '/api/charts/choices'
         $.ajax({
             method:"GET",
             url: endpoint,
@@ -19,7 +19,7 @@
                 restaurants = choicestatistic.choices_of_the_past
                 for (var index in restaurants) {
                     restaurant_names.push(restaurants[index].name)
-                    votes.push(restaurants[index].votes)
+                    votes.push(restaurants[index].times_won)
                     background_color.push(restaurants[index].color + 'B3')
                 }
                 choicesChart()

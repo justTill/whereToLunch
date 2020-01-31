@@ -53,7 +53,7 @@ class RestaurantStatisticsLogic:
         for name in restaurant_names:
             data.append({
                 'name': name,
-                'votes': self.get_votes_for_restaurant_name(name),
+                'times_won': self.get_votes_for_restaurant_name(name),
                 'color': self.get_color_for_restaurant_name(name)
             })
         return data

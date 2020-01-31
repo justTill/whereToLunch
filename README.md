@@ -85,6 +85,20 @@ Create an admin
 
 Our application can be accessed via: [`http://localhost:1337/`](http://localhost:1337/)
 
+## Endpoints
+The application contains 2 Rest Endpoints.
+
+1. /api/charts/votes 
+    
+    gives back all Restaurant names that have Votes. Including all Supporters,
+    Images from the Supporters if they have one and the color of the Restaurant so that the statistics can be in Color
+ 
+    
+2. /api/charts/votes
+    
+    gives back all Restaurants names with the number of Times the Restaurant won the
+    voting and the Color.
+
 # Licences
 
 Copyright (c) 2020 Pilarczyk Till
