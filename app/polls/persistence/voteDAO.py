@@ -19,9 +19,6 @@ class VoteDAO:
         supporters = [vote.user.username for vote in votes]
         return supporters
 
-    def get_votes_for_restaurant(self, restaurant):
-        return self.get_all_votes().filter(restaurant=restaurant)
-
     def save_vote_for_restaurant_with_user(self, restaurant, user):
         vote = Vote.objects.create(restaurant=restaurant, user=user)
         vote.save()

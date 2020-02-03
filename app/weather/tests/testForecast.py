@@ -1,11 +1,12 @@
 import datetime
+import forecast
 from decimal import Decimal
-
 from django.test import TestCase
 from django.utils import timezone
-from forecast import save_new_forecast
 from weather.models import Forecast
 from weather.logic import weather_context
+from utils.customize.models import Customize
+from utils.enum import CustomizeChoices
 
 
 class SetUpTests(TestCase):
@@ -45,13 +46,25 @@ class SetUpTests(TestCase):
 
     def test_safe_new_fore_cast(self):
         for json in self.first_forecast['list']:
-            save_new_forecast(json)
+            forecast.save_new_forecast(json)
         assert len(Forecast.objects.all()), 2
 
     def test_weather_context(self):
+        current_forecast = weather_context()
+        self.assertEqual(current_forecast, {'temperature_in_c': '', 'weather_group': '', 'description': '', 'icon': ''})
         timestamp = timezone.now() + datetime.timedelta(hours=1)
         Forecast.objects.create(timestamp=timestamp, temperature=120.42, description='sunny', icon_id='01d')
         context = weather_context()
         self.assertEquals(context['temperature_in_c'], Decimal('120.42'))
         self.assertEquals(context['description'], 'sunny')
         self.assertEquals(context['icon'], '01d')
+
+    def test_get_forecast_json(self):
+
+        Customize.objects.create(key_name=CustomizeChoices.OPENWEATHERMAP_API_KEY.value,
+                                 string_property="jhgjhg",
+                                 )
+        Customize.objects.create(key_name=CustomizeChoices.CITY_FOR_WEATHER.value,
+                                 string_property="Cologne",
+                                 )
+        self.assertEqual(forecast.get_forecast_json(), None)

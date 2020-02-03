@@ -9,3 +9,5 @@ polls/static/polls/CACHE
 /app/mediafiles
 /app/staticfiles
 /app/database
+/app/.coverage
+/app/cover

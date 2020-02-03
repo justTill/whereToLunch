@@ -1,3 +1,4 @@
+import datetime
 from decimal import Decimal
 from absenceCalendar.models import Absence
 from django.test import TestCase
@@ -11,6 +12,7 @@ from utils.date import dateManager
 class AbsenceIndexTest(TestCase):
     today = dateManager.today()
     tomorrow = dateManager.tomorrow()
+    yesterday = today + datetime.timedelta(days=-1)
 
     def setUp(self):
         Forecast.objects.create(temperature=12, description="sunny")
@@ -44,11 +46,11 @@ class AbsenceIndexTest(TestCase):
         login = self.client.post('/admin/login/?next=/save_new_absence', {'username': 'erster_test_user', 'password': '12345'})
         self.assertRedirects(login, '/save_new_absence', status_code=302)
         response = self.client.post('/save_new_absence', {'user': user, 'absenceFrom': self.today, 'absenceTo': self.today})
-
+        self.assertEqual(len(Absence.objects.all()), 2)
+        response = self.client.post('/save_new_absence', {'user': user, 'absenceFrom': self.yesterday, 'absenceTo': self.yesterday})
         self.assertEqual(len(Absence.objects.all()), 2)
 
-
-def test_delete_absences(self):
+    def test_delete_absences(self):
         user = User.objects.get(username='erster_test_user')
         absence = Absence.objects.get(user__username='erster_test_user')
 
