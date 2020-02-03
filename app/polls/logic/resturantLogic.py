@@ -32,7 +32,7 @@ class RestaurantLogic:
         if votes:
             return votes.values_list('restaurant_count', flat=True).get()
         else:
-            logger.info("there is no vote for that restaurant" % restaurant_id)
+            logger.info("there is no vote for that restaurant")
             return 0
 
     def get_restaurants_with_names(self, restaurant_names):
