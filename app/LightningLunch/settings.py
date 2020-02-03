@@ -25,7 +25,6 @@ DEBUG = bool(os.environ.get("DEBUG", default=False))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default='localhost 127.0.0.1 [::1]').split(" ")
 
 # Application definition
-
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'weather.apps.WeatherConfig',
