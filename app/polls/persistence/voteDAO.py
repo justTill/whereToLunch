@@ -14,8 +14,8 @@ class VoteDAO:
     def get_votes_from_user(self, user):
         return self.get_all_votes().filter(user=user)
 
-    def get_supporters_todays_choice(self, choice_of_the_day):
-        votes = self.get_all_votes().filter(restaurant=choice_of_the_day[0])
+    def get_supporters_for_restaurant(self, restaurant):
+        votes = self.get_all_votes().filter(restaurant=restaurant)
         supporters = [vote.user.username for vote in votes]
         return supporters
 
