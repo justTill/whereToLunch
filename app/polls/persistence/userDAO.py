@@ -14,5 +14,5 @@ class UserDAO:
         logger.info('get image from user: %s' % user)
         if user and user.get().profile and user.get().profile.userImage:
             return user.get().profile.userImage.url
-        logger.warning('could not get Image Url check if an image is deposited')
+        logger.warning('could not get Image URL, check if an image is deposited')
         return None
