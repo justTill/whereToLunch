@@ -177,7 +177,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': './app/logs/debug.log'
+            'filename': './logs/debug.log'
         }
     },
     'loggers': {
