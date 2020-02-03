@@ -11,4 +11,4 @@ polls/static/polls/CACHE
 /app/database
 /app/.coverage
 /app/cover
-
+/app/logs/debug.log
