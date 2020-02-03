@@ -5,6 +5,7 @@ from polls.persistence import Restaurant
 from absenceCalendar.models import Absence
 from utils.enum import Reasons
 
+
 class IndexViewTest(SetUpTests):
     def test_index(self):
         offenbach = Restaurant.objects.get(restaurant_name='Offenbach')
@@ -27,19 +28,28 @@ class IndexViewTest(SetUpTests):
         response = self.client.post('/vote/', {'voteButton': "Super Salad"})
         self.assertRedirects(response, '/', status_code=302)
 
-        self.i_am_out(self.client)
-        self.do_not_care(self.client)
+        self.client.post('/admin/logout')
+        self.i_am_out()
+        self.client.post('/admin/logout')
+        self.do_not_care()
 
-    def i_am_out(self, client):
-        user = User.objects.get(username="erster_test_user")
-        response = client.post('/iAmOut/')
+    def i_am_out(self):
+        user = User.objects.create(username="out_user", is_staff=True)
+        user.set_password("1234")
+        user.save()
+        self.client.post('/admin/login/?next=/vote/', {'username': 'out_user', 'password': '1234'})
+        response = self.client.post('/iAmOut/')
         self.assertRedirects(response, '/', status_code=302)
+        print(Absence.objects.all())
         absence = Absence.objects.get(user=user)
         self.assertEquals(absence.reason, Reasons.OUT.value)
 
-    def do_not_care(self, client):
-        user = User.objects.get(username="erster_test_user")
-        response = client.post('/doNotCare/')
+    def do_not_care(self):
+        user = User.objects.create(username="do_not_care_user", is_staff=True)
+        user.set_password("1234")
+        user.save()
+        self.client.post('/admin/login/?next=/vote/', {'username': 'do_not_care_user', 'password': '1234'})
+        response = self.client.post('/doNotCare/')
         self.assertRedirects(response, '/', status_code=302)
         absence = Absence.objects.get(user=user)
         self.assertEquals(absence.reason, Reasons.DONOTCARE.value)

@@ -154,3 +154,6 @@ NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=app',
 ]
+
+RESET_VOTES_MIN = 30
+RESET_VOTES_HOUR = 12
