@@ -13,7 +13,7 @@ class RestaurantLogicTest(SetUpTests):
         stinkeburger = Restaurant.objects.get(restaurant_name='Stinkeburger')
         purino = Restaurant.objects.get(restaurant_name='Purino')
 
-        self.assertEquals(len(restaurantSet), 4)
+        self.assertEquals(len(restaurantSet), 5)
 
         self.assertIn(offenbach, restaurantSet)
 
