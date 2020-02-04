@@ -1,38 +1,46 @@
+import logging
+
 from absenceCalendar.persistence import AbsenceDAO
 from utils.enum import Reasons
 from utils.date import dateManager
+
+logger = logging.getLogger(__name__)
 
 
 class AbsenceLogic:
     absence_DAO = AbsenceDAO()
 
     def set_vote_absence_for_user(self, user, reason):
+        logger.info("set (vote) absence for User: %s with reason %s" % (user.username, reason.value))
         current_vote_day = dateManager.current_vote_day()
-        absences = self.absence_DAO.get_absences_from_user(user).filter(reason=reason.value)
-        self.delete_old_absence_for_user(user)
-
-        if not self.check_if_a_absence_is_active_for_date(absences, current_vote_day):
-            self.absence_DAO.set_absence_for_user(user, current_vote_day, current_vote_day, reason)
+        self.delete_old_and_current_absences_for_user(user)
+        self.absence_DAO.set_absence_for_user(user, current_vote_day, current_vote_day, reason)
 
     def get_absences_for_do_not_care(self):
+        logger.info("get absences for do not Care")
         return self.absence_DAO.get_absences_for_reason(Reasons.DONOTCARE)
 
     def get_absences_for_out(self):
+        logger.info("get absences for out")
         return self.absence_DAO.get_absences_for_reason(Reasons.OUT)
 
     def get_absent_absences(self):
+        logger.info("get absences for just being Absent")
         return self.absence_DAO.get_absences_for_reason(Reasons.ABSENT)
 
     def get_sorted_absent_absences(self):
+        logger.info("get sorted absent Absences from all Users")
         absences_from_all_users = self.get_absent_absences()
         user_list = []
+        logger.info("collect all Users that have an absent Absences")
         for absence in absences_from_all_users:
             if absence.user.username not in user_list:
                 user_list.append(absence.user.username)
 
+        logger.info("Sort all Users with their absent absences")
         sorted_absences = {}
-        for user in user_list:
-            sorted_absences[user] = []
+        for user_name in user_list:
+            sorted_absences[user_name] = []
         for absence in absences_from_all_users:
             sorted_absences[absence.user.username].append(absence)
 
@@ -47,10 +55,9 @@ class AbsenceLogic:
                 active_absences.append(absence)
         return active_absences
 
-    def delete_old_absence_for_user(self, user):
+    def delete_old_and_current_absences_for_user(self, user):
         current_vote_day = dateManager.current_vote_day()
-        reasons = [Reasons.OUT.value, Reasons.DONOTCARE.value, Reasons.ABSENT.value]
-        user_absences_for_reason = self.absence_DAO.get_absences_from_user(user).filter(reason__in=reasons)
+        user_absences_for_reason = self.absence_DAO.get_absences_from_user(user)
 
         for absence in user_absences_for_reason.filter(absenceFrom__lte=current_vote_day):
             self.absence_DAO.delete_absence(absence)

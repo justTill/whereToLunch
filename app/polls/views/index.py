@@ -54,7 +54,7 @@ def vote(request):
     restaurant_names = request.POST.getlist('voteButton')
     if restaurant_names:
         vote_logic.save_vote_for_restaurants_with_names(restaurant_names, user)
-        absence_logic.delete_old_absence_for_user(user)
+        absence_logic.delete_old_and_current_absences_for_user(user)
     return HttpResponseRedirect(reverse('polls:index'))
 
 

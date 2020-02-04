@@ -56,14 +56,14 @@ class AbsenceLogicTest(TestCase):
         firstUser = User.objects.get(username='test_user')
         secondUser = User.objects.get(username='test_user_second')
 
-        self.absence_logic.delete_old_absence_for_user(firstUser)
+        self.absence_logic.delete_old_and_current_absences_for_user(firstUser)
         self.assertNotIn(absence_first_user, self.absence_dao.get_absences_from_user(firstUser))
 
         Absence.objects.create(user=firstUser,
                                absenceFrom=self.today,
                                absenceTo=self.today,
                                reason=Reasons.OUT.value)
-        self.absence_logic.delete_old_absence_for_user(firstUser)
+        self.absence_logic.delete_old_and_current_absences_for_user(firstUser)
         self.assertIn(absence_second_user, self.absence_dao.get_absences_from_user(secondUser))
 
     def test_set_todays_absence_for_user(self):
