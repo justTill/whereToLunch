@@ -1,6 +1,9 @@
+import structlog
 from restaurantStatistics.persistence import RestaurantStatisticsDAO
 from polls.persistence import RestaurantDAO
 from polls.logic import VoteLogic, RestaurantLogic, UserLogic
+
+logger = structlog.getLogger(__name__)
 
 
 class RestaurantStatisticsLogic:
@@ -11,29 +14,32 @@ class RestaurantStatisticsLogic:
     user_logic = UserLogic()
 
     def get_different_restaurant_names(self):
+        logger.info("get different restaurants names that one at least on time")
         choices = self.restaurant_statistics_dao.get_restaurant_names()
         restaurant_dict = {c.restaurant.restaurant_name for c in choices}
         return restaurant_dict
 
     def get_votes_for_restaurant_name(self, restaurant_name):
+        logger.info("get current votes for a restaurant with the name %s " % restaurant_name)
         vote = self.restaurant_statistics_dao.get_votes_for_restaurant(
             self.restaurant_dao.get_restaurant_with_name(restaurant_name)
         )
-
         return vote
 
     def get_restaurants_that_have_votes(self):
+        logger.info("get all restaurants that have at least one vote")
         return {
-            restaurant.restaurant_name: vote
-            for restaurant, vote
-            in self.restaurant_logic.get_restaurants_with_votes().items()
-            if vote != 0
-        }
+                restaurant.restaurant_name: vote
+                for restaurant, vote
+                in self.restaurant_logic.get_restaurants_with_votes().items()
+                if vote != 0
+            }
 
     def get_color_for_restaurant_name(self, restaurant_name):
         return self.restaurant_dao.get_color_for_restaurant_with_name(restaurant_name)
 
     def get_current_vote_statistics_data(self):
+        logger.info("process current vote statistics data, and get them in order for json endpoint")
         restaurants_that_have_votes = self.get_restaurants_that_have_votes()
         data = []
         for restaurant in restaurants_that_have_votes:
@@ -48,6 +54,7 @@ class RestaurantStatisticsLogic:
         return data
 
     def get_choices_of_the_past(self):
+        logger.info("process restaurant data of the past and collect information for the json endpoint ")
         restaurant_names = self.get_different_restaurant_names()
         data = []
         for name in restaurant_names:
