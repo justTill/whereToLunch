@@ -28,11 +28,11 @@ def get_forecast_json():
             logger.info("forecast json was successfully received")
             return r.json()
         except Exception as e:
-            logger.ERROR("something went wrong, is the city-name: (%s) or api-key (%s) correct ? ")
+            logger.error("something went wrong, is the city-name: (%s) or api-key (%s) correct ? ")
             print(e)
             return None
 
-    logger.warn("there is no api key or city name deposited")
+    logger.warning("there is no api key or city name deposited")
 
 
 def update_forecast():

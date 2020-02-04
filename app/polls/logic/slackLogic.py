@@ -69,8 +69,8 @@ class SlackLogic:
                 slack.chat.post_message(channel_name, message)
                 logger.info('successful sending of a message')
             except Exception as e:
-                logger.warning('something went wrong, is the api_key correct (%s)? and the channel name (%s)?'
+                logger.error('something went wrong, is the api_key correct (%s)? and the channel name (%s)?'
                                % (api_key, channel_name))
-                logger.warning('trying to send a notification caused following error %s' % e)
+                logger.error('trying to send a notification caused following error %s' % e)
         else:
             logger.warning('there is no api Key and/or channel_name')
