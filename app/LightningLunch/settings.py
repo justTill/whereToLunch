@@ -145,15 +145,6 @@ COMPRESS_PRECOMPILERS = (
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
-# Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-# Tell nose to measure coverage on the 'foo' and 'bar' apps
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=./app',
-]
-
 RESET_VOTES_MIN = 30
 RESET_VOTES_HOUR = 12
 
@@ -177,7 +168,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': './app/logs/debug.log'
+            'filename': './logs/debug.log'
         }
     },
     'loggers': {
