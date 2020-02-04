@@ -1,10 +1,10 @@
-import logging
+import structlog
 from polls.persistence import UserDAO
 from polls.persistence import VoteDAO
 from absenceCalendar.persistence import AbsenceDAO
 from absenceCalendar.logic import AbsenceLogic
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class UserLogic:

@@ -1,10 +1,10 @@
-import logging
+import structlog
 
 from absenceCalendar.persistence import AbsenceDAO
 from utils.enum import Reasons
 from utils.date import dateManager
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class AbsenceLogic:

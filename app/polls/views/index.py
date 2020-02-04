@@ -1,4 +1,4 @@
-import logging
+import structlog
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import loader
@@ -16,7 +16,7 @@ vote_logic = VoteLogic()
 user_logic = UserLogic()
 absence_logic = AbsenceLogic()
 customize_logic = CustomizeLogic()
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 def index(request):

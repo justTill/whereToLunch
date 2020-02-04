@@ -1,9 +1,9 @@
-import logging
+import structlog
 from django.db.models import Count, Max
 from polls.persistence import VoteDAO
 from polls.logic import RestaurantLogic
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class VoteLogic:

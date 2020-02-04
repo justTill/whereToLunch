@@ -1,8 +1,8 @@
 import collections
-import logging
+import structlog
 from polls.persistence import RestaurantDAO, VoteDAO
 
-logger = logging.getLogger(__name__)
+logger = structlog.getLogger(__name__)
 
 
 class RestaurantLogic:
