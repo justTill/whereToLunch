@@ -1,6 +1,7 @@
 import datetime
 import forecast
 from decimal import Decimal
+
 from django.test import TestCase
 from django.utils import timezone
 from weather.models import Forecast
@@ -67,4 +68,6 @@ class SetUpTests(TestCase):
         Customize.objects.create(key_name=CustomizeChoices.CITY_FOR_WEATHER.value,
                                  string_property="Cologne",
                                  )
-        self.assertEqual(forecast.get_forecast_json(), None)
+        response = forecast.get_forecast_json()
+        self.assertRaises(Exception, response)
+        self.assertEqual(response, None)
