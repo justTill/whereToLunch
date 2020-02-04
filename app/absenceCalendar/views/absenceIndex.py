@@ -1,3 +1,4 @@
+import structlog
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -11,6 +12,8 @@ from utils.date import dateManager
 from polls.logic import VoteLogic
 from django.conf import settings
 from utils.customize.logic import CustomizeLogic
+
+logger = structlog.getLogger(__name__)
 
 absence_logic = AbsenceLogic()
 vote_logic = VoteLogic()
@@ -29,6 +32,7 @@ def absenceIndex(request):
 
 @staff_member_required
 def save_new_absence(request):
+    logger.info("save absence")
     context = get_standard_context()
     if request.method == 'POST':
         form = AbsenceForm(request.POST)
@@ -39,10 +43,13 @@ def save_new_absence(request):
             new_absence.reason = Reasons.ABSENT.value
             new_absence.save()
             absence_logic.delete_vote_absence_for_user(request.user, new_absence.absenceFrom)
+            logger.info("form is valid, save absence for user: %s and delete old one" % request.user.username)
             if new_absence.absenceFrom <= current_vote_day:
+                logger.info("User voted, we need to delete that votes")
                 vote_logic.delete_votes_from_user(request.user)
             return HttpResponseRedirect(reverse('absenceCalendar:absenceIndex'))
         else:
+            logger.warn("Form was not valid")
             context['absence_form'] = form
     return render(request, 'absenceCalendar/absenceIndex.html', context)
 
@@ -52,10 +59,12 @@ def delete_absences(request):
     user = request.user
     absences = request.POST.getlist('absenceBox')
     absence_logic.delete_absences_for_user(user, absences)
+    logger.info("delete absences: %s for user %s" % (user.username, absences))
     return HttpResponseRedirect(reverse('absenceCalendar:absenceIndex'))
 
 
 def get_standard_context():
+    logger.info("get standard context things for Absences index page")
     absences_from_users = absence_logic.get_sorted_absent_absences()
     website_name = customize_logic.get_website_name()
     background_image_url = customize_logic.get_background_image_url()
