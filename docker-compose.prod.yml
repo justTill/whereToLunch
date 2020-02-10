@@ -15,7 +15,7 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=${SECRET_KEY}
-      - DJANGO_ALLOWED_HOSTS=['*']
+      - ALLOWED_HOSTS=['*']
       - SQL_ENGINE=django.db.backends.postgresql
       - DATABASE=postgres
       - SQL_DATABASE=${DATABASE_NAME}
