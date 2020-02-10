@@ -23,7 +23,7 @@ class SlackLogic:
                 switcher = {
                     1: member_ids + "are to slow. They do not get any kind of food today",
                     2: "NO FOOD FOR " + member_ids,
-                    3: "No food for " + member_ids,
+                    3: "Following users need to vote " + member_ids,
                     4: "shame shame shame shame shame shame " + member_ids + " shame shame shame shame shame shame",
                     5: member_ids + "are on a diet, so no food for them, not even a crumb of bread."
                 }
@@ -51,7 +51,7 @@ class SlackLogic:
                       "\nThe exact weather forecast looks as follows: " \
                       "\nTemperatur: * {temp}°C* " \
                       "\nDescription: *{desc}* " \
-                      "\nJVote Now!!!!" \
+                      "\nVote Now!!!!" \
                 .format(temp=current_weather_forecast.get('temperature_in_c').__str__(),
                         desc=current_weather_forecast.get('description'))
             url = self.customize_logic.get_website_url()
