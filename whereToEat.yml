@@ -12,7 +12,7 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=${SECRET_KEY}
-      - DJANGO_ALLOWED_HOSTS=localhost 0.0.0.0 [::1]
+      - DJANGO_ALLOWED_HOSTS=['*']
       - SQL_ENGINE=django.db.backends.postgresql
       - DATABASE=postgres
       - SQL_DATABASE=${DATABASE_NAME}
@@ -32,7 +32,6 @@ services:
       - POSTGRES_DB=${DATABASE_NAME}
   nginx:
     image: justtill/where_to_eat:nginx_latest
-    build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
