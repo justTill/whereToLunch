@@ -12,7 +12,7 @@ class SetUpTests(TestCase):
 
     def test_get_random_slack_message_with_users(self):
         message = self.slack.get_random_slack_message_with_users([])
-        self.assertEqual(message, "Super es haben alle Auserwählten abgestimmt")
+        self.assertEqual(message, "congratulation all user have voted")
 
         user = User.objects.create(username='test_user', is_staff=True)
         user.set_password('12345')

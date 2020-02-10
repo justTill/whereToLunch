@@ -21,16 +21,16 @@ class SlackLogic:
                     member_ids = member_ids + "<@" + user.profile.slack_member_id + "> "
             if member_ids:
                 switcher = {
-                    1: "Die Schnecken des Tages heißen: " + member_ids,
-                    2: "ES GIBT HEUTE KEIN ESSEN FÜR " + member_ids,
-                    3: "Essen fällt für " + member_ids + "aus",
+                    1: member_ids + "are to slow. They do not get any kind of food today",
+                    2: "NO FOOD FOR " + member_ids,
+                    3: "Following users need to vote " + member_ids,
                     4: "shame shame shame shame shame shame " + member_ids + " shame shame shame shame shame shame",
-                    5: member_ids + "machen eine Diät, daher bekommen sie heute nichts zum Essen."
+                    5: member_ids + "are on a diet, so no food for them, not even a crumb of bread."
                 }
-                return switcher.get(random.randint(1, 5), "Folgende Personen sollten noch Abstimmen " + member_ids) \
-                       + " Jetzt abstimmen !!! "
+                return switcher.get(random.randint(1, 5), "Following users need to vote " + member_ids) \
+                       + " Vote NOW !!! "
         logger.info('no user is left, all have voted')
-        return "Super es haben alle Auserwählten abgestimmt"
+        return "congratulation all user have voted"
 
     def send_vote_notification_to_slack_channel(self):
         logger.info('send notification to slack channel')
@@ -47,11 +47,11 @@ class SlackLogic:
 
         if current_weather_forecast.get('weather_group') in bad_weather_groups:
             logger.info('send message')
-            message = "Das morgige Wetter ist nicht ganz so gut :( " \
-                      "\nDie Genauen Wetteraussichten sehen wie folgt aus: " \
+            message = "The weather forecast for tomorrow is not that good :( " \
+                      "\nThe exact weather forecast looks as follows: " \
                       "\nTemperatur: * {temp}°C* " \
-                      "\nBeschreibung: *{desc}* " \
-                      "\nJetzt Abstimmen!!!!" \
+                      "\nDescription: *{desc}* " \
+                      "\nVote Now!!!!" \
                 .format(temp=current_weather_forecast.get('temperature_in_c').__str__(),
                         desc=current_weather_forecast.get('description'))
             url = self.customize_logic.get_website_url()
@@ -70,7 +70,7 @@ class SlackLogic:
                 logger.info('successful sending of a message')
             except Exception as e:
                 logger.error('something went wrong, is the api_key correct (%s)? and the channel name (%s)?'
-                               % (api_key, channel_name))
+                             % (api_key, channel_name))
                 logger.error('trying to send a notification caused following error %s' % e)
         else:
             logger.warning('there is no api Key and/or channel_name')
