@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.1] - 2020-02-10
 ### Added
-- default background. BackgroundColor is a gray shade, if the admin does not provide an image
+- default background. If the admin does not provide a background-image, background-color will be set to a gray shade
 - changelog 
 
 ### Changed
 - env.dev, some variables were not used anymore 
 - local_settings, delete unused/not necessary settings
 - increase version number in docker-compose.prod file
-- Slack Messages are now in english.
+- slack messages are now in english.
 
 ## [1.0.0] - 2020-02-03
 ### Added
