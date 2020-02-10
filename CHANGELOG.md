@@ -1,0 +1,23 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+- automatic deletion of debug.log file
+
+## [1.0.1] - 2020-02-10
+### Added
+- default background color is now in a gray shade (rgb(145, 145, 145)) if the admin does not provide an image
+- changelog
+
+### Changed
+- env.dev, some variables were not used anymore 
+- local_settings, delete unused/not necessary settings
+- increase version number in docker-compose.prod file
+
+## [1.0.0] - 2020-02-03
+### Added
+- Published Project
+- Features that come with the application are written in the README file
