@@ -1,4 +1,3 @@
-
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
 from polls.logic import SlackLogic

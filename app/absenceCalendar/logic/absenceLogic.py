@@ -1,44 +1,52 @@
+import structlog
 from absenceCalendar.persistence import AbsenceDAO
 from utils.enum import Reasons
 from utils.date import dateManager
+
+logger = structlog.getLogger(__name__)
 
 
 class AbsenceLogic:
     absence_DAO = AbsenceDAO()
 
     def set_vote_absence_for_user(self, user, reason):
+        logger.info("set (vote) absence for User: %s with reason %s" % (user.username, reason.value))
         current_vote_day = dateManager.current_vote_day()
-        absences = self.absence_DAO.get_absences_from_user(user).filter(reason=reason.value)
-        self.delete_old_absence_for_user(user)
-
-        if not self.check_if_a_absence_is_active_for_date(absences, current_vote_day):
-            self.absence_DAO.set_absence_for_user(user, current_vote_day, current_vote_day, reason)
+        self.delete_old_and_current_absences_for_user(user)
+        self.absence_DAO.set_absence_for_user(user, current_vote_day, current_vote_day, reason)
 
     def get_absences_for_do_not_care(self):
+        logger.info("get absences for do not Care")
         return self.absence_DAO.get_absences_for_reason(Reasons.DONOTCARE)
 
     def get_absences_for_out(self):
+        logger.info("get absences for out")
         return self.absence_DAO.get_absences_for_reason(Reasons.OUT)
 
     def get_absent_absences(self):
+        logger.info("get absences for just being Absent")
         return self.absence_DAO.get_absences_for_reason(Reasons.ABSENT)
 
     def get_sorted_absent_absences(self):
+        logger.info("get sorted absent Absences from all Users")
         absences_from_all_users = self.get_absent_absences()
         user_list = []
+        logger.info("collect all Users that have an absent Absences")
         for absence in absences_from_all_users:
             if absence.user.username not in user_list:
                 user_list.append(absence.user.username)
 
+        logger.info("Sort all Users with their absent absences")
         sorted_absences = {}
-        for user in user_list:
-            sorted_absences[user] = []
+        for user_name in user_list:
+            sorted_absences[user_name] = []
         for absence in absences_from_all_users:
             sorted_absences[absence.user.username].append(absence)
 
         return sorted_absences
 
     def get_active_absent_absences(self):
+        logger.info("get active absent absences")
         current_vote_day = dateManager.current_vote_day()
         absences = self.absence_DAO.get_absences_for_reason(Reasons.ABSENT)
         active_absences = []
@@ -47,21 +55,23 @@ class AbsenceLogic:
                 active_absences.append(absence)
         return active_absences
 
-    def delete_old_absence_for_user(self, user):
+    def delete_old_and_current_absences_for_user(self, user):
+        logger.info("delete absences for user: %s that are old or current active" % user.username)
         current_vote_day = dateManager.current_vote_day()
-        reasons = [Reasons.OUT.value, Reasons.DONOTCARE.value, Reasons.ABSENT.value]
-        user_absences_for_reason = self.absence_DAO.get_absences_from_user(user).filter(reason__in=reasons)
+        user_absences_for_reason = self.absence_DAO.get_absences_from_user(user)
 
         for absence in user_absences_for_reason.filter(absenceFrom__lte=current_vote_day):
             self.absence_DAO.delete_absence(absence)
 
     def delete_absences_for_user(self, user, absences_str_list):
+        logger.info("delete absences for user: %s that are on this list: %s" % (user.username, absences_str_list))
         absences_from_user = self.absence_DAO.get_absences_from_user(user)
         for absence in absences_from_user:
             if absence.__str__() in absences_str_list:
                 self.absence_DAO.delete_absence(absence)
 
     def delete_vote_absence_for_user(self, user, absent_start_day):
+        logger.info("delete vote absences for user: %s where absent start day %s is bigger than that absences end day " % (user.username, absent_start_day))
         absences = self.absence_DAO.get_absences_from_user(user)
         for absence in absences:
             if absence.reason == Reasons.OUT.value or absence.reason == Reasons.DONOTCARE.value:
@@ -69,6 +79,7 @@ class AbsenceLogic:
                     self.absence_DAO.delete_absence(absence)
 
     def delete_all_inactive_absences(self):
+        logger.info("delete all absences that are not active / old")
         current_vote_day = dateManager.current_vote_day()
         absences = self.absence_DAO.get_absences()
         for absence in absences:
@@ -76,6 +87,7 @@ class AbsenceLogic:
                 self.absence_DAO.delete_absence(absence)
 
     def check_if_a_absence_is_active_for_date(self, absences, date):
+        logger.info("check if absence: %s ist active for date: %s" % (absences, date))
         absence_active = False
         for absence in absences:
             if absence.absenceFrom <= date <= absence.absenceTo:
