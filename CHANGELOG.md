@@ -20,5 +20,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2020-02-03
 ### Added
-- Published Project
-- Features that come with the application are written in the README file
+- published project
