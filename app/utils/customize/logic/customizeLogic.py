@@ -23,7 +23,7 @@ class CustomizeLogic:
 
     def get_background_image_url(self):
         image_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.BACKGROUND_IMAGE)
-        logger.info("try to get image property from customize: %s" % image_object)
+        logger.debug("try to get image property from customize: %s" % image_object)
         if image_object and image_object.get().image_property:
             return image_object.get().image_property.url
         logger.warn("Image property is not there for customize: %s" % image_object)
@@ -42,7 +42,7 @@ class CustomizeLogic:
         return self.get_customize_string_property(website_object)
 
     def get_customize_string_property(self, customize):
-        logger.info("get string property from customize: %s" % customize)
+        logger.debug("get string property from customize: %s" % customize)
         if customize and customize.get().string_property:
             return customize.get().string_property
         logger.warn("String property is not there for customize: %s" % customize)

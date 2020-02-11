@@ -43,7 +43,7 @@ def index(request):
         'background_image_url': background_image_url,
         'django_static_url': settings.MEDIA_URL,
     }
-    logger.info('collected index view stuff')
+    logger.debug('collected index view stuff')
     return HttpResponse(template.render(context, request))
 
 

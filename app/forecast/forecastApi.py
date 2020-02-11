@@ -11,7 +11,7 @@ logger = structlog.getLogger(__name__)
 
 
 def get_forecast_json():
-    logger.info("get things for weather forecast")
+    logger.debug("get things for weather forecast")
     customize_logic = CustomizeLogic()
     key = customize_logic.get_weather_api_key()
     city = customize_logic.get_city_for_weather()
@@ -25,7 +25,7 @@ def get_forecast_json():
 
         try:
             r.raise_for_status()
-            logger.info("forecast json was successfully received")
+            logger.debug("forecast json was successfully received")
             return r.json()
         except Exception as e:
             logger.error("something went wrong, is the city-name: (%s) or api-key (%s) correct ? ")
@@ -41,7 +41,7 @@ def update_forecast():
     tomorrow = timezone.now() + datetime.timedelta(days=1)
     tomorrow = tomorrow.strftime("%Y-%m-%d 12:00:00")
     try:
-        logger.info("process forecast information in json")
+        logger.debug("process forecast information in json")
         if json is not None:
             for json in json['list']:
                 if json['dt_txt'] == tomorrow and dateManager.is_after_noon():
@@ -54,7 +54,7 @@ def update_forecast():
 
 
 def save_new_forecast(json):
-    logger.info("save forecast")
+    logger.debug("save forecast")
     new_forecast = Forecast()
     # open weather map gives temps in Kelvin. We want celsius.
     temp_in_celsius = json['main']['temp'] - 273.15
