@@ -8,6 +8,7 @@ services:
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
+      - log_volume:/home/app/web/logs
     expose:
       - 8000
     environment:
@@ -45,3 +46,4 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+  log_volume:
