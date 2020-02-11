@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - automatic deletion of debug.log file
 
+##[1.x.x] - 2020-02.11
+### Bugfix
+- Background image and default Background settings are now available for absence Page
+
 ## [1.0.1] - 2020-02-10
 ### Added
 - default background. If the admin does not provide a background-image, background-color will be set to a gray shade
