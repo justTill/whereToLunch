@@ -8,7 +8,7 @@ from weather.logic import weather_context
 from absenceCalendar.logic import AbsenceLogic
 from utils.enum import Reasons
 from utils.date import dateManager
-from utils.customize.logic import CustomizeLogic
+from customize.logic import CustomizeLogic
 from django.conf import settings
 
 restaurant_logic = RestaurantLogic()

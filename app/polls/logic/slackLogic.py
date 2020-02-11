@@ -3,7 +3,7 @@ import structlog
 from slacker import Slacker
 from polls.logic import UserLogic
 from weather.logic import weather_context
-from utils.customize.logic import CustomizeLogic
+from customize.logic import CustomizeLogic
 
 logger = structlog.getLogger(__name__)
 

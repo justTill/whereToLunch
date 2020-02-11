@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.utils import timezone
 from weather.models import Forecast
 from weather.logic import weather_context
-from utils.customize.models import Customize
+from customize.models import Customize
 from utils.enum import CustomizeChoices
 
 

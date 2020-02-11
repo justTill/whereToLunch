@@ -1,4 +1,4 @@
-from utils.customize.models import Customize
+from customize.models import Customize
 
 
 class CustomizeDAO:

@@ -11,7 +11,7 @@ from utils.enum import Reasons
 from utils.date import dateManager
 from polls.logic import VoteLogic
 from django.conf import settings
-from utils.customize.logic import CustomizeLogic
+from customize.logic import CustomizeLogic
 
 logger = structlog.getLogger(__name__)
 

@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'weather.apps.WeatherConfig',
     'restaurantStatistics.apps.RestaurantStatisticsConfig',
     'absenceCalendar.apps.AbsenceCalendarConfig',
-    'utils.customize.apps.CustomizeConfig',
+    'customize.apps.CustomizeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

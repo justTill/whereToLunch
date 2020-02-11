@@ -10,7 +10,7 @@ class RestaurantLogicTest(SetUpTests):
         restaurantSet = restaurantLogic.get_restaurants_with_votes()
         offenbach = Restaurant.objects.get(restaurant_name='Offenbach')
         zucchini = Restaurant.objects.get(restaurant_name='Zucchini')
-        stinkeburger = Restaurant.objects.get(restaurant_name='Stinkeburger')
+        burger = Restaurant.objects.get(restaurant_name='burger')
         purino = Restaurant.objects.get(restaurant_name='Purino')
 
         self.assertEquals(len(restaurantSet), 4)
@@ -20,9 +20,9 @@ class RestaurantLogicTest(SetUpTests):
         # #Check if they have the right Amounts
         self.assertEquals(restaurantSet.get(offenbach), 2)
         self.assertEquals(restaurantSet.get(zucchini), 1)
-        self.assertEquals(restaurantSet.get(stinkeburger), 1)
+        self.assertEquals(restaurantSet.get(burger), 1)
         self.assertEquals(restaurantSet.get(purino), 0)
 
         # Check if they are Sorted after Votes
         # second Criteria are Names
-        self.assertEquals(restaurantSet.items(), {(offenbach, 2), (stinkeburger, 1), (zucchini, 1), (purino, 0)})
+        self.assertEquals(restaurantSet.items(), {(offenbach, 2), (burger, 1), (zucchini, 1), (purino, 0)})

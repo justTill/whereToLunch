@@ -30,6 +30,6 @@ class VoteLogicTest(SetUpTests):
         self.assertIn('SuperSalad', choice_of_the_day[1].__str__())
 
     def test_delete_votes_from_user(self):
-        user = User.objects.get(username='zweiter_test_user')
+        user = User.objects.get(username='second_test_user')
         self.voteLogic.delete_votes_from_user(user)
         self.assertEquals(list(self.voteLogic.get_votes_from_user(user)), [])

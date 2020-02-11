@@ -13,49 +13,49 @@ class SetUpTests(TestCase):
     def setUp(self):
         offenbach = Restaurant.objects.create(restaurant_name='Offenbach')
         zucchini = Restaurant.objects.create(restaurant_name='Zucchini')
-        stinkeburger = Restaurant.objects.create(restaurant_name='Stinkeburger')
+        burger = Restaurant.objects.create(restaurant_name='burger')
         Restaurant.objects.create(restaurant_name='Purino')
 
-        erster_test_user = User.objects.create(username='erster_test_user', is_staff=True)
-        erster_test_user.set_password('12345')
-        erster_test_user.save()
+        first_test_user = User.objects.create(username='first_test_user', is_staff=True)
+        first_test_user.set_password('12345')
+        first_test_user.save()
 
-        zweiter_test_user = User.objects.create(username='zweiter_test_user', is_staff=True)
-        zweiter_test_user.set_password('12345')
-        zweiter_test_user.save()
+        second_test_user = User.objects.create(username='second_test_user', is_staff=True)
+        second_test_user.set_password('12345')
+        second_test_user.save()
 
-        dritter_test_user = User.objects.create(username='dritter_test_user', is_staff=True)
-        dritter_test_user.set_password('12345')
-        dritter_test_user.save()
+        third_test_user = User.objects.create(username='third_test_user', is_staff=True)
+        third_test_user.set_password('12345')
+        third_test_user.save()
 
-        vierter_test_user = User.objects.create(username='vierter_test_user', is_staff=True)
-        vierter_test_user.set_password('12345')
-        vierter_test_user.save()
+        fourth_test_user = User.objects.create(username='fourth_test_user', is_staff=True)
+        fourth_test_user.set_password('12345')
+        fourth_test_user.save()
 
-        Vote.objects.create(restaurant=offenbach, user=erster_test_user)
-        Vote.objects.create(restaurant=offenbach, user=zweiter_test_user)
-        Vote.objects.create(restaurant=stinkeburger, user=dritter_test_user)
-        Vote.objects.create(restaurant=zucchini, user=vierter_test_user)
+        Vote.objects.create(restaurant=offenbach, user=first_test_user)
+        Vote.objects.create(restaurant=offenbach, user=second_test_user)
+        Vote.objects.create(restaurant=burger, user=third_test_user)
+        Vote.objects.create(restaurant=zucchini, user=fourth_test_user)
 
         Forecast.objects.create(temperature=12, description="sunny")
 
-        Absence.objects.create(user=erster_test_user,
+        Absence.objects.create(user=first_test_user,
                                absenceFrom=self.today,
                                absenceTo=self.today,
                                reason=Reasons.ABSENT.value
                                )
-        Absence.objects.create(user=erster_test_user,
+        Absence.objects.create(user=first_test_user,
                                absenceFrom=self.today + datetime.timedelta(days=1),
                                absenceTo=self.today + datetime.timedelta(days=1),
                                reason=Reasons.ABSENT.value
                                )
 
-        Absence.objects.create(user=zweiter_test_user,
+        Absence.objects.create(user=second_test_user,
                                absenceFrom=self.today,
                                absenceTo=self.today,
                                reason=Reasons.DONOTCARE.value
                                )
-        Absence.objects.create(user=vierter_test_user,
+        Absence.objects.create(user=fourth_test_user,
                                absenceFrom=self.today,
                                absenceTo=self.today,
                                reason=Reasons.OUT.value

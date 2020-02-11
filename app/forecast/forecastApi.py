@@ -5,7 +5,7 @@ import structlog
 from django.utils import timezone
 from weather.models import Forecast
 from utils.date import dateManager
-from utils.customize.logic import CustomizeLogic
+from customize.logic import CustomizeLogic
 
 logger = structlog.getLogger(__name__)
 

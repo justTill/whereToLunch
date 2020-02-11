@@ -1,5 +1,5 @@
 import structlog
-from utils.customize.persistence import CustomizeDAO
+from customize.persistence import CustomizeDAO
 from utils.enum import CustomizeChoices
 
 logger = structlog.getLogger(__name__)
