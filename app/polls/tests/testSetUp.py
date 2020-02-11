@@ -11,10 +11,10 @@ class SetUpTests(TestCase):
     today = datetime.date.today()
 
     def setUp(self):
-        offenbach = Restaurant.objects.create(restaurant_name='Offenbach')
-        zucchini = Restaurant.objects.create(restaurant_name='Zucchini')
-        burger = Restaurant.objects.create(restaurant_name='burger')
-        Restaurant.objects.create(restaurant_name='Purino')
+        first_restaurant = Restaurant.objects.create(restaurant_name='first_restaurant')
+        second_restaurant = Restaurant.objects.create(restaurant_name='second_restaurant')
+        third_restaurant = Restaurant.objects.create(restaurant_name='third_restaurant')
+        Restaurant.objects.create(restaurant_name='fourth_restaurant')
 
         first_test_user = User.objects.create(username='first_test_user', is_staff=True)
         first_test_user.set_password('12345')
@@ -32,10 +32,10 @@ class SetUpTests(TestCase):
         fourth_test_user.set_password('12345')
         fourth_test_user.save()
 
-        Vote.objects.create(restaurant=offenbach, user=first_test_user)
-        Vote.objects.create(restaurant=offenbach, user=second_test_user)
-        Vote.objects.create(restaurant=burger, user=third_test_user)
-        Vote.objects.create(restaurant=zucchini, user=fourth_test_user)
+        Vote.objects.create(restaurant=first_restaurant, user=first_test_user)
+        Vote.objects.create(restaurant=first_restaurant, user=second_test_user)
+        Vote.objects.create(restaurant=third_restaurant, user=third_test_user)
+        Vote.objects.create(restaurant=second_restaurant, user=fourth_test_user)
 
         Forecast.objects.create(temperature=12, description="sunny")
 
