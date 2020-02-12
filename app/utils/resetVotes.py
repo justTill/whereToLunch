@@ -14,12 +14,12 @@ def reset_things_from_last_vote_day():
     choiceOfTheDays = voteLogic.choice_of_the_day()
 
     """in Case there is a 'Kopf and Kopf rennen' we save both"""
-    logger.debug("Save Choice of the day ")
+    logger.info("Save Choice of the day ")
     for choice in choiceOfTheDays:
         ChoicesOfTheWeek.objects.create(restaurant=choice)
 
-    logger.debug("reset Votes")
+    logger.info("reset Votes")
     Vote.objects.all().delete()
 
-    logger.debug("Delete old absences")
+    logger.info("Delete old absences")
     absenceLogic.delete_all_inactive_absences()

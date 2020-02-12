@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Bugfix
 - Background image and default Background settings are now available for absence Page
 
+### Added
+- new log file for audit logs /also mounted via log folder
+
 ### Changed
-- Logfile is now mounted in a volume
+- Log folder is now mounted in a volume
 
 ## [1.0.1] - 2020-02-10
 ### Added
