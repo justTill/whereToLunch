@@ -173,12 +173,22 @@ LOGGING = {
             "class": "logging.handlers.WatchedFileHandler",
             'formatter': 'file',
             'filename': './logs/debug.log'
+        },
+        'audit_file': {
+            'level': 'DEBUG',
+            "class": "logging.handlers.WatchedFileHandler",
+            'formatter': 'file',
+            'filename': './logs/audit.log'
         }
     },
     'loggers': {
         '': {
             'level': 'DEBUG',
             'handlers': ['console', 'file']
+        },
+        'audit': {
+            'level': 'DEBUG',
+            'handlers': ['audit_file']
         }
     }
 }
