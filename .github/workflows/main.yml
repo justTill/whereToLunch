@@ -2,6 +2,9 @@ name: Docker
 on:
   push:
 
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 jobs:  
   healthcheck:
     runs-on: ubuntu-latest 
