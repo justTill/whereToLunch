@@ -40,7 +40,6 @@ class IndexViewTest(SetUpTests):
         self.client.post('/admin/login/?next=/vote/', {'username': 'out_user', 'password': '1234'})
         response = self.client.post('/iAmOut/')
         self.assertRedirects(response, '/', status_code=302)
-        print(Absence.objects.all())
         absence = Absence.objects.get(user=user)
         self.assertEquals(absence.reason, Reasons.OUT.value)
 

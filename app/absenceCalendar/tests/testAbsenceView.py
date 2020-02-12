@@ -17,18 +17,18 @@ class AbsenceIndexTest(TestCase):
     def setUp(self):
         Forecast.objects.create(temperature=12, description="sunny")
 
-        erster_test_user = User.objects.create(username='erster_test_user', is_staff=True)
-        erster_test_user.set_password('12345')
-        erster_test_user.save()
+        another_test_user = User.objects.create(username='another_test_user', is_staff=True)
+        another_test_user.set_password('12345')
+        another_test_user.save()
 
-        Absence.objects.create(user=erster_test_user,
+        Absence.objects.create(user=another_test_user,
                                absenceFrom=self.tomorrow,
                                absenceTo=self.tomorrow,
                                reason=Reasons.ABSENT.value
                                )
 
     def test_absenceIndex(self):
-        absence = Absence.objects.get(user__username='erster_test_user')
+        absence = Absence.objects.get(user__username='another_test_user')
         response = self.client.get(reverse('absenceCalendar:absenceIndex'))
 
         self.assertEquals(response.status_code, 200)
@@ -37,13 +37,13 @@ class AbsenceIndexTest(TestCase):
                            'weather_group': '',
                            'description': 'sunny',
                            'icon': ''})
-        self.assertEquals(response.context[-1]['absences_from_users'], {'erster_test_user': [absence]})
+        self.assertEquals(response.context[-1]['absences_from_users'], {'another_test_user': [absence]})
 
     def test_save_new_absence(self):
-        user = User.objects.get(username='erster_test_user')
+        user = User.objects.get(username='another_test_user')
         self.assertEqual(len(Absence.objects.all()), 1)
 
-        login = self.client.post('/admin/login/?next=/save_new_absence', {'username': 'erster_test_user', 'password': '12345'})
+        login = self.client.post('/admin/login/?next=/save_new_absence', {'username': 'another_test_user', 'password': '12345'})
         self.assertRedirects(login, '/save_new_absence', status_code=302)
         response = self.client.post('/save_new_absence', {'user': user, 'absenceFrom': self.today, 'absenceTo': self.today})
         self.assertEqual(len(Absence.objects.all()), 2)
@@ -51,13 +51,13 @@ class AbsenceIndexTest(TestCase):
         self.assertEqual(len(Absence.objects.all()), 2)
 
     def test_delete_absences(self):
-        user = User.objects.get(username='erster_test_user')
-        absence = Absence.objects.get(user__username='erster_test_user')
+        user = User.objects.get(username='another_test_user')
+        absence = Absence.objects.get(user__username='another_test_user')
 
         self.assertEqual(Absence.objects.all().get(), absence)
         self.assertEqual(len(Absence.objects.all()), 1)
 
-        login = self.client.post('/admin/login/?next=/delete_absences', {'username': 'erster_test_user', 'password': '12345'})
+        login = self.client.post('/admin/login/?next=/delete_absences', {'username': 'another_test_user', 'password': '12345'})
         self.assertRedirects(login, '/delete_absences', status_code=302, target_status_code=302)
 
         response = self.client.post('/delete_absences', {'user': user, 'absenceBox': absence.__str__()})
