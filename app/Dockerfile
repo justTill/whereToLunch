@@ -8,7 +8,6 @@ WORKDIR /usr/src/app/
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install psycopg2 dependencies
 # install dependencies
 RUN apt-get update && apt-get -y install gcc python3-dev musl-dev postgresql-server-dev-11
 RUN pip install --upgrade pip

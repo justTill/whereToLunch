@@ -2,11 +2,13 @@ version: '3.7'
 
 services:
   lunchapp:
-    image: justtill/where_to_eat:where_to_eat_v.1.0.1 # Change this version number if you want a previous/new version
+    restart: always
+    image: justtill/where_to_eat:where_to_eat_v.1.0.1 # Change this version number if you want a previous/newer version
     command: gunicorn LightningLunch.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
+      - log_volume:/home/app/web/logs
     expose:
       - 8000
     environment:
@@ -21,6 +23,7 @@ services:
     depends_on:
       - db
   db:
+    restart: always
     image: postgres:11.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
@@ -29,6 +32,7 @@ services:
       - POSTGRES_PASSWORD=${SQL_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
   nginx:
+    restart: always
     image: justtill/where_to_eat:nginx_latest
     volumes:
       - static_volume:/home/app/web/staticfiles
@@ -42,3 +46,4 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+  log_volume:

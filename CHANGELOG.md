@@ -5,7 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- automatic deletion of debug.log file
+- automatic deletion/clearing of debug.log file/volume
+
+##[1.0.2] - 2020-02.12
+### Bugfix
+- Background image and default Background settings are now available for absence Page
+
+### Added
+- new log file for audit logs /also mounted via log folder
+
+### Changed
+- Log folder is now mounted in a volume
 
 ## [1.0.1] - 2020-02-10
 ### Added
@@ -15,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - env.dev, some variables were not used anymore 
 - local_settings, delete unused/not necessary settings
-- increase version number in docker-compose.prod file
 - slack messages are now in english.
 
 ## [1.0.0] - 2020-02-03

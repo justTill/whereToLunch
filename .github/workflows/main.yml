@@ -1,11 +1,10 @@
 name: Docker
 on:
   push:
-    
+
 env:
-  IMAGE_NAME: whereToEat
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
-  
+
 jobs:  
   healthcheck:
     runs-on: ubuntu-latest 

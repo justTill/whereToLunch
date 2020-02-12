@@ -11,7 +11,7 @@ class VoteLogicTest(SetUpTests):
         choice_of_the_day = self.voteLogic.choice_of_the_day()
 
         self.assertEquals(len(choice_of_the_day), 1)
-        self.assertIn('Offenbach', choice_of_the_day[0].__str__())
+        self.assertIn('first_restaurant', choice_of_the_day[0].__str__())
 
         user = User.objects.create(username='test_user', is_staff=True)
         user.set_password('12345')
@@ -21,15 +21,15 @@ class VoteLogicTest(SetUpTests):
         user2.set_password('12345')
         user2.save()
 
-        superSalad = Restaurant.objects.create(restaurant_name='SuperSalad')
-        Vote.objects.create(restaurant=superSalad, user=user)
-        Vote.objects.create(restaurant=superSalad, user=user2)
+        restaurant = Restaurant.objects.create(restaurant_name='restaurant')
+        Vote.objects.create(restaurant=restaurant, user=user)
+        Vote.objects.create(restaurant=restaurant, user=user2)
 
         choice_of_the_day = self.voteLogic.choice_of_the_day()
-        self.assertIn('Offenbach', choice_of_the_day[0].__str__())
-        self.assertIn('SuperSalad', choice_of_the_day[1].__str__())
+        self.assertIn('first_restaurant', choice_of_the_day[0].__str__())
+        self.assertIn('restaurant', choice_of_the_day[1].__str__())
 
     def test_delete_votes_from_user(self):
-        user = User.objects.get(username='zweiter_test_user')
+        user = User.objects.get(username='second_test_user')
         self.voteLogic.delete_votes_from_user(user)
         self.assertEquals(list(self.voteLogic.get_votes_from_user(user)), [])

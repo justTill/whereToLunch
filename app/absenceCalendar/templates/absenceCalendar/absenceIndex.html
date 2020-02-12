@@ -13,9 +13,15 @@
         <link type="text/x-scss" href="{% static 'weather.scss' %}" rel="stylesheet" media="screen">
         <link type="text/x-scss" href="{% static 'absence.scss' %}" rel="stylesheet" media="screen">
         <style>
-            .background{
-                background-image: url( {{ django_static_url }}{{  background_image_url }} );
-            }
+            {% if background_image_url %}
+                .background {
+                    background-image: url({{  background_image_url }} );
+                }
+            {% else  %}
+                .background {
+                    background-color: rgb(145, 145, 145);
+                }
+            {% endif %}
         </style>
     {% endcompress %}
 </head>

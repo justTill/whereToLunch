@@ -12,7 +12,7 @@ class VotesChart(APIView):
     permission_classes = []
 
     def get(self, request, Format=None):
-        logger.info("get restaurants with votes for statistics")
+        logger.debug("get restaurants with votes for statistics")
         restaurants_with_votes = self.restaurant_statistics_logic.get_current_vote_statistics_data()
         votesStatistic = {
             'restaurants_with_votes': restaurants_with_votes,
@@ -26,7 +26,7 @@ class ChoicesChart(APIView):
     permission_classes = []
 
     def get(self, request, Format=None):
-        logger.info("get choices of the past for statistics")
+        logger.debug("get choices of the past for statistics")
         get_choices_of_the_past = self.restaurant_statistics_logic.get_choices_of_the_past()
         choicesStatistic = {
             'choices_of_the_past': get_choices_of_the_past

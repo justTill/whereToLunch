@@ -10,19 +10,19 @@
                                 <div class="oneAbsence">
                                 {% if user.username == name %}
                                     <input class="checkbox"c type="checkbox" name="absenceBox" value="{{ a }}">
-                                    <span class="fromWithBox">Vom: {{ a.absenceFrom }}</span>
+                                    <span class="fromWithBox">from: {{ a.absenceFrom }}</span>
                                     <br>
-                                    <span class="to">Bis: {{ a.absenceTo }}</span>
+                                    <span class="to">till: {{ a.absenceTo }}</span>
                                 {% else %}
-                                    <span class="from">Vom: {{ a.absenceFrom }}</span>
+                                    <span class="from">from: {{ a.absenceFrom }}</span>
                                     <br>
-                                    <span class="to">Bis: {{ a.absenceTo }}</span>
+                                    <span class="to">till: {{ a.absenceTo }}</span>
                                 {% endif %}
                             </div>
                 {% endfor %}
                 </div>
             {% endfor %}
         </div>
-    <input type="submit" value="Abwesenheit Löschen">
+    <input type="submit" value="Delete absences">
 </form>
 {% endif %}
