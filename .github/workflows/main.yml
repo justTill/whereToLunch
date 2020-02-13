@@ -1,4 +1,4 @@
-name: Docker
+name: Check_And_Deploy
 on:
   push:
 
