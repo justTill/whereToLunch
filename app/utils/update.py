@@ -2,7 +2,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
 from polls.logic import SlackLogic
 from forecast import forecastApi
-from utils import resetVotes
+from utils import resetVotes, clearLogs
 
 
 def start():
@@ -10,6 +10,8 @@ def start():
     scheduler = BackgroundScheduler()
 
     scheduler.add_job(forecastApi.update_forecast, 'interval', minutes=20)
+    scheduler.add_job(clearLogs.clear_debug_logs, 'interval', hours=1)
+    scheduler.add_job(clearLogs.clear_audit_logs, 'interval', hours=1)
     scheduler.add_job(forecastApi.delete_old_forecasts, 'cron', hour=6, minute=00)
     scheduler.add_job(slack.send_vote_notification_to_slack_channel, 'cron', minute=00, hour=11, day_of_week="0-4")
     scheduler.add_job(slack.send_weather_forecast_to_slack_channel, 'cron', minute=00, hour=15, day_of_week="0-4")
