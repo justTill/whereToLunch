@@ -20,21 +20,25 @@
                 }
             {% else  %}
                 .background {
-                    background-color: rgb(145, 145, 145);
+                    background-color: rgb(230, 230, 230);
                 }
             {% endif %}
         </style>
     {% endcompress %}
 </head>
-<nav>
-    <div class="header">
-        {% include "./header.html" %}
-    </div>
-</nav>
 <body>
-    <div class="choiceOfTheDay">
-        {% include "./choiceOfTheDay.html" %}
-    </div>
+<div class="header">
+    {% include "./header.html" %}
+</div>
+<nav class="navigation">
+    {% include "./navigation.html" %}
+</nav>
+{% if user.is_authenticated %}
+    <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+{% endif %}
+<div class="choiceOfTheDay">
+    {% include "./choiceOfTheDay.html" %}
+</div>
 <main>
     <div class="voteStats">
         {% include "votesStatistic.html" %}
