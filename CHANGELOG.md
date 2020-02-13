@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- new look (hopefully more beautifully)
-- responsive for mobile/Tablet
+- I have no more ideas for features, if you have one you can either open an issue or drop a pull request
+
+##[1.1.0] - 2020-02-X
+### Changed
+ - new look for Where To Lunch
+ - application is now responsive
 
 ##[1.0.3] - 2020-02-X
 ### Added
