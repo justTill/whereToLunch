@@ -1,19 +1,19 @@
 {% load addDays %}
 <div class="innerHeader">
-    <div class="weather">
-    {% include "weather_template.html"%}
-    </div>
-
     <div class="title">
         <span class="header_title"><a href="{% url 'polls:index' %}">{{website_name}}</a></span>
         <br>
         <span>Vote for
             {% if is_after_noon %}
-                Tomorrow the: {{ 1|addDays|date:"d M Y" }}
+                tomorrow the: {{ 1|addDays|date:"d M Y" }}
             {% else %}
                 today the: {% now "j b Y" %}
             {% endif %}
         </span>
+    </div>
+
+    <div class="weather">
+        {% include "weather_template.html"%}
     </div>
 
     <div class="userLinks">
