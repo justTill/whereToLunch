@@ -1,14 +1,14 @@
 {% if weather_context.temperature_in_c and weather_context.description and weather_context.icon %}
-    <img class="weatherIcon" alt="WeatherIcon" src="http://openweathermap.org/img/wn/{{ weather_context.icon }}@2x.png">
     <span class="weatherDateText">
         {% if is_after_noon %}
             Tomorrow it will be:
         {% else %}
             Today at Noon it will be:
         {% endif %}
-    </span>
-    <span class="weatherStats">
         {{ weather_context.temperature_in_c }} °C
+    <br>
+    <img class="weatherIcon" alt="WeatherIcon" src="http://openweathermap.org/img/wn/{{ weather_context.icon }}@2x.png">
+    <br>
     with: {{ weather_context.description }}
     </span>
 {% endif %}

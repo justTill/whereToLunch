@@ -2,24 +2,72 @@
 
 .innerHeader {
   display: flex;
-  align-items: center;
+  height: 200px;
+  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
 
   .weather {
-    justify-content: center;
-    flex: 1;
     margin-left: 10px;
+    padding: 10px;
+    background-color: white;
+    align-self: center;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+
   .title {
-    flex: 1;
-    justify-content: center;
-    text-align: center;
+    height: 200px;
+    width: 400px;
+    align-self: center;
+    background-color: maroon;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
     .header_title {
+      margin-top: 30px;
       font-size: 50px;
       font-weight: bold;
     }
     a {
-      color: black;
+      color: white;
     }
+    a:hover {
+      color: #0f0f0f;
+    }
+    .voteForDateText {
+      color: white;
+    }
+  }
+  .userLinks {
+    margin-left: auto;
+    margin-right: 30px;
+
+    a {
+      padding-left: 20px;
+      color: maroon;
+    }
+    a:hover {
+      color: #0f0f0f;
+    }
+  }
+  .navigation {
+    margin-left: auto;
+    align-self: flex-end;
+    padding-left: 50px;
+    margin-bottom: 20px;
+
+    a {
+      margin-left: 30px;
+      padding: 20px;
+      color: maroon;
+      background-color: white;
+      box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    a:hover {
+      color: #0f0f0f;
+    }
+
   }
 }
 

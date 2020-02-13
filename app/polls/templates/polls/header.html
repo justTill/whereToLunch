@@ -3,7 +3,7 @@
     <div class="title">
         <span class="header_title"><a href="{% url 'polls:index' %}">{{website_name}}</a></span>
         <br>
-        <span>Vote for
+        <span class="voteForDateText">Vote for
             {% if is_after_noon %}
                 tomorrow the: {{ 1|addDays|date:"d M Y" }}
             {% else %}
@@ -14,6 +14,11 @@
 
     <div class="weather">
         {% include "weather_template.html"%}
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'polls:index' %}" class="absence"> Vote/Startpage</a>
+        <a href="{% url 'absenceCalendar:absenceIndex' %}" class="absence"> Absencecalendar</>
     </div>
 
     <div class="userLinks">

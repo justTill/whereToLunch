@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" class="background">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -20,35 +20,36 @@
                 }
             {% else  %}
                 .background {
-                    background-color: rgb(230, 230, 230);
+                    background-color: rgb(250, 250, 250);
                 }
             {% endif %}
         </style>
     {% endcompress %}
 </head>
-<body>
-<div class="header">
-    {% include "./header.html" %}
-</div>
-<nav class="navigation">
-    {% include "./navigation.html" %}
-</nav>
-{% if user.is_authenticated %}
-    <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
-{% endif %}
-<div class="choiceOfTheDay">
-    {% include "./choiceOfTheDay.html" %}
-</div>
-<main>
-    <div class="voteStats">
-        {% include "votesStatistic.html" %}
-    </div>
-    <div class="voteForm">
-        {% include "./restaurantVoteForm.html" %}
-    </div>
-</main>
-    <div class="choicesStats">
-        {% include "choiceStatistic.html" %}
-    </div>
-</body>
+    <body>
+        <div class="background">
+            <div class="header">
+                {% include "./header.html" %}
+            </div>
+            <div class="welcomeText">
+                {% if user.is_authenticated %}
+                    <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+                {% endif %}
+            </div>
+            <div class="choiceOfTheDay">
+                {% include "./choiceOfTheDay.html" %}
+            </div>
+            <main>
+                <div class="voteStats">
+                    {% include "votesStatistic.html" %}
+                </div>
+                <div class="voteForm">
+                    {% include "./restaurantVoteForm.html" %}
+                </div>
+            </main>
+            <div class="choicesStats">
+                {% include "choiceStatistic.html" %}
+            </div>
+        </div>
+    </body>
 </html>
