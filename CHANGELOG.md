@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - automatic deletion/clearing of debug.log file/volume
+##[1.0.2] - 2020-02-X
+### Added
+ - automatic deletion of debug and audit log file if they are to big / every hour there will be one check
 
-##[1.0.2] - 2020-02.12
+
+##[1.0.2] - 2020-02-12
 ### Bugfix
 - Background image and default Background settings are now available for absence Page
 
