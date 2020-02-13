@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - new look (hopefully more beautifully)
 - responsive for mobile/Tablet
 
-##[1.0.3] - 2020-02-X
+##[1.0.3] - 2020-02-13
 ### Added
  - automatic deletion of debug and audit log file if they are to big / every hour there will be one check
 
