@@ -34,6 +34,8 @@
         <div class="welcomeText">
             {% if user.is_authenticated %}
                 <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+            {% else %}
+                <span>You need to be logged in before you can do anything.</span>
             {% endif %}
         </div>
         <div class="choiceForToday">
