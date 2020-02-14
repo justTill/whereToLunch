@@ -30,7 +30,7 @@ def index(request):
     user_that_do_not_care = user_logic.get_users_that_do_not_care()
     website_name = customize_logic.get_website_name()
     background_image_url = customize_logic.get_background_image_url()
-    longest_list = FindMaxLength([not_voted, user_that_do_not_care, user_that_are_out])
+    longest_list = find_longest_list([not_voted, user_that_do_not_care, user_that_are_out])
     context = {
         'restaurant_list': restaurant_logic.get_restaurants_with_votes(),
         'choice_of_the_day': choice_of_the_day,
@@ -91,7 +91,6 @@ def get_longest_list(first, second, third):
     return longest
 
 
-def FindMaxLength(lst):
-    maxList = max(lst, key=lambda i: len(i))
-
-    return maxList
+def find_longest_list(lists):
+    longest = max(lists, key=lambda i: len(i))
+    return longest
