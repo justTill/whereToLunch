@@ -1,65 +1,30 @@
 {% load static %}
+{% load index %}
 {% if restaurant_list %}
-    <form action="{% url 'polls:vote' %}" method="post">
-        {% csrf_token %}
-        {% if not_voted %}
-            <b class="userThatNotVoted">
-                {% for user in not_voted %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Not Voted</th>
+                    <th>Do not Care</th>
+                    <th>Out</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in longest_list%}
+                    <tr>
+                        <td>
+                            {{ not_voted|index:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_do_not_care|index:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_are_out|index:forloop.counter0 }}
+                        </td>
+                    </tr>
                 {% endfor %}
-            </b>
-            <br>
-            <span>{% if not_voted|length == 1%} need {% else %} needs {% endif %} to vote.</span>
-            <br>
-        {% endif %}
-        {% if user_that_do_not_care %}
-            <br>
-            <b class="userThatAreOut">
-                {% for user in user_that_do_not_care %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </b>
-            <br>
-            <span>do not care where they will have lunch.</span>
-        {% endif %}
-        <br>
-        <br>
-        {% if user_that_are_out %}
-            <b class="userThatAreOut">
-                {% for user in user_that_are_out %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </b>
-            <br>
-            <span>{% if user_that_are_out|length == 1%} is {% else %} are {% endif %} out for {% if is_after_noon %}tomorrow {% else %}today {% endif %}</span>
-        {% endif %}
+            </tbody>
+        </table>
         <table>
             <thead>
                 <tr>

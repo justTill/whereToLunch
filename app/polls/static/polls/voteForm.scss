@@ -40,8 +40,12 @@
   }
 
   a {
+    color: maroon;
+  }
+  a:hover {
     color: black;
   }
+
   .userThatNotVoted {
     margin-right: 10px;
   }
