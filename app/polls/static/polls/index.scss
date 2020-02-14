@@ -1,3 +1,5 @@
+@import "breakpoints";
+
 html {
   padding: 0;
   margin: 0;
@@ -7,32 +9,45 @@ body {
   flex-direction: row;
   justify-content: center;
   margin: 0;
-
 }
 .background {
   max-width: 1500px;
+  width: 1500px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top center;
 }
 .welcomeText {
   background-color: white;
-  box-shadow: 0px -4px 0 rgba(0, 0, 0, 0.2gs);
+  box-shadow: 0px -4px 0 rgba(0, 0, 0, 0.1);
   border-bottom: #cccccc solid 1px;
-}
 
-.choiceOfTheDay {
+}
+@media (min-width: $l-mobile) {
+  .choiceForToday{
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .voteStats, .choicesStats{
+    display: none;
+  }
+}
+.choiceForToday {
   margin-bottom: 30px;
+  border-bottom: solid rgba(0,0,0,0.1);
+
   .choiceOfTheDay {
     font-weight: bold;
     font-size: 20px;
   }
+
   .supportedBy {
     font-size: 15px;
   }
+
   text-align: center;
   font-size: 20px;
-
 }
 
 main {

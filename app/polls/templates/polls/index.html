@@ -26,30 +26,30 @@
         </style>
     {% endcompress %}
 </head>
-    <body>
-        <div class="background">
-            <div class="header">
-                {% include "./header.html" %}
+<body>
+    <div class="background">
+        <div class="header">
+            {% include "./header.html" %}
+        </div>
+        <div class="welcomeText">
+            {% if user.is_authenticated %}
+                <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+            {% endif %}
+        </div>
+        <div class="choiceForToday">
+            {% include "./choiceOfTheDay.html" %}
+        </div>
+        <main>
+            <div class="voteStats">
+                {% include "votesStatistic.html" %}
             </div>
-            <div class="welcomeText">
-                {% if user.is_authenticated %}
-                    <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
-                {% endif %}
+            <div class="voteForm">
+                {% include "./restaurantVoteForm.html" %}
             </div>
-            <div class="choiceOfTheDay">
-                {% include "./choiceOfTheDay.html" %}
-            </div>
-            <main>
-                <div class="voteStats">
-                    {% include "votesStatistic.html" %}
-                </div>
-                <div class="voteForm">
-                    {% include "./restaurantVoteForm.html" %}
-                </div>
-            </main>
             <div class="choicesStats">
                 {% include "choiceStatistic.html" %}
             </div>
-        </div>
-    </body>
+        </main>
+    </div>
+</body>
 </html>

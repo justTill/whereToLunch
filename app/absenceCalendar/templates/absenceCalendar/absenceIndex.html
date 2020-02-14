@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" class="background">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -19,25 +19,31 @@
                 }
             {% else  %}
                 .background {
-                    background-color: rgb(230, 230, 230);
+                    background-color: rgb(250, 250, 250);
                 }
             {% endif %}
         </style>
     {% endcompress %}
 </head>
-<nav>
-    <div class="header">
-        {% include "polls/header.html" %}
-    </div>
-</nav>
 <body>
-<div class="absence">
-    <div class="absenceForm">
-        {% include "absenceCalendar/absenceForm.html" %}
+    <div class="background">
+        <div class="header">
+            {% include "polls/header.html" %}
+        </div>
+
+        <div class="welcomeText">
+            {% if user.is_authenticated %}
+                <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+            {% endif %}
+        </div>
+        <div class="absence">
+            <div class="absenceForm">
+                {% include "absenceCalendar/absenceForm.html" %}
+            </div>
+            <div class="absenceLists">
+                {% include "absenceCalendar/absenceLists.html" %}
+            </div>
+        </div>
     </div>
-    <div class="absenceLists">
-        {% include "absenceCalendar/absenceLists.html" %}
-    </div>
-</div>
 </body>
 </html>
