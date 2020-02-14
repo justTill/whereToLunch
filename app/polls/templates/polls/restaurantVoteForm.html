@@ -54,7 +54,7 @@
             {% if not user.is_authenticated %}
                 <button class="vote" type="submit" value="Please Login first"> Login in</button>
             {% else %}
-                <button class="vote" type="submit" value="Vote now">vote </button>
+                <button class="vote" type="submit" value="Vote now">Vote </button>
                 <a class="notCare" href={% url 'polls:doNotCare' %}>Do not care</a>
                 <a class="amOut" href={% url 'polls:iAmOut' %}>I am out</a>
             {% endif %}
