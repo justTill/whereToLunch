@@ -61,6 +61,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
+
     .vote {
       font-size: 24px;
       padding: 10px;
@@ -85,8 +86,10 @@
       margin-right: auto;
       box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    .vote:hover {
+
+    .vote:hover, .notCare:hover, .amOut:hover {
       color: black;
+      padding: 11px;
     }
 
   }

@@ -72,7 +72,11 @@
 
       a:hover {
         color: #0f0f0f;
+        padding: 21px;
       }
+    }
+    .navigation:hover{
+      padding: 21px;
     }
   }
 }
@@ -114,6 +118,7 @@
     }
     a:hover {
       color: #0f0f0f;
+      padding: 22px;
     }
   }
   .weather {

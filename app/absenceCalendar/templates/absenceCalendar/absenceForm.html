@@ -1,5 +1,4 @@
 <h1>Enter absence</h1>
-
 <form class="saveNewAbsence" action="{% url 'absenceCalendar:save_new_absence' %}" method="post">
     {% csrf_token %}
     {{ absence_form.non_field_errors }}
@@ -16,8 +15,8 @@
     </div>
     <br>
     {% if user.is_authenticated %}
-        <input class="save" type="submit" value="Enter Absence">
+        <button class="save" type="submit" value="Enter Absence">Enter Absence</button>
     {% else %}
-        <input class="save" type="submit" value="Please Login">
+        <button class="save" type="submit" value="Please Login">Please Login First</button>
     {% endif %}
 </form>
