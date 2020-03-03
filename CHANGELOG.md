@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - If you have more ideas for features, you can either open an issue or drop a pull request
 - Scroll button for new mobile view
-- new customize field for the time of noon ( right now noon is at 12:30 German Time)
+- new customize field for the time of noon (right now noon is at 12:30 German Time)
 
 ##[1.1.0] - 2020-03-3
 ### Changed
