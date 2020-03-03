@@ -40,7 +40,7 @@ def save_new_absence(request):
             new_absence.save()
             absence_logic.delete_vote_absence_for_user(request.user, new_absence.absenceFrom)
             logger.info("form is valid, save absence %s for user: %s and delete old one" %(new_absence, request.user.username))
-            if new_absence.absenceFrom <= dateManager.current_vote_day:
+            if new_absence.absenceFrom <= dateManager.current_vote_day():
                 logger.debug("User voted, we need to delete that votes")
                 vote_logic.delete_votes_from_user(request.user)
             return HttpResponseRedirect(reverse('absenceCalendar:absenceIndex'))
