@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - new look for Where To Lunch
  - application is now responsive
 
+##[1.0.3] - 2020-03-03
+### Bugfix
+ - Votes will now be deleted after entering an absence for the current vote day
+
 ##[1.0.3] - 2020-02-13
 ### Added
  - automatic deletion of debug and audit log file if they are to big / every hour there will be one check
