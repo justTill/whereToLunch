@@ -3,7 +3,7 @@ version: '3.7'
 services:
   lunchapp:
     restart: always
-    image: justtill/where_to_eat:where_to_eat_v.1.0.1 # Change this version number if you want a previous/newer version
+    image: justtill/where_to_eat:where_to_eat_v.1.0.3 # Change this version number if you want a previous/newer version
     command: gunicorn LightningLunch.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
