@@ -22,7 +22,7 @@ Admin should customize the application (more details below)
 	* Weather forecast is pulled from: [https://openweathermap.org/forecast5](https://openweathermap.org/forecast5)
 
 *  Slack notifications from a slack app (UTC+01:00 Time)
-	* Notifications at 11am for: Users That have not voted yet. 
+	* Notifications at 11am for: Users that have not voted yet. 
 	* Notification at 15 pm if tomorrow is bad weather.
 
 * Statistics: 
@@ -73,7 +73,7 @@ Take down old volume
 Build Images
 ```  SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build ```
 
-**If you use the old volume you do not need to do following steps**
+
 Migrate new database scheme
 ```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput ```
 
