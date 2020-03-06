@@ -30,7 +30,7 @@ body {
     display: none;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: $l-mobile) {
   .voteStats, .choicesStats{
     display: none;
   }
@@ -60,14 +60,24 @@ main {
   align-items: baseline;
 }
 
-@media (max-width: 1059px) {
+@media (max-width: $tablet) {
   .voteForm {
-    order: 1;
+    order: 2;
     margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .restaurantsStats {
-    order: 2;
+  .voteStats {
+    order: 1;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .choicesStats {
+    order: 3;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 }
