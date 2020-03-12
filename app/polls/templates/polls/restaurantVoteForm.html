@@ -1,69 +1,36 @@
 {% load static %}
+{% load index %}
 {% if restaurant_list %}
-    <form action="{% url 'polls:vote' %}" method="post">
+    <form id="vote_form" action="{% url 'polls:vote' %}" method="post">
         {% csrf_token %}
-        {% if not_voted %}
-            <b class="userThatNotVoted">
-                {% for user in not_voted %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </b>
-            <br>
-            <span>{% if not_voted|length == 1%} need {% else %} needs {% endif %} to vote.</span>
-            <br>
-        {% endif %}
-        {% if user_that_do_not_care %}
-            <br>
-            <b class="userThatAreOut">
-                {% for user in user_that_do_not_care %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </b>
-            <br>
-            <span>do not care where they will have lunch.</span>
-        {% endif %}
-        <br>
-        <br>
-        {% if user_that_are_out %}
-            <b class="userThatAreOut">
-                {% for user in user_that_are_out %}
-                    {% cycle 'row' 'row' 'row' 'row' '' as row silent %}
-                    {% if row %}{% endif %}
-                        {% if forloop.last %}
-                            {{ user }}
-                        {% else %}
-                            {{ user }},&nbsp;
-                        {% endif %}
-                    {% if not row %}
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            </b>
-            <br>
-            <span>{% if user_that_are_out|length == 1%} is {% else %} are {% endif %} out for {% if is_after_noon %}tomorrow {% else %}today {% endif %}</span>
-        {% endif %}
-        <table>
+        <table class="statusFromUsers">
             <thead>
                 <tr>
-                    <th>
+                    <th>not voted</th>
+                    <th>do not care</th>
+                    <th>out</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in longest_absence_list%}
+                    <tr>
+                        <td>
+                            {{ not_voted|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_do_not_care|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_are_out|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="restaurantsList">
+            <thead>
+                <tr>
+                    <th colspan="2">
                         Restaurants
                     </th>
                 </tr>
@@ -83,23 +50,17 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% if not user.is_authenticated %}
-            <input class="vote" type="submit" value="Please Login first">
-        {% else %}
-            <input class="vote" type="submit" value="Vote now">
-        {% endif %}
+        <div class="userButtons">
+            {% if not user.is_authenticated %}
+                <button class="vote" type="submit" value="Please Login first"> Login in</button>
+            {% else %}
+                <button class="vote" type="submit" value="Vote now">Vote </button>
+                <a class="notCare" href={% url 'polls:doNotCare' %}>Do not care</a>
+                <a class="amOut" href={% url 'polls:iAmOut' %}>I am out</a>
+            {% endif %}
+        </div>
     </form>
     {% if user.is_authenticated %}
-        <form class="iamOutForm" action="{% url 'polls:iAmOut' %}" method="post">
-            {% csrf_token %}
-            <br>
-            <input class="iAmOut" type="submit" value="I am out">
-        </form>
-        <form class="doNotCare" action="{% url 'polls:doNotCare' %}" method="post">
-            {% csrf_token %}
-            <br>
-            <input class="doNotCare" type="submit" value="Do not care">
-        </form>
     {% endif %}
 {% else %}
     <p>No restaurants available</p>

@@ -1,4 +1,4 @@
-<h1>All Absences</h1>
+<h1>All absences</h1>
 {% if absences_from_users %}
 <form action="{% url 'absenceCalendar:delete_absences' %}" method="post">
     {% csrf_token %}
@@ -9,7 +9,7 @@
                     {% for a in absence %}
                                 <div class="oneAbsence">
                                 {% if user.username == name %}
-                                    <input class="checkbox"c type="checkbox" name="absenceBox" value="{{ a }}">
+                                    <input class="checkbox" type="checkbox" name="absenceBox" value="{{ a }}">
                                     <span class="fromWithBox">from: {{ a.absenceFrom }}</span>
                                     <br>
                                     <span class="to">till: {{ a.absenceTo }}</span>
@@ -23,6 +23,6 @@
                 </div>
             {% endfor %}
         </div>
-    <input type="submit" value="Delete absences">
+    <button class="delete" type="submit">Delete Absence</button>
 </form>
 {% endif %}

@@ -1,48 +1,121 @@
+@import "breakpoints";
+//TODO: MAKE Form scrollable for desktop and tablet for mobile not??
 .voteForm {
-  tbody, thead tr { display: block; }
-  tbody {
-    height: 400px;
-    overflow: auto;
-    overflow-y: scroll;
+  @media (max-width: $l-mobile) {
+    margin-right: auto;
+    margin-left: auto;
   }
-  th {
-    font-size: 20px;
-  }
-  tbody td, thead th {
-    width: 140px;
-  }
-  th, td {
-    border-bottom: 1px solid #ddd;
-    height: 50px;
-    vertical-align: bottom;
-    padding-right: 50px;
-  }
-  .radioButton {
-    border-bottom: none;
-    vertical-align: middle;
-    width: 0px;
-  }
+  .statusFromUsers {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: white;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    tbody, thead, tr {
+      display: block;
+    }
 
-  .vote{
-    margin-top: 15px;
-    font-size: 30px;
+    th {
+      border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+      font-size: 20px;
+    }
+    th:first-child, td:first-child{
+      border-left: 0.5px solid rgba(0, 0, 0, 0.2);
+    }
+    th, td {
+      width: 100px;
+      border-right: 0.5px solid rgba(0, 0, 0, 0.2);
+    }
+    td {
+      text-align: center;
+    }
   }
+  .restaurantsList {
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+    background-color: white;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-  .iAmOut {
-    font-size: 24px;
-  }
-  .doNotCare {
-    font-size: 24px;
-  }
+    tbody {
+      display: block;
+      max-height: 500px;
+      overflow: scroll;
+      overflow-y: scroll;
+    }
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+    th {
+      text-align: center;
+      font-size: 20px;
+    }
+    th, td {
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+      width: 200px;
+      height: 100px;
+    }
+    td {
+      text-align: center;
+    }
 
-  form {
-    display: inline;
-  }
+    .radioButton {
+      vertical-align: middle;
+    }
 
+    .userThatNotVoted {
+      margin-right: 10px;
+    }
+  }
+  .userButtons {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    .vote {
+      font-size: 24px;
+      padding: 10px;
+      background: white !important;
+      border: none;
+      color: maroon;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      font-family: Times, sans-serif;
+    }
+
+    .notCare, .amOut {
+      font-size: 24px;
+      padding: 10px;
+      background-color: white;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .vote:hover, .notCare:hover, .amOut:hover {
+      color: black;
+      padding: 11px;
+    }
+
+  }
   a {
-    color: black;
+    color: maroon;
   }
-  .userThatNotVoted {
-    margin-right: 10px;
+
+  a:hover {
+    color: black;
   }
 }

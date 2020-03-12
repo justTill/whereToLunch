@@ -1,32 +1,32 @@
 {% load addDays %}
 <div class="innerHeader">
-    <div class="weather">
-    {% include "weather_template.html"%}
-    </div>
-
     <div class="title">
         <span class="header_title"><a href="{% url 'polls:index' %}">{{website_name}}</a></span>
         <br>
-        <span>Vote for
+        <span class="voteForDateText">Vote for
             {% if is_after_noon %}
-                Tomorrow the: {{ 1|addDays|date:"d M Y" }}
+                tomorrow the: {{ 1|addDays|date:"d M Y" }}
             {% else %}
                 today the: {% now "j b Y" %}
             {% endif %}
         </span>
     </div>
 
+    <div class="weather">
+        {% include "weather_template.html"%}
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'polls:index' %}"> Vote/Startpage</a>
+        <a href="{% url 'absenceCalendar:absenceIndex' %}"> Absencecalendar</>
+    </div>
+
     <div class="userLinks">
         {% if not user.is_authenticated %}
             <a href="{% url 'polls:vote' %}">Login</a>
         {% else %}
-            <span> Hello {{ user.get_username }}</span>
-            <br>
             <a href="{% url 'admin:logout' %}"> Logout </a>
-            <br>
-            <a href="{% url 'admin:index' %}" class="login"> Admin Site </a>
-            <br>
-            <a href="{% url 'absenceCalendar:absenceIndex' %}" class="absence"> Absencecalendar</a>
+            <a href="{% url 'admin:index' %}"> Admin&nbsp;Site </a>
         {% endif %}
     </div>
 </div>
