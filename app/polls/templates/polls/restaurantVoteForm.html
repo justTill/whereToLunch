@@ -12,16 +12,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for user in longest_list%}
+                {% for user in longest_absence_list%}
                     <tr>
                         <td>
-                            {{ not_voted|index:forloop.counter0 }}
+                            {{ not_voted|getElementIfIndexIsInRange:forloop.counter0 }}
                         </td>
                         <td>
-                            {{ user_that_do_not_care|index:forloop.counter0 }}
+                            {{ user_that_do_not_care|getElementIfIndexIsInRange:forloop.counter0 }}
                         </td>
                         <td>
-                            {{ user_that_are_out|index:forloop.counter0 }}
+                            {{ user_that_are_out|getElementIfIndexIsInRange:forloop.counter0 }}
                         </td>
                     </tr>
                 {% endfor %}

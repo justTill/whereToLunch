@@ -3,7 +3,7 @@ register = template.Library()
 
 
 @register.filter
-def index(sequence, position):
+def getElementIfIndexIsInRange(sequence, position):
     if position < len(sequence):
         return sequence[position]
     else:
