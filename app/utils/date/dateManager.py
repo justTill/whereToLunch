@@ -31,5 +31,5 @@ def current_vote_day():
 
 def activate_timezone():
     time_zone = customizeLogic.get_timezone()
-    if time_zone:
+    if time_zone and time_zone in pytz.all_timezones:
         timezone.activate(pytz.timezone(time_zone))
