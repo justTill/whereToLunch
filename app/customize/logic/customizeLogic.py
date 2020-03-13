@@ -34,8 +34,8 @@ class CustomizeLogic:
         return self.get_customize_string_property(website_object)
 
     def get_timezone(self):
-        noon_time_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.TIMEZONE)
-        return self.get_customize_string_property(noon_time_object)
+        timezone_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.TIMEZONE)
+        return self.get_customize_string_property(timezone_object)
 
     def get_background_image_url(self):
         image_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.BACKGROUND_IMAGE)
