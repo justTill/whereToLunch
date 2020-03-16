@@ -21,8 +21,8 @@ Admin should customize the application (more details below)
 	* Based on what time it is. (if it is after noon) 
 	* Weather forecast is pulled from: [https://openweathermap.org/forecast5](https://openweathermap.org/forecast5)
 
-*  Slack notifications from a slack app (UTC+01:00 Time)
-	* Notifications at 11am for: Users that have not voted yet. 
+*  Slack notifications from a slack app (default = UTC time)
+	* Notifications at 11 am for: Users that have not voted yet. 
 	* Notification at 15 pm if tomorrow is bad weather.
 
 * Statistics: 
@@ -43,6 +43,8 @@ Admin should customize the application (more details below)
 				* if you found your city copy the name e.q London, Cologne....
 	* You can change the title of the application.
 	* You can change the background image.
+	* You can change you timezone
+	    * this effects the time you get Slack messages or the daily deletion of the votes
 # Technologies
 
 * [Django](https://www.djangoproject.com/)
