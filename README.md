@@ -43,8 +43,9 @@ Admin should customize the application (more details below)
 				* if you found your city copy the name e.q London, Cologne....
 	* You can change the title of the application.
 	* You can change the background image.
-	* You can change you timezone
-	    * this effects the time you get Slack messages or the daily deletion of the votes
+	* You can change the timezone
+	    * this effects the time you get Slack messages and the daily deletion of the votes
+	    * find your timezone here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 # Technologies
 
 * [Django](https://www.djangoproject.com/)
@@ -70,20 +71,25 @@ Our application can be accessed via: [`http://127.0.0.1:8000`](http://127.0.0.1:
 If you want to run your production environment with your locally code changes you need to run following commands
 
 Take down old volume
-```docker-compose down -v```
-
+```
+docker-compose down -v
+```
 Build Images
-```  SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build ```
-
-
+```
+SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build 
+```
 Migrate new database scheme
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput ```
-
+```
+docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput
+```
 Collect all static files
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collectstatic --no-input --clear```
-
+```
+docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collectstatic --no-input --clear
+```
 Create an admin
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser```
+```
+docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser
+```
 
 Our application can be accessed via: [`http://localhost:1337/`](http://localhost:1337/)
 
