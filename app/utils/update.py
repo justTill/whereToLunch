@@ -7,7 +7,7 @@ from customize.logic.customizeLogic import CustomizeLogic
 
 
 def initialize_and_start_cron_jobs():
-    scheduler = BackgroundScheduler(settings.TIME_ZONE)
+    scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
     create_and_start_cron_jobs_with_scheduler(scheduler)
 
 
