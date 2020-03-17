@@ -6,4 +6,4 @@ class WeatherConfig(AppConfig):
 
     def ready(self):
         from utils import update
-        update.start()
+        update.initialize_and_start_cron_jobs()

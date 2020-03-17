@@ -1,3 +1,4 @@
+import pytz
 from django.conf import settings
 from django.db import models
 from utils.enum import CustomizeChoices
@@ -19,8 +20,15 @@ class Customize(models.Model):
     image_property = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.key_name == CustomizeChoices.TIMEZONE.value:
-            settings.TIME_ZONE = self.string_property
+        is_timezone_customize_choices = self.key_name == CustomizeChoices.TIMEZONE.value
+        if is_timezone_customize_choices:
+            timezone = self.string_property
+            if timezone in pytz.all_timezones:
+                from utils import update
+                update.delete_old_and_create_new_cron_jobs_with_timezone(timezone)
+            else:
+                default_timezone = settings.TIME_ZONE
+                self.string_property = default_timezone
         super(Customize, self).save(*args, **kwargs)
 
     def __str__(self):

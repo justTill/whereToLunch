@@ -1,5 +1,6 @@
 import structlog
 from customize.persistence import CustomizeDAO
+from django.conf import settings
 from utils.enum import CustomizeChoices
 
 logger = structlog.getLogger(__name__)
@@ -35,7 +36,8 @@ class CustomizeLogic:
 
     def get_timezone(self):
         timezone_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.TIMEZONE)
-        return self.get_customize_string_property(timezone_object)
+        timezone = self.get_customize_string_property(timezone_object)
+        return timezone if timezone else settings.TIME_ZONE
 
     def get_background_image_url(self):
         image_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.BACKGROUND_IMAGE)

@@ -21,11 +21,11 @@ class TestResetVotes(TestCase):
         first = User.objects.create(username="first")
         second = User.objects.create(username="second")
         restaurant = Restaurant.objects.create(restaurant_name="test_restaurant")
-        absence = Absence.objects.create(user=first,
-                                         absenceFrom=self.yesterday,
-                                         absenceTo=self.yesterday,
-                                         reason=Reasons.OUT.value)
-        vote = Vote.objects.create(restaurant=restaurant, user=second)
+        Absence.objects.create(user=first,
+                               absenceFrom=self.yesterday,
+                               absenceTo=self.yesterday,
+                               reason=Reasons.OUT.value)
+        Vote.objects.create(restaurant=restaurant, user=second)
 
         self.assertEqual(len(User.objects.all()), 2)
         self.assertEqual(Restaurant.objects.exists(), True)

@@ -1,5 +1,4 @@
 import datetime
-
 import pytz
 from django.utils import timezone
 from customize.logic.customizeLogic import CustomizeLogic
@@ -31,5 +30,4 @@ def current_vote_day():
 
 def activate_timezone():
     time_zone = customizeLogic.get_timezone()
-    if time_zone and time_zone in pytz.all_timezones:
-        timezone.activate(pytz.timezone(time_zone))
+    timezone.activate(pytz.timezone(time_zone))
