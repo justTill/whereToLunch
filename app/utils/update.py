@@ -15,7 +15,8 @@ def delete_old_and_create_new_cron_jobs_with_timezone(timezone):
     customize_logic = CustomizeLogic()
     old_scheduler = BackgroundScheduler(timezone=customize_logic.get_timezone())
     delete_cron_jobs_for_scheduler(old_scheduler)
-
+    # only works one time not twice so the first time i change a timezone ist works if i changed it again ist does not work
+    # build more log in save and update methods an watch logs
     new_scheduler = BackgroundScheduler(timezone=timezone)
     create_and_start_cron_jobs_with_scheduler(new_scheduler)
 
