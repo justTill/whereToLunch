@@ -180,11 +180,11 @@ LOGGING = {
             'formatter': 'file',
             'filename': './logs/audit.log'
         },
-        'test_file': {
+        'cron_file': {
             'level': 'DEBUG',
             "class": "logging.handlers.WatchedFileHandler",
             'formatter': 'file',
-            'filename': './logs/test.log'
+            'filename': './logs/cron.log'
         }
     },
     'loggers': {
@@ -196,9 +196,9 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['audit_file']
         },
-        'test': {
+        'cron': {
             'level': 'INFO',
-            'handlers': ['test_file']
+            'handlers': ['cron_file']
         }
     }
 }

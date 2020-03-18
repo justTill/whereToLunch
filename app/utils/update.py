@@ -6,7 +6,7 @@ from forecast import forecastApi
 from utils import resetVotes, clearLogs
 from customize.logic.customizeLogic import CustomizeLogic
 
-logger = structlog.getLogger('test')
+logger = structlog.getLogger('cron')
 
 
 def initialize_and_start_cron_jobs():

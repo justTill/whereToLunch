@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import models
 from utils.enum import CustomizeChoices
 
-logger = structlog.getLogger('test')
+logger = structlog.getLogger('cron')
 
 
 class Customize(models.Model):
@@ -28,7 +28,7 @@ class Customize(models.Model):
             timezone = self.string_property
             if timezone in pytz.all_timezones:
                 from utils import update
-                logger.info("now go delete old cron job an create new one with timezone %s", timezone)
+                logger.info("now go delete old cron j#ob an create new one with timezone %s", timezone)
                 update.delete_old_and_create_new_cron_jobs_with_timezone(timezone)
             else:
                 default_timezone = settings.TIME_ZONE
