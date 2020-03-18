@@ -179,6 +179,12 @@ LOGGING = {
             "class": "logging.handlers.WatchedFileHandler",
             'formatter': 'file',
             'filename': './logs/audit.log'
+        },
+        'test_file': {
+            'level': 'DEBUG',
+            "class": "logging.handlers.WatchedFileHandler",
+            'formatter': 'file',
+            'filename': './logs/test.log'
         }
     },
     'loggers': {
@@ -189,6 +195,10 @@ LOGGING = {
         'audit': {
             'level': 'DEBUG',
             'handlers': ['audit_file']
+        },
+        'test': {
+            'level': 'INFO',
+            'handlers': ['test_file']
         }
     }
 }
