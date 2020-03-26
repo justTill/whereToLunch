@@ -10,6 +10,8 @@ logger = structlog.getLogger('cron')
 
 
 def initialize_and_start_cron_jobs():
+    # try catch block -> try access auf db if error take settings timezone
+    # problem -> after update with db changes, need to re-save timezone
     # customize_logic = CustomizeLogic()
     # old_timezone = customize_logic.get_timezone()
     scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
