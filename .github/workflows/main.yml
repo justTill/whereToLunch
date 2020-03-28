@@ -17,7 +17,7 @@ jobs:
           pip3 install -r ./app/requirements.txt
 
       - name: create databse dir
-        run: cd ./app/ && mkdir database
+        run: cd ./app/ && mkdir database && python3 manage.py migrate
 
       - name: Run test
         run: cd ./app/ && python3 manage.py test --settings=LightningLunch.test_settings
