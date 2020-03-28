@@ -33,3 +33,7 @@ class TestCustomizeLogic(TestCase):
         self.assertEqual(self.customize_logic.get_slack_channel_name(), "slack_channel")
         self.assertEqual(self.customize_logic.get_city_for_weather(), "city_for_weather")
         self.assertEqual(self.customize_logic.get_website_url(), "website_url")
+        self.assertEqual(self.customize_logic.get_timezone(), "UTC")
+        Customize.objects.create(key_name=CustomizeChoices.TIMEZONE.value,
+                                 string_property="Europe/Berlin")
+        self.assertEqual(self.customize_logic.get_timezone(), "Europe/Berlin")

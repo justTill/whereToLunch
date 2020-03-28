@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from utils.date import dateManager
 
 
 class Forecast(models.Model):
@@ -11,6 +12,7 @@ class Forecast(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
+            dateManager.activate_timezone()
             self.timestamp = timezone.now()
         return super(Forecast, self).save(*args, **kwargs)
 

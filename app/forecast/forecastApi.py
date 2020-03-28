@@ -1,4 +1,3 @@
-import datetime
 import requests
 import structlog
 
@@ -37,9 +36,8 @@ def get_forecast_json():
 
 def update_forecast():
     json = get_forecast_json()
-    today = timezone.now().strftime("%Y-%m-%d 12:00:00")
-    tomorrow = timezone.now() + datetime.timedelta(days=1)
-    tomorrow = tomorrow.strftime("%Y-%m-%d 12:00:00")
+    today = dateManager.today().strftime("%Y-%m-%d 12:00:00")
+    tomorrow = dateManager.tomorrow().strftime("%Y-%m-%d 12:00:00")
     try:
         logger.debug("process forecast information in json")
         if json is not None:
@@ -66,5 +64,6 @@ def save_new_forecast(json):
 
 
 def delete_old_forecasts():
+    dateManager.activate_timezone()
     Forecast.objects.filter(timestamp__lte=timezone.now()).delete()
 

@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -179,6 +179,12 @@ LOGGING = {
             "class": "logging.handlers.WatchedFileHandler",
             'formatter': 'file',
             'filename': './logs/audit.log'
+        },
+        'cron_file': {
+            'level': 'DEBUG',
+            "class": "logging.handlers.WatchedFileHandler",
+            'formatter': 'file',
+            'filename': './logs/cron.log'
         }
     },
     'loggers': {
@@ -189,6 +195,10 @@ LOGGING = {
         'audit': {
             'level': 'DEBUG',
             'handlers': ['audit_file']
+        },
+        'cron': {
+            'level': 'INFO',
+            'handlers': ['cron_file']
         }
     }
 }

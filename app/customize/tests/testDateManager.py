@@ -2,6 +2,7 @@ import datetime
 from django.utils import timezone
 from unittest import TestCase
 from utils.date import dateManager
+from customize.models.customize import Customize
 
 
 class TestDateManager(TestCase):
@@ -13,12 +14,13 @@ class TestDateManager(TestCase):
         self.assertEqual(dateManager.tomorrow(), datetime.date.today() + datetime.timedelta(days=1))
 
     def test_is_after_noon(self):
-        now = timezone.now() + datetime.timedelta(hours=1)
+        Customize.objects.all().delete()
+        now = timezone.now()
         now = now.time().strftime('%H:%M')
+        print(now)
         noon = timezone.now().time().replace(hour=12, minute=30, second=0).strftime('%H:%M')
-
         if now >= noon:
             self.assertEqual(dateManager.current_vote_day(), datetime.date.today() + datetime.timedelta(days=1))
         else:
-            self.assertEqual(dateManager.current_vote_day(), datetime.date.today())
+            self.assertEqual(dateManager.current_vote_day(), timezone.now().date())
 

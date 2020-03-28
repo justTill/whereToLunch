@@ -48,13 +48,13 @@ RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
 
 # install dependencies
-RUN apt-get update && apt-get install -y libpq5 gcc
+RUN apt-get update && apt-get install -y libpq5 gcc netcat
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
 
-# copy entrypoint-prod.sh
+COPY ./entrypoint.prod.sh $APP_HOME
 
 # copy project
 COPY . $APP_HOME
@@ -64,3 +64,5 @@ RUN chown -R app:app $APP_HOME
 
 # change to the app user
 USER app
+
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]

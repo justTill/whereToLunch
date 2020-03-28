@@ -21,8 +21,8 @@ Admin should customize the application (more details below)
 	* Based on what time it is. (if it is after noon) 
 	* Weather forecast is pulled from: [https://openweathermap.org/forecast5](https://openweathermap.org/forecast5)
 
-*  Slack notifications from a slack app (UTC+01:00 Time)
-	* Notifications at 11am for: Users that have not voted yet. 
+*  Slack notifications from a slack app (default = UTC time)
+	* Notifications at 11 am for: Users that have not voted yet. 
 	* Notification at 15 pm if tomorrow is bad weather.
 
 * Statistics: 
@@ -43,6 +43,9 @@ Admin should customize the application (more details below)
 				* if you found your city copy the name e.q London, Cologne....
 	* You can change the title of the application.
 	* You can change the background image.
+	* You can change the timezone
+	    * this effects the time you get Slack messages and the daily deletion of the votes
+	    * find your timezone here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 # Technologies
 
 * [Django](https://www.djangoproject.com/)
@@ -68,20 +71,17 @@ Our application can be accessed via: [`http://127.0.0.1:8000`](http://127.0.0.1:
 If you want to run your production environment with your locally code changes you need to run following commands
 
 Take down old volume
-```docker-compose down -v```
-
+```
+docker-compose down -v
+```
 Build Images
-```  SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build ```
-
-
-Migrate new database scheme
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput ```
-
-Collect all static files
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collectstatic --no-input --clear```
-
+```
+SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build 
+```
 Create an admin
-```docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser```
+```
+docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser
+```
 
 Our application can be accessed via: [`http://localhost:1337/`](http://localhost:1337/)
 

@@ -1,5 +1,6 @@
 import structlog
 from customize.persistence import CustomizeDAO
+from django.conf import settings
 from utils.enum import CustomizeChoices
 
 logger = structlog.getLogger(__name__)
@@ -21,14 +22,6 @@ class CustomizeLogic:
         weather_key_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.OPENWEATHERMAP_API_KEY)
         return self.get_customize_string_property(weather_key_object)
 
-    def get_background_image_url(self):
-        image_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.BACKGROUND_IMAGE)
-        logger.debug("try to get image property from customize: %s" % image_object)
-        if image_object and image_object.get().image_property:
-            return image_object.get().image_property.url
-        logger.warn("Image property is not there for customize: %s" % image_object)
-        return ''
-
     def get_slack_channel_name(self):
         slack_channel_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.SLACK_CHANNEL)
         return self.get_customize_string_property(slack_channel_object)
@@ -40,6 +33,19 @@ class CustomizeLogic:
     def get_website_url(self):
         website_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.WEBSITE_URL)
         return self.get_customize_string_property(website_object)
+
+    def get_timezone(self):
+        timezone_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.TIMEZONE)
+        timezone = self.get_customize_string_property(timezone_object)
+        return timezone if timezone else settings.TIME_ZONE
+
+    def get_background_image_url(self):
+        image_object = self.customize_dao.get_customize_field_for_choice(CustomizeChoices.BACKGROUND_IMAGE)
+        logger.debug("try to get image property from customize: %s" % image_object)
+        if image_object and image_object.get().image_property:
+            return image_object.get().image_property.url
+        logger.warn("Image property is not there for customize: %s" % image_object)
+        return ''
 
     def get_customize_string_property(self, customize):
         logger.debug("get string property from customize: %s" % customize)
