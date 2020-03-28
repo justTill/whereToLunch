@@ -10,13 +10,12 @@ logger = structlog.getLogger('cron')
 
 
 def initialize_and_start_cron_jobs():
-    # try catch block -> try access auf db if error take settings timezone
-    # problem -> after update with db changes, need to re-save timezone
-    # customize_logic = CustomizeLogic()
-    # old_timezone = customize_logic.get_timezone()
-    scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
+    customize_logic = CustomizeLogic()
+    timezone = customize_logic.get_timezone()
+    scheduler = BackgroundScheduler(timezone=timezone)
     create_and_start_cron_jobs_with_scheduler(scheduler)
     logger.info("initialized and started cron jobs with timezone: %s" % settings.TIME_ZONE)
+    return scheduler
 
 
 def delete_old_and_create_new_cron_jobs_with_timezone(timezone):
@@ -30,6 +29,7 @@ def delete_old_and_create_new_cron_jobs_with_timezone(timezone):
     logger.info("create new scheduler: with new_timezone: %s" % timezone)
     create_and_start_cron_jobs_with_scheduler(new_scheduler)
     logger.info("new jobs from scheduler %s" % new_scheduler.get_jobs())
+    return [old_scheduler, new_scheduler]
 
 
 def create_and_start_cron_jobs_with_scheduler(scheduler):
