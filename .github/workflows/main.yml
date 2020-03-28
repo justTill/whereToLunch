@@ -16,6 +16,9 @@ jobs:
           pip3 install setuptools wheel
           pip3 install -r ./app/requirements.txt
 
+      - name: create databse dir
+        run: cd ./app/ && mkdir database
+
       - name: Run test
         run: cd ./app/ && python3 manage.py test --settings=LightningLunch.test_settings
   
