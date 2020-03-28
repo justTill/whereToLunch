@@ -78,14 +78,6 @@ Build Images
 ```
 SECRET_KEY=string DATABASE_NAME=name SQL_USER=name SQL_PASSWORD=pw docker-compose -f docker-compose.prod.yml up --build 
 ```
-Migrate new database scheme
-```
-docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py migrate --noinput
-```
-Collect all static files
-```
-docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py collectstatic --no-input --clear
-```
 Create an admin
 ```
 docker-compose -f docker-compose.prod.yml exec lunchapp python manage.py createsuperuser

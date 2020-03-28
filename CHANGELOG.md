@@ -6,11 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - If you have more ideas for features, you can either open an issue or drop a pull request
-- new customize field for the time of noon (right now noon is at 12:30 German Time)
+##[1.2.0] - 2020-03-28
+### Added
+ - user can no change the timezone.
+    - This has an effect on the time that votes get deleted and the time a slack message is sent.
 
 ##[1.1.0] - 2020-03-12
 ### Changed
- - new look for Where To Lunch
+ - new look for Where To Eat
 
 ##[1.0.3] - 2020-02-13
 ### Added
