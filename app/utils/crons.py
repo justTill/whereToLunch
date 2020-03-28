@@ -1,6 +1,7 @@
 import structlog
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
+from django.db import OperationalError
 from polls.logic import SlackLogic
 from forecast import forecastApi
 from utils import resetVotes, clearLogs
@@ -11,10 +12,15 @@ logger = structlog.getLogger('cron')
 
 def initialize_and_start_cron_jobs():
     customize_logic = CustomizeLogic()
-    timezone = customize_logic.get_timezone()
+    try:
+        timezone = customize_logic.get_timezone()
+    except OperationalError:
+        logger.warn("could not get timezone from database")
+        logger.info("use default timezone from settings")
+        timezone = settings.TIME_ZONE
     scheduler = BackgroundScheduler(timezone=timezone)
     create_and_start_cron_jobs_with_scheduler(scheduler)
-    logger.info("initialized and started cron jobs with timezone: %s" % settings.TIME_ZONE)
+    logger.info("initialized and started cron jobs with timezone: %s" % timezone)
     return scheduler
 
 
