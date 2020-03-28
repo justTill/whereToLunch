@@ -27,9 +27,9 @@ class Customize(models.Model):
         if is_timezone_customize_choices:
             timezone = self.string_property
             if timezone in pytz.all_timezones:
-                from utils import update
+                from utils import crons
                 logger.info("now go delete old cron j#ob an create new one with timezone %s", timezone)
-                update.delete_old_and_create_new_cron_jobs_with_timezone(timezone)
+                crons.delete_old_and_create_new_cron_jobs_with_timezone(timezone)
             else:
                 default_timezone = settings.TIME_ZONE
                 self.string_property = default_timezone
