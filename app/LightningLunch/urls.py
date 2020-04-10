@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('', include('restaurantStatistics.urls')),
-    path('', include('absenceCalendar.urls')),
+    path('', include('view.urls')),
 ]
 if bool(settings.DEBUG):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

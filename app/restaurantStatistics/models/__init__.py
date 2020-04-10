@@ -1,1 +1,0 @@
-from restaurantStatistics.models.choicesOfTheWeek import *

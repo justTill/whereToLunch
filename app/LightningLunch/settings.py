@@ -27,11 +27,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
-    'weather.apps.WeatherConfig',
-    'restaurantStatistics.apps.RestaurantStatisticsConfig',
-    'absenceCalendar.apps.AbsenceCalendarConfig',
-    'customize.apps.CustomizeConfig',
+    'apps.LightningLunchConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,10 +125,10 @@ USE_TZ = True
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'polls/static/polls'),
-    os.path.join(BASE_DIR, 'weather/static/weather'),
-    os.path.join(BASE_DIR, 'restaurantStatistics/static/restaurantStatistics'),
-    os.path.join(BASE_DIR, 'absenceCalendar/static/absenceCalendar'),
+    os.path.join(BASE_DIR, 'polls/static/../view/static/polls'),
+    os.path.join(BASE_DIR, 'weather/static/../view/static/weather'),
+    os.path.join(BASE_DIR, 'restaurantStatistics/static/../view/static/restaurantStatistics'),
+    os.path.join(BASE_DIR, 'absenceCalendar/../view/static/absenceCalendar'),
 ]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
