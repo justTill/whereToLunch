@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from polls.models import Restaurant
+from .restaurant import Restaurant
 
 
 class ChoicesOfTheWeek(models.Model):
