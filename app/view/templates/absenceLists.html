@@ -1,6 +1,6 @@
 <h1>All absences</h1>
 {% if absences_from_users %}
-<form action="{% url 'absenceCalendar:delete_absences' %}" method="post">
+<form action="{% url 'LightningLunchConfig:delete_absences' %}" method="post">
     {% csrf_token %}
         <div class="absences">
             {% for name, absence in absences_from_users.items %}

@@ -125,10 +125,7 @@ USE_TZ = True
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'polls/static/../view/static/polls'),
-    os.path.join(BASE_DIR, 'weather/static/../view/static/weather'),
-    os.path.join(BASE_DIR, 'restaurantStatistics/static/../view/static/restaurantStatistics'),
-    os.path.join(BASE_DIR, 'absenceCalendar/../view/static/absenceCalendar'),
+    os.path.join(BASE_DIR, 'view/static/')
 ]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

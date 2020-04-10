@@ -1,5 +1,5 @@
 <h1>Enter absence</h1>
-<form class="saveNewAbsence" action="{% url 'absenceCalendar:save_new_absence' %}" method="post">
+<form class="saveNewAbsence" action="{% url 'LightningLunchConfig:save_new_absence' %}" method="post">
     {% csrf_token %}
     {{ absence_form.non_field_errors }}
     <div class="fieldWrapper">

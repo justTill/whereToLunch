@@ -1,8 +1,9 @@
 from django.conf.urls import url
 from django.urls import path
-from absenceCalendar import views as views
+from .view.views import views as views
+from .view.views import ChoicesChart, VotesChart
 
-app_name = 'absenceCalendar'
+app_name = 'LightningLunchConfig'
 
 urlpatterns = [
     url(r'^absence$', views.absenceIndex, name='absenceIndex'),

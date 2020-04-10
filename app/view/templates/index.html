@@ -29,7 +29,7 @@
 <body>
     <div class="background">
         <div class="header">
-            {% include "./header.html" %}
+            {% include "header.html" %}
         </div>
         <div class="welcomeText">
             {% if user.is_authenticated %}
@@ -39,17 +39,17 @@
             {% endif %}
         </div>
         <div class="choiceForToday">
-            {% include "./choiceOfTheDay.html" %}
+            {% include "choiceOfTheDay.html" %}
         </div>
         <main>
             <div class="voteStats">
-                {% include "../../../view/templates/votesStatistic.html" %}
+                {% include "votesStatistic.html" %}
             </div>
             <div class="voteForm">
-                {% include "./restaurantVoteForm.html" %}
+                {% include "restaurantVoteForm.html" %}
             </div>
             <div class="choicesStats">
-                {% include "../../../view/templates/choiceStatistic.html" %}
+                {% include "choiceStatistic.html" %}
             </div>
         </main>
     </div>

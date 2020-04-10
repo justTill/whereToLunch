@@ -1,9 +1,9 @@
 from django.contrib import admin
-from customize.models import Customize
-from absenceCalendar.models import Absence
-from weather.models import Forecast
-from restaurantStatistics.models import ChoicesOfTheWeek
-from polls.models import Restaurant, Vote, Profile
+from .model.models import Customize
+from .model.models import Absence
+from .model.models import Forecast
+from .model.models import ChoicesOfTheWeek
+from .model.models import Restaurant, Vote, Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
