@@ -3,7 +3,6 @@ from utils import crons
 from unittest import TestCase
 from main.model.models import Customize
 from utils.enum import CustomizeChoices
-gaa
 
 class TestUpdate(TestCase):
 
