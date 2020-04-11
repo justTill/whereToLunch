@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {{website_name}}
+    </title>
+    {% load static %}
+    {% load compress %}
+    {% compress css %}
+        <link type="text/x-scss" href="{% static '../static/index.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static '../static/header.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static '../static/weather.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static '../static/voteForm.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static '../static/statistics.scss' %}" rel="stylesheet" media="screen">
+        <style>
+            {% if background_image_url %}
+                .background {
+                    background-image: url({{  background_image_url }} );
+                }
+            {% else  %}
+                .background {
+                    background-color: rgb(250, 250, 250);
+                }
+            {% endif %}
+        </style>
+    {% endcompress %}
+</head>
+<body>
+    <div class="background">
+        <div class="header">
+            {% include "header.html" %}
+        </div>
+        <div class="welcomeText">
+            {% if user.is_authenticated %}
+                <span> Hello {{ user.get_username }}, <!--if user does not have votes -> vote now else say what es has voted  if user is besimmbar ansonsten garnichts --></span>
+            {% else %}
+                <span>You need to be logged in before you can do anything.</span>
+            {% endif %}
+        </div>
+        <div class="choiceForToday">
+            {% include "choiceOfTheDay.html" %}
+        </div>
+        <main>
+            <div class="voteStats">
+                {% include "votesStatistic.html" %}
+            </div>
+            <div class="voteForm">
+                {% include "restaurantVoteForm.html" %}
+            </div>
+            <div class="choicesStats">
+                {% include "choiceStatistic.html" %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

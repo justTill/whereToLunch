@@ -2,10 +2,9 @@ import structlog
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
 from django.db import OperationalError
-from polls.logic import SlackLogic
-from forecast import forecastApi
+from main.controller.logic import SlackLogic, CustomizeLogic
+from main.controller.forecast import forecastApi
 from utils import resetVotes, clearLogs
-from customize.logic.customizeLogic import CustomizeLogic
 
 logger = structlog.getLogger('cron')
 

@@ -1,7 +1,7 @@
 import datetime
 import pytz
 from django.utils import timezone
-from customize.logic.customizeLogic import CustomizeLogic
+from main.controller.logic import CustomizeLogic
 
 customizeLogic = CustomizeLogic()
 
