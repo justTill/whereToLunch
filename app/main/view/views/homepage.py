@@ -17,7 +17,7 @@ logger = structlog.getLogger(__name__)
 
 
 def index(request):
-    template = loader.get_template('polls/index.html')
+    template = loader.get_template('index.html')
     choice_of_the_day = vote_logic.choice_of_the_day()
     voted_restaurants = vote_logic.get_voted_restaurants_from_user(
         request.user) if request.user.is_authenticated else None
