@@ -1,5 +1,5 @@
 from django.urls import reverse
-from restaurantStatistics.tests import SetUpTests
+from main.tests.testSetUp import SetUpTests
 
 
 class ChartView(SetUpTests):

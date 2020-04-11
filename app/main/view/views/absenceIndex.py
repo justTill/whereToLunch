@@ -18,7 +18,7 @@ customize_logic = CustomizeLogic()
 
 
 def index(request):
-    template = loader.get_template('absenceCalendar/absenceIndex.html')
+    template = loader.get_template('templates/absenceIndex.html')
     context = get_standard_context()
     return HttpResponse(template.render(context, request))
 
@@ -44,7 +44,7 @@ def save_new_absence(request):
         else:
             logger.warn("Form was not valid")
             context['absence_form'] = form
-    return render(request, 'absenceCalendar/absenceIndex.html', context)
+    return render(request, 'templates/absenceIndex.html', context)
 
 
 @staff_member_required
@@ -53,7 +53,7 @@ def delete_absences(request):
     absences = request.POST.getlist('absenceBox')
     absence_logic.delete_absences_for_user(user, absences)
     logger.info("delete absences: %s for user %s" % (user.username, absences))
-    return HttpResponseRedirect(reverse('absenceCalendar:absenceIndex'))
+    return HttpResponseRedirect(reverse('main:absenceIndex'))
 
 
 def get_standard_context():

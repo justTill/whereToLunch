@@ -1,7 +1,7 @@
 import datetime
 from django.contrib.auth.models import User
-from polls.tests import SetUpTestss
-from polls.logic import UserLogic
+from main.tests.testSetUpP import SetUpTestss
+from main.controller.logic import UserLogic
 
 
 class UserLogicTest(SetUpTestss):

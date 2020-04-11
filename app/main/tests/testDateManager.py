@@ -2,7 +2,7 @@ import datetime
 from django.utils import timezone
 from unittest import TestCase
 from utils.date import dateManager
-from customize.models.customize import Customize
+from main.model.models import Customize
 
 
 class TestDateManager(TestCase):

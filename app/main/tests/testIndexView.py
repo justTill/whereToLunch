@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.urls import reverse
-from polls.tests import SetUpTestss
-from polls.persistence import Restaurant
-from absenceCalendar.models import Absence
+from main.tests.testSetUpP import SetUpTestss
+from main.model.persistence import Restaurant
+from main.model.models import Absence
 from utils.enum import Reasons
 
 
@@ -10,7 +10,7 @@ class IndexViewTest(SetUpTestss):
     def test_index(self):
         first_restaurant = Restaurant.objects.get(restaurant_name='first_restaurant')
 
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse('main:index'))
 
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context[-1]['restaurant_list']), 4)

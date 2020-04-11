@@ -4,9 +4,8 @@ from decimal import Decimal
 
 from django.test import TestCase
 from django.utils import timezone
-from weather.models import Forecast
-from weather.logic import weather_context
-from customize.models import Customize
+from main.controller.logic import weather_context
+from main.model.models import Customize, Forecast
 from utils.enum import CustomizeChoices
 
 

@@ -2,9 +2,9 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from absenceCalendar.logic import AbsenceLogic
-from absenceCalendar.persistence import AbsenceDAO
-from absenceCalendar.models import Absence
+from main.controller.logic import AbsenceLogic
+from main.model.persistence import AbsenceDAO
+from main.model.models import Absence
 from utils.enum import Reasons
 from utils.date import dateManager
 

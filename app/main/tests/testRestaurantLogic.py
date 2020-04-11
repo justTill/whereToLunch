@@ -1,6 +1,6 @@
-from polls.tests import SetUpTestss
-from polls.logic import RestaurantLogic
-from polls.models import Restaurant
+from main.tests.testSetUpP import SetUpTestss
+from main.controller.logic import RestaurantLogic
+from main.model.models import Restaurant
 
 
 class RestaurantLogicTest(SetUpTestss):

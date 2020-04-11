@@ -1,12 +1,10 @@
 import datetime
 from unittest import TestCase
-from polls.models import Restaurant, Vote
-from absenceCalendar.models import Absence
+from django.contrib.auth.models import User
+from main.model.models import Absence, Vote, Restaurant, ChoicesOfTheWeek
 from utils.enum import Reasons
 from utils.date import dateManager
-from django.contrib.auth.models import User
 from utils import resetVotes
-from restaurantStatistics.models import ChoicesOfTheWeek
 
 
 class TestResetVotes(TestCase):

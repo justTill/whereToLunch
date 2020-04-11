@@ -1,6 +1,6 @@
 from unittest import TestCase
-from customize.models import Customize
-from customize.logic import CustomizeLogic
+from main.model.models import Customize
+from main.controller.logic import CustomizeLogic
 from utils.enum import CustomizeChoices
 
 

@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
-from polls.logic import SlackLogic
-from customize.models import Customize
+from main.controller.logic import SlackLogic
+from main.model.models import Customize, Forecast
 from utils.enum import CustomizeChoices
-from weather.models import Forecast
 
 
 class SetUpTestsp(TestCase):

@@ -17,7 +17,7 @@ logger = structlog.getLogger(__name__)
 
 
 def index(request):
-    template = loader.get_template('main/../templates/index.html')
+    template = loader.get_template('templates/index.html')
     choice_of_the_day = vote_logic.choice_of_the_day()
     voted_restaurants = vote_logic.get_voted_restaurants_from_user(
         request.user) if request.user.is_authenticated else None
@@ -55,7 +55,7 @@ def vote(request):
     if restaurant_names:
         vote_logic.save_vote_for_restaurants_with_names(restaurant_names, user)
         absence_logic.delete_old_and_current_absences_for_user(user)
-    return HttpResponseRedirect(reverse('polls:index'))
+    return HttpResponseRedirect(reverse('main:index'))
 
 
 @staff_member_required
@@ -64,7 +64,7 @@ def iAmOut(request):
     logger.info('user: %s is out' % user.username)
     vote_logic.delete_votes_from_user(user)
     absence_logic.set_vote_absence_for_user(user, Reasons.OUT)
-    return HttpResponseRedirect(reverse('polls:index'))
+    return HttpResponseRedirect(reverse('main:index'))
 
 
 @staff_member_required
@@ -73,7 +73,7 @@ def doNotCare(request):
     logger.info('user: %s do not care' % user.username)
     vote_logic.delete_votes_from_user(user)
     absence_logic.set_vote_absence_for_user(request.user, Reasons.DONOTCARE)
-    return HttpResponseRedirect(reverse('polls:index'))
+    return HttpResponseRedirect(reverse('main:index'))
 
 
 def get_longest_list(lists):

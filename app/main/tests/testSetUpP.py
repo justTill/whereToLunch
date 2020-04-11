@@ -1,9 +1,7 @@
 import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
-from polls.models import Restaurant, Vote
-from weather.models import Forecast
-from absenceCalendar.models import Absence
+from main.model.models import Restaurant, Vote, Forecast, Absence
 from utils.enum import Reasons
 
 

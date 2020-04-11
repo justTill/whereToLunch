@@ -1,7 +1,7 @@
 from pytz import timezone
 from utils import crons
 from unittest import TestCase
-from customize.models.customize import Customize
+from main.model.models import Customize
 from utils.enum import CustomizeChoices
 
 

@@ -1,6 +1,6 @@
 import datetime
 from django.test import TestCase
-from absenceCalendar.forms import AbsenceForm
+from main.controller.forms import AbsenceForm
 from utils.date import dateManager
 
 

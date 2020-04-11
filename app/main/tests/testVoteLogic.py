@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-from polls.logic import VoteLogic
-from polls.tests import SetUpTestss
-from polls.models import Restaurant, Vote
+from main.controller.logic import VoteLogic
+from main.tests.testSetUpP import SetUpTestss
+from main.model.models import Restaurant, Vote
 
 
 class VoteLogicTest(SetUpTestss):

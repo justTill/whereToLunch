@@ -1,10 +1,9 @@
 import datetime
 from decimal import Decimal
-from absenceCalendar.models import Absence
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from weather.models import Forecast
+from main.model.models import Absence, Forecast
 from utils.enum import Reasons
 from utils.date import dateManager
 

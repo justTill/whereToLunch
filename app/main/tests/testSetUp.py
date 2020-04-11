@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from polls.models import Restaurant, Vote
-from restaurantStatistics.models import ChoicesOfTheWeek
-from polls.models import Profile
+from main.model.models import ChoicesOfTheWeek, Restaurant, Vote, Profile
+
 
 class SetUpTests(TestCase):
     def setUp(self):
