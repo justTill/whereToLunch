@@ -1,5 +1,10 @@
-import datetime
 from LightningLunch.settings import *
 
-RESET_VOTES_MIN = int((datetime.datetime.now() + datetime.timedelta(minutes=1)).minute)
-RESET_VOTES_HOUR = int(datetime.datetime.now().hour)
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=main, utils',
+]
