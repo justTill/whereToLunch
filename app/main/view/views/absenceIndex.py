@@ -17,7 +17,7 @@ vote_logic = VoteLogic()
 customize_logic = CustomizeLogic()
 
 
-def absenceIndex(request):
+def index(request):
     template = loader.get_template('absenceCalendar/absenceIndex.html')
     context = get_standard_context()
     return HttpResponse(template.render(context, request))

@@ -1,9 +1,6 @@
 import datetime
 import pytz
 from django.utils import timezone
-from main.controller.logic import CustomizeLogic
-
-customizeLogic = CustomizeLogic()
 
 
 def today():
@@ -29,5 +26,7 @@ def current_vote_day():
 
 
 def activate_timezone():
+    from main.controller.logic import CustomizeLogic
+    customizeLogic = CustomizeLogic()
     time_zone = customizeLogic.get_timezone()
     timezone.activate(pytz.timezone(time_zone))
