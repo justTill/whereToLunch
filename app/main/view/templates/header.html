@@ -17,13 +17,13 @@
     </div>
 
     <div class="navigation">
-        <a href="{% url 'LightningLunchConfig:index' %}"> Vote/Startpage</a>
-        <a href="{% url 'LightningLunchConfig:absenceIndex' %}"> Absencecalendar</>
+        <a href="{% url 'main:index' %}"> Vote/Startpage</a>
+        <a href="{% url 'main:absenceIndex' %}"> Absencecalendar</>
     </div>
 
     <div class="userLinks">
         {% if not user.is_authenticated %}
-            <a href="{% url 'LightningLunchConfig:vote' %}">Login</a>
+            <a href="{% url 'main:vote' %}">Login</a>
         {% else %}
             <a href="{% url 'admin:logout' %}"> Logout </a>
             <a href="{% url 'admin:index' %}"> Admin&nbsp;Site </a>

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 from .view.views import homepage, absenceIndex, ChoicesChart, VotesChart
 
-app_name = 'whereToLunch'
+app_name = 'main'
 
 urlpatterns = [
     url(r'^absence$', absenceIndex.index, name='absenceIndex'),
