@@ -8,10 +8,10 @@
     {% load static %}
     {% load compress %}
     {% compress css %}
-        <link type="text/x-scss" href="{% static '../static/index.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/header.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/weather.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/absence.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'index.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'header.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'weather.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'absence.scss' %}" rel="stylesheet" media="screen">
         <style>
             {% if background_image_url %}
                 .background {
@@ -28,7 +28,7 @@
 <body>
     <div class="background">
         <div class="header">
-            {% include "header.html" %}
+            {% include "templates/header.html" %}
         </div>
 
         <div class="welcomeText">
@@ -40,10 +40,10 @@
         </div>
         <div class="absence">
             <div class="absenceForm">
-                {% include "absenceForm.html" %}
+                {% include "templates/absenceForm.html" %}
             </div>
             <div class="absenceLists">
-                {% include "absenceLists.html" %}
+                {% include "templates/absenceLists.html" %}
             </div>
         </div>
     </div>

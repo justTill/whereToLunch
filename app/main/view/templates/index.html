@@ -8,11 +8,11 @@
     {% load static %}
     {% load compress %}
     {% compress css %}
-        <link type="text/x-scss" href="{% static '../static/index.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/header.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/weather.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/voteForm.scss' %}" rel="stylesheet" media="screen">
-        <link type="text/x-scss" href="{% static '../static/statistics.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'index.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'header.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'weather.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'voteForm.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'statistics.scss' %}" rel="stylesheet" media="screen">
         <style>
             {% if background_image_url %}
                 .background {
@@ -29,7 +29,7 @@
 <body>
     <div class="background">
         <div class="header">
-            {% include "header.html" %}
+            {% include "templates/header.html" %}
         </div>
         <div class="welcomeText">
             {% if user.is_authenticated %}
@@ -39,17 +39,17 @@
             {% endif %}
         </div>
         <div class="choiceForToday">
-            {% include "choiceOfTheDay.html" %}
+            {% include "templates/choiceOfTheDay.html" %}
         </div>
         <main>
             <div class="voteStats"> e
-                {% include "votesStatistic.html" %}
+                {% include "templates/votesStatistic.html" %}
             </div>
             <div class="voteForm">
-                {% include "restaurantVoteForm.html" %}
+                {% include "templates/restaurantVoteForm.html" %}
             </div>
             <div class="choicesStats">
-                {% include "choiceStatistic.html" %}
+                {% include "templates/choiceStatistic.html" %}
             </div>
         </main>
     </div>

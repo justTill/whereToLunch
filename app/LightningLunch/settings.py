@@ -28,6 +28,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 INSTALLED_APPS = [
     'main.apps.LightningLunchConfig',
+    'utils.apps.UtilsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'compressor',
     'chartjs',
     'rest_framework',
-    'django_nose'
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'LightningLunch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'main/view/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'main/view/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
