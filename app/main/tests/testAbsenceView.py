@@ -28,7 +28,7 @@ class AbsenceIndexTest(TestCase):
 
     def test_absenceIndex(self):
         absence = Absence.objects.get(user__username='another_test_user')
-        response = self.client.get(reverse('absenceCalendar:absenceIndex'))
+        response = self.client.get(reverse('main:absenceIndex'))
 
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.context[-1]['weather_context'],

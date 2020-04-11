@@ -17,7 +17,6 @@ class TestDateManager(TestCase):
         Customize.objects.all().delete()
         now = timezone.now()
         now = now.time().strftime('%H:%M')
-        print(now)
         noon = timezone.now().time().replace(hour=12, minute=30, second=0).strftime('%H:%M')
         if now >= noon:
             self.assertEqual(dateManager.current_vote_day(), datetime.date.today() + datetime.timedelta(days=1))

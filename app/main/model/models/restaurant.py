@@ -23,4 +23,3 @@ class Restaurant(models.Model):
 
 class ColorWidget(Input):
     input_type = 'color'
-    template_name = 'polls/forms/widgets/color.html'

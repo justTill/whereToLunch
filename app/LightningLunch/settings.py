@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'chartjs',
+    'django.forms',
     'rest_framework',
     'django_nose',
 ]

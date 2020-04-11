@@ -3,7 +3,7 @@
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a style="color: Yellow" href="{% url 'admin:index' %}">Admin Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:orange" href="{% url 'polls:index' %}">Home Page</a></h1>
+<h1 id="site-name"><a style="color: Yellow" href="{% url 'admin:index' %}">Admin Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:orange" href="{% url 'main:index' %}">Home Page</a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
