@@ -9,7 +9,6 @@ class VoteLogicTest(TestCase):
 
     def setUp(self):
         first_restaurant = Restaurant.objects.create(restaurant_name='first_restaurant')
-        second_restaurant = Restaurant.objects.create(restaurant_name='second_restaurant')
 
         first_test_user = User.objects.create(username='first_test_user', is_staff=True)
         first_test_user.set_password('12345')
