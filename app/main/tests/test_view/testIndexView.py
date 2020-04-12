@@ -1,19 +1,33 @@
 from django.contrib.auth.models import User
+from django.test import TestCase
 from django.urls import reverse
-from main.tests.testSetUpP import SetUpTestss
-from main.model.persistence import Restaurant
-from main.model.models import Absence
+from main.model.models import Restaurant, Vote, Forecast, Absence
 from utils.enum import Reasons
 
 
-class IndexViewTest(SetUpTestss):
+class IndexViewTest(TestCase):
+
+    def setUp(self):
+        first_restaurant = Restaurant.objects.create(restaurant_name='first_restaurant')
+        Restaurant.objects.create(restaurant_name='second_restaurant')
+
+        first_test_user = User.objects.create(username='first_test_user', is_staff=True)
+        first_test_user.set_password('12345')
+        first_test_user.save()
+        second_test_user = User.objects.create(username='second_test_user', is_staff=True)
+        second_test_user.set_password('12345')
+        second_test_user.save()
+
+        Vote.objects.create(restaurant=first_restaurant, user=first_test_user)
+        Vote.objects.create(restaurant=first_restaurant, user=second_test_user)
+
     def test_index(self):
         first_restaurant = Restaurant.objects.get(restaurant_name='first_restaurant')
 
         response = self.client.get(reverse('main:index'))
 
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context[-1]['restaurant_list']), 4)
+        self.assertEquals(len(response.context[-1]['restaurant_list']), 2)
         self.assertEquals(response.context[-1]['choice_of_the_day'][0], first_restaurant)
         self.assertEquals(response.context[-1]['supporters'], ['first_test_user', 'second_test_user'])
 
