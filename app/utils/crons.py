@@ -1,7 +1,7 @@
 import structlog
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
-from django.db import OperationalError
+from django.db import OperationalError, ProgrammingError
 from main.controller.logic import SlackLogic, CustomizeLogic
 from main.controller.forecast import forecastApi
 from utils import resetVotes, clearLogs
@@ -13,6 +13,10 @@ def initialize_and_start_cron_jobs():
     customize_logic = CustomizeLogic()
     try:
         timezone = customize_logic.get_timezone()
+    except ProgrammingError:
+        logger.warn("could not get timezone from database")
+        logger.info("use default timezone from settings")
+        timezone = settings.TIME_ZONE
     except OperationalError:
         logger.warn("could not get timezone from database")
         logger.info("use default timezone from settings")
@@ -41,8 +45,8 @@ def create_and_start_cron_jobs_with_scheduler(scheduler):
     if isinstance(scheduler, BackgroundScheduler):
         slack = SlackLogic()
         scheduler.add_job(forecastApi.update_forecast, 'interval', minutes=20, id="update_forecast")
-        scheduler.add_job(clearLogs.clear_debug_logs, 'interval', hours=1, id="clear_debug_logs")
-        scheduler.add_job(clearLogs.clear_audit_logs, 'interval', hours=1, id="clear_audit_logs")
+        scheduler.add_job(clearLogs.clear_debug_logs, 'interval', minutes=20, id="clear_debug_logs")
+        scheduler.add_job(clearLogs.clear_audit_logs, 'interval', minutes=20, id="clear_audit_logs")
         scheduler.add_job(forecastApi.delete_old_forecasts, 'cron', hour=6, minute=00, id="delete_old_forecasts")
         scheduler.add_job(slack.send_vote_notification_to_slack_channel, 'cron', minute=00, hour=11, day_of_week="0-4",
                           id="send_vote_notification")
