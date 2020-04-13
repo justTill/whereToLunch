@@ -27,11 +27,8 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
-    'weather.apps.WeatherConfig',
-    'restaurantStatistics.apps.RestaurantStatisticsConfig',
-    'absenceCalendar.apps.AbsenceCalendarConfig',
-    'customize.apps.CustomizeConfig',
+    'main.apps.MainConfig',
+    'utils.apps.UtilsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'chartjs',
+    'django.forms',
     'rest_framework',
-    'django_nose'
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +58,7 @@ ROOT_URLCONF = 'LightningLunch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'main/view/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,10 +127,7 @@ USE_TZ = True
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'polls/static/polls'),
-    os.path.join(BASE_DIR, 'weather/static/weather'),
-    os.path.join(BASE_DIR, 'restaurantStatistics/static/restaurantStatistics'),
-    os.path.join(BASE_DIR, 'absenceCalendar/static/absenceCalendar'),
+    os.path.join(BASE_DIR, 'main/view/static/')
 ]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

@@ -1,8 +1,6 @@
 import structlog
-from polls.models import Vote
-from restaurantStatistics.models import ChoicesOfTheWeek
-from polls.logic import VoteLogic
-from absenceCalendar.logic import AbsenceLogic
+from main.model.models import ChoicesOfTheWeek, Vote
+from main.controller.logic import VoteLogic, AbsenceLogic
 
 logger = structlog.getLogger(__name__)
 

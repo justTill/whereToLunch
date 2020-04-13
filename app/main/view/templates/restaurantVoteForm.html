@@ -1,0 +1,67 @@
+{% load static %}
+{% load index %}
+{% if restaurant_list %}
+    <form id="vote_form" action="{% url 'main:vote' %}" method="post">
+        {% csrf_token %}
+        <table class="statusFromUsers">
+            <thead>
+                <tr>
+                    <th>not voted</th>
+                    <th>do not care</th>
+                    <th>out</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in longest_absence_list%}
+                    <tr>
+                        <td>
+                            {{ not_voted|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_do_not_care|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                        <td>
+                            {{ user_that_are_out|getElementIfIndexIsInRange:forloop.counter0 }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="restaurantsList">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Restaurants
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurant in restaurant_list %}
+                    <tr>
+                        <td>
+                            <a{% if restaurant.restaurant_menu_link %} href="{{ restaurant.restaurant_menu_link }}" target="_blank" {% endif %}> {{ restaurant.restaurant_name }} </a>
+                        </td>
+                        <td class="radioButton">
+                            {% if user.is_authenticated %}
+                                <input type="checkbox" name="voteButton" value="{{ restaurant.restaurant_name }}" {% if restaurant in voted_restaurants %} checked="checked" {% endif %} >
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="userButtons">
+            {% if not user.is_authenticated %}
+                <button class="vote" type="submit" value="Please Login first"> Login in</button>
+            {% else %}
+                <button class="vote" type="submit" value="Vote now">Vote </button>
+                <a class="notCare" href={% url 'main:doNotCare' %}>Do not care</a>
+                <a class="amOut" href={% url 'main:iAmOut' %}>I am out</a>
+            {% endif %}
+        </div>
+    </form>
+    {% if user.is_authenticated %}
+    {% endif %}
+{% else %}
+    <p>No restaurants available</p>
+{% endif %}

@@ -1,0 +1,137 @@
+{% include "templates/js.html" %}
+<div class="voteChart">
+    <span>Vote statistics for {% if is_after_noon  %} tomorrow {% else %} today {% endif %}</span>
+    <canvas id="votesStatistics"></canvas>
+</div>
+
+<script>
+    var choices = []
+    var vote = []
+    var background_colors = []
+    var supportedBy = []
+    var userImages = []
+    {% block jquery %}
+        var endpoint = 'api/charts/votes/'
+        $.ajax({
+            method:"GET",
+            url: endpoint,
+            success: function (votesStatistics) {
+                data = votesStatistics.restaurants_with_votes
+                for (var index in data) {
+                    console.log(name)
+                    choices.push(data[index].name)
+                    vote.push(data[index].supporters.length)
+                    background_colors.push(data[index].color + 'B3')
+                    supportedBy.push(data[index].supporters)
+
+                    var imageArray = []
+                    var images = data[index].images
+                    for(var i = 0; i<images.length; i++) {
+                        var userImg = document.createElement("img")
+                        userImg.src = images[i]
+                        imageArray.push(userImg)
+                    }
+                    userImages.push(imageArray)
+                }
+                voteChart()
+            },
+            error: function (error_data) {
+                console.log(error_data)
+            }
+        })
+    {% endblock %}
+    function voteChart() {
+        var ctxVotes = document.getElementById('votesStatistics').getContext('2d');
+        var voteChart = new Chart(ctxVotes, {
+            type: 'horizontalBar',
+            data: {
+                labels: choices,
+                datasets: [{
+                    label: '',
+                    data: vote,
+                    backgroundColor: background_colors,
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            fontStyle: "bold",
+                            fontSize: 18
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontStyle: "bold",
+                            fontSize: 18
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+                },
+                animation: {
+                    onComplete: function () {
+                        var ctxVotes = this.chart.ctx;
+                        ctxVotes.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                        ctxVotes.textAlign = 'left';
+                        ctxVotes.textBaseline = 'bottom';
+
+                        var yHeight = calculateHeightFromOneBar(voteChart.getDatasetMeta(0).data[0]._yScale.height);
+                        var xWidth = calculateWidthFromOneBarSection(voteChart.getDatasetMeta(0).data[0]._xScale.maxWidth);
+                        var iconSize = (yHeight > xWidth) ? xWidth -1: yHeight;
+                        this.data.datasets.forEach(function (dataset) {
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                    left = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._xScale.left;
+
+                                if (iconSize >= 30.0) {
+                                    if (choices.length == 1 && Math.max.apply(null, vote) < 4){
+                                        iconSize = iconSize/2
+                                        drawImagesWith(left +(xWidth-iconSize)/2, iconSize, model, i, ctxVotes, xWidth)
+                                    }
+                                    else if (yHeight > xWidth){
+                                        drawImagesWith(left, iconSize, model, i, ctxVotes, iconSize)
+                                    }else {
+                                        drawImagesWith(left +(xWidth-iconSize)/2, iconSize, model, i, ctxVotes, xWidth)
+                                    }
+                                }else {
+                                    ctxVotes.fillStyle = 'black';
+                                    var fontArgs = ctxVotes.font.split(' ');
+                                    var fontSize = yHeight/2;
+                                    ctxVotes.font = fontSize + ' ' + fontArgs[fontArgs.length - 1];
+                                    ctxVotes.fillText(supportedBy[i], left + 5, model.y + 8);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function calculateHeightFromOneBar(height) {
+        return height/choices.length
+    }
+    function calculateWidthFromOneBarSection(width) {
+        //Math.max.apply(null, vote can be written as Math.max(...vote)
+        return width/Math.max.apply(null, vote)
+    }
+    function drawImagesWith(startSpacing, iconSize, model, index, canvas, spacingSteps) {
+        for(var k in userImages[index]) {
+            var img = userImages[index][k];
+            if (iconSize >= 30.0) {
+                canvas.drawImage(img, startSpacing, model.y - iconSize / 2, iconSize, iconSize);
+            }else {
+                canvas.drawImage(img, startSpacing-k, model.y - iconSize / 2, iconSize, iconSize);
+            }
+
+            startSpacing += spacingSteps
+        }
+    }
+</script>
