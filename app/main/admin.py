@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .model.models import Absence
-from .model.models import ChoicesOfTheWeek
-from .model.models import Customize
-from .model.models import Forecast
-from .model.models import Restaurant, Vote, Profile
+from .model.models import Absence, ChoicesOfTheWeek, Customize, Forecast, Restaurant, Vote, Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
