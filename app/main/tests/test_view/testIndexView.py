@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from main.model.models import Restaurant, Vote, Forecast, Absence
 from utils.enum import Reasons
+from users.models import Team
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -10,14 +11,17 @@ User = get_user_model()
 class IndexViewTest(TestCase):
 
     def setUp(self):
-        first_restaurant = Restaurant.objects.create(restaurant_name='first_restaurant')
-        Restaurant.objects.create(restaurant_name='second_restaurant')
+        team = Team.objects.create(team_name="testTeam")
+        first_restaurant = Restaurant.objects.create(restaurant_name='first_restaurant', restaurant_for_team=team)
+        Restaurant.objects.create(restaurant_name='second_restaurant', restaurant_for_team=team)
 
         first_test_user = User.objects.create(username='first_test_user', is_staff=True)
         first_test_user.set_password('12345')
+        first_test_user.team = team
         first_test_user.save()
         second_test_user = User.objects.create(username='second_test_user', is_staff=True)
         second_test_user.set_password('12345')
+        second_test_user.team = team
         second_test_user.save()
 
         Vote.objects.create(restaurant=first_restaurant, user=first_test_user)
@@ -25,7 +29,7 @@ class IndexViewTest(TestCase):
 
     def test_index(self):
         first_restaurant = Restaurant.objects.get(restaurant_name='first_restaurant')
-
+        self.client.post('/admin/login/?next=/vote/', {'username': 'first_test_user', 'password': '12345'})
         response = self.client.get(reverse('main:index'))
 
         self.assertEquals(response.status_code, 200)
@@ -40,8 +44,7 @@ class IndexViewTest(TestCase):
         response = self.client.post('/admin/login/?next=/vote/', {'username': 'first_test_user', 'password': '12345'})
         self.assertRedirects(response, '/vote/', status_code=302, target_status_code=302)
 
-        Restaurant.objects.create(restaurant_name='another_restaurant')
-        response = self.client.post('/vote/', {'voteButton': "another_restaurant"})
+        response = self.client.post('/vote/', {'voteButton': "first_restaurant"})
         self.assertRedirects(response, '/', status_code=302)
 
         self.client.post('/admin/logout')

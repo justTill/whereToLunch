@@ -20,10 +20,10 @@ class RestaurantStatisticsLogic:
         restaurant_dict = {c.restaurant.restaurant_name for c in choices}
         return restaurant_dict
 
-    def get_votes_for_restaurant_name(self, restaurant_name):
+    def get_votes_for_restaurant_name_from_team(self, restaurant_name, team):
         logger.debug("get current votes for a restaurant with the name %s " % restaurant_name)
         vote = self.restaurant_statistics_dao.get_votes_for_restaurant(
-            self.restaurant_dao.get_restaurant_with_name_for_team(restaurant_name)
+            self.restaurant_dao.get_restaurant_with_name_for_team(restaurant_name, team)
         )
         return vote
 
@@ -61,7 +61,7 @@ class RestaurantStatisticsLogic:
         for name in restaurant_names:
             data.append({
                 'name': name,
-                'times_won': self.get_votes_for_restaurant_name(name),
+                'times_won': self.get_votes_for_restaurant_name_from_team(name, team),
                 'color': self.get_color_for_restaurant_name_for_team(name, team)
             })
         return data

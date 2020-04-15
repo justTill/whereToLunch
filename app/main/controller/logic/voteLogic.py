@@ -35,7 +35,6 @@ class VoteLogic:
         logger.info('save restaurants: %s for user: %s' % (restaurant_names, user))
         self.delete_votes_from_user(user)
         restaurants = self.restaurant_logic.get_restaurants_with_names_for_team(restaurant_names, user.team)
-        print(restaurants)
         for restaurant in restaurants:
             self.vote_dao.save_vote_for_restaurant_with_user(restaurant.get(), user)
 

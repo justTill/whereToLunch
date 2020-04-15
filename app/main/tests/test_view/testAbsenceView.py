@@ -1,11 +1,12 @@
 import datetime
-from decimal import Decimal
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
+from decimal import Decimal
 from main.model.models import Absence, Forecast
+from users.models import Team
 from utils.enum import Reasons
 from utils.date import dateManager
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -17,9 +18,10 @@ class AbsenceIndexTest(TestCase):
 
     def setUp(self):
         Forecast.objects.create(temperature=12, description="sunny")
-
+        team = Team.objects.create(team_name="TestTeam")
         another_test_user = User.objects.create(username='another_test_user', is_staff=True)
         another_test_user.set_password('12345')
+        another_test_user.team = team
         another_test_user.save()
 
         Absence.objects.create(user=another_test_user,
@@ -30,6 +32,7 @@ class AbsenceIndexTest(TestCase):
 
     def test_absenceIndex(self):
         absence = Absence.objects.get(user__username='another_test_user')
+        self.client.post('/admin/login/?next=/', {'username': 'another_test_user', 'password': '12345'})
         response = self.client.get(reverse('main:absenceIndex'))
 
         self.assertEquals(response.status_code, 200)
