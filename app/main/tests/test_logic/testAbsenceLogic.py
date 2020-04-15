@@ -109,7 +109,7 @@ class AbsenceLogicTest(TestCase):
                                         absenceTo=self.tomorrow,
                                         reason=Reasons.ABSENT.value)
 
-        active_absences = self.absence_logic.get_active_absent_absences()
+        active_absences = self.absence_logic.get_active_absent_absences_from_team()
         self.assertEqual(active_absences, [absent])
 
     def test_delete_all_inactive_absences(self):
@@ -134,7 +134,7 @@ class AbsenceLogicTest(TestCase):
                                              absenceTo=self.tomorrow,
                                              reason=Reasons.ABSENT.value)
 
-        absences = self.absence_logic.get_sorted_absent_absences()
+        absences = self.absence_logic.get_sorted_absent_absences_for_team()
         self.assertEqual(absences, {'test_user': [absence], 'test_user_second': [absence_two]})
 
     def test_delete_vote_absence_for_user(self):

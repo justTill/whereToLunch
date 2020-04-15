@@ -34,7 +34,7 @@ class SlackLogic:
 
     def send_vote_notification_to_slack_channel(self):
         logger.debug('send notification to slack channel')
-        user_that_not_voted = self.userLogic.get_users_that_not_voted_yet()
+        user_that_not_voted = self.userLogic.get_users_from_team_that_not_voted_yet()
         message = self.get_random_slack_message_with_users(user_that_not_voted)
         url = self.customize_logic.get_website_url()
 

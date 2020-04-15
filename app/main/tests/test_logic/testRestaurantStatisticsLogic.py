@@ -24,7 +24,7 @@ class RestaurantLogicTest(TestCase):
         Vote.objects.create(restaurant=first_restaurant, user=testUser)
 
     def test_get_different_restaurant_names(self):
-        names = self.restaurantStatisticsLogic.get_different_restaurant_names()
+        names = self.restaurantStatisticsLogic.get_different_restaurant_names_from_team()
         self.assertEquals(names, {'first_restaurant', 'second_restaurant'})
 
     def test_get_votes_for_restaurants(self):
@@ -33,9 +33,9 @@ class RestaurantLogicTest(TestCase):
         self.assertEquals(votes, 2)
 
     def test_get_choice_of_the_days_with_votes(self):
-        choice = self.restaurantStatisticsLogic.get_restaurants_that_have_votes()
+        choice = self.restaurantStatisticsLogic.get_restaurants_that_have_votes_from_team()
         self.assertEquals(choice, {'first_restaurant': 1})
 
     def test_get_color_for_restaurant_names(self):
-        color = self.restaurantStatisticsLogic.get_color_for_restaurant_name('first_restaurant')
+        color = self.restaurantStatisticsLogic.get_color_for_restaurant_name_for_team('first_restaurant')
         self.assertEquals(color, '#ffffff')

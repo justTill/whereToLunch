@@ -27,7 +27,7 @@ class RestaurantLogic:
 
     def get_votes_for_restaurant_with_id(self, restaurant_id):
         logger.debug("get votes for restaurants with id: %s" % restaurant_id)
-        vote_queryset = self.vote_dao.get_counted_votes()
+        vote_queryset = self.vote_dao.get_counted_votes(restaurant_id)
         votes = vote_queryset.filter(restaurant_id=restaurant_id)
         if votes:
             return votes.values_list('restaurant_count', flat=True).get()
@@ -35,9 +35,9 @@ class RestaurantLogic:
             logger.debug("there is no vote for that restaurant with id: %s" % restaurant_id)
             return 0
 
-    def get_restaurants_with_names(self, restaurant_names):
+    def get_restaurants_with_names_for_team(self, restaurant_names, team):
         logger.debug("get restaurants with names: %s" % restaurant_names)
-        return [self.restaurant_dao.get_restaurant_with_name(name) for name in restaurant_names]
+        return [self.restaurant_dao.get_restaurant_with_name_for_team(name, team) for name in restaurant_names]
 
     def sort_restaurant_dict(self, restaurant_dict):
         logger.debug("sorting this restaurants dict after votes: %s" % restaurant_dict)

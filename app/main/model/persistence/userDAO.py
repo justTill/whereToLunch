@@ -7,8 +7,8 @@ logger = structlog.getLogger(__name__)
 
 class UserDAO:
 
-    def get_users_that_are_not_on_list(self, userList):
-        return User.objects.all().exclude(username__in=userList)
+    def get_users_from_team_that_are_not_on_list(self, userList, team):
+        return User.objects.all().filter(team=team).exclude(username__in=userList)
 
     def get_image_from_user(self, user):
         user = User.objects.filter(username=user.get('user__username'))

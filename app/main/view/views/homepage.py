@@ -20,13 +20,13 @@ logger = structlog.getLogger(__name__)
 def index(request):
     team = request.user.team
     template = loader.get_template('templates/index.html')
-    choice_of_the_day = vote_logic.choice_of_the_day()
+    choice_of_the_day = vote_logic.choice_of_the_day_for_team(team)
     voted_restaurants = vote_logic.get_voted_restaurants_from_user(
         request.user) if request.user.is_authenticated else None
     supporters = vote_logic.get_choice_of_the_day_supporters(choice_of_the_day)
-    user_that_have_not_voted = user_logic.get_users_that_not_voted_yet()
-    user_that_are_out = user_logic.get_user_that_are_not_available_for_lunch()
-    user_that_do_not_care = user_logic.get_users_that_do_not_care()
+    user_that_have_not_voted = user_logic.get_users_from_team_that_not_voted_yet(team)
+    user_that_are_out = user_logic.get_user_from_team_that_are_not_available_for_lunch(team)
+    user_that_do_not_care = user_logic.get_users_from_team_that_do_not_care(team)
     website_name = customize_logic.get_website_name()
     background_image_url = customize_logic.get_background_image_url()
     longest_absence_list = get_longest_list([user_that_have_not_voted, user_that_do_not_care, user_that_are_out])

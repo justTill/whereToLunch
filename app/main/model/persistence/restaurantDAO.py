@@ -14,8 +14,8 @@ class RestaurantDAO:
         ]
         return restaurants
 
-    def get_restaurant_with_name(self, restaurant_name):
-        return Restaurant.objects.filter(restaurant_name=restaurant_name)
+    def get_restaurant_with_name_for_team(self, restaurant_name, team):
+        return Restaurant.objects.filter(restaurant_name=restaurant_name).filter(restaurant_for_team=team)
 
-    def get_color_for_restaurant_with_name(self, restaurant_name):
-        return Restaurant.objects.filter(restaurant_name=restaurant_name).get().restaurant_color
+    def get_color_for_restaurant_with_name_for_team(self, restaurant_name, team):
+        return Restaurant.objects.filter(restaurant_name=restaurant_name).filter(restaurant_for_team=team).get().restaurant_color

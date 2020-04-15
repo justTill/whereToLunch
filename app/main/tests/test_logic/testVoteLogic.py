@@ -22,7 +22,7 @@ class VoteLogicTest(TestCase):
         second_test_user.save()
 
     def test_choice_of_the_day(self):
-        choice_of_the_day = self.voteLogic.choice_of_the_day()
+        choice_of_the_day = self.voteLogic.choice_of_the_day_for_team()
         self.assertEquals(len(choice_of_the_day), 1)
         self.assertIn('first_restaurant', choice_of_the_day[0].__str__())
 
@@ -33,7 +33,7 @@ class VoteLogicTest(TestCase):
         restaurant = Restaurant.objects.create(restaurant_name='restaurant')
         Vote.objects.create(restaurant=restaurant, user=user)
 
-        choice_of_the_day = self.voteLogic.choice_of_the_day()
+        choice_of_the_day = self.voteLogic.choice_of_the_day_for_team()
         self.assertIn('first_restaurant', choice_of_the_day[0].__str__())
         self.assertIn('restaurant', choice_of_the_day[1].__str__())
 

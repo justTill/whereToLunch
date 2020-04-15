@@ -19,14 +19,14 @@ customize_logic = CustomizeLogic()
 
 def index(request):
     template = loader.get_template('templates/absenceIndex.html')
-    context = get_standard_context()
+    context = get_standard_context(request)
     return HttpResponse(template.render(context, request))
 
 
 @staff_member_required
 def save_new_absence(request):
     logger.debug("save absence")
-    context = get_standard_context()
+    context = get_standard_context(request)
     if request.method == 'POST':
         form = AbsenceForm(request.POST)
         if form.is_valid():
@@ -56,9 +56,10 @@ def delete_absences(request):
     return HttpResponseRedirect(reverse('main:absenceIndex'))
 
 
-def get_standard_context():
+def get_standard_context(request):
+    team = request.user.team
     logger.debug("get standard context things for Absences index page")
-    absences_from_users = absence_logic.get_sorted_absent_absences()
+    absences_from_users = absence_logic.get_sorted_absent_absences_for_team(team)
     website_name = customize_logic.get_website_name()
     background_image_url = customize_logic.get_background_image_url()
     return {

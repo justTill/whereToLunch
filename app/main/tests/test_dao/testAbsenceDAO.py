@@ -49,6 +49,6 @@ class AbsenceDaoTest(TestCase):
                                          absenceFrom=self.today,
                                          absenceTo=self.today,
                                          reason=Reasons.ABSENT.value)
-        absences_for_reason = self.absence_dao.get_absences_for_reason(Reasons.ABSENT)
+        absences_for_reason = self.absence_dao.get_absences_from_team_for_reason(Reasons.ABSENT)
 
         self.assertEqual(absence, absences_for_reason.get())

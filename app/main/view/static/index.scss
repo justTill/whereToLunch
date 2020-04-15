@@ -25,7 +25,7 @@ body {
   border-bottom: #cccccc solid 1px;
 
 }
-@media (min-width: $l-mobile) {
+@media (max-width: $l-mobile) {
   .choiceForToday{
     display: none;
   }
