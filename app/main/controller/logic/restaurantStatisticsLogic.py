@@ -32,7 +32,7 @@ class RestaurantStatisticsLogic:
         return {
                 restaurant.restaurant_name: vote
                 for restaurant, vote
-                in self.restaurant_logic.get_restaurants_with_votes().items()
+                in self.restaurant_logic.get_restaurants_with_votes_from_team().items()
                 if vote != 0
             }
 

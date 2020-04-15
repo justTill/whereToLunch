@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms.widgets import Input
+from users.models import Team
 
 
 class ColorField(models.CharField):
@@ -13,9 +14,13 @@ class ColorField(models.CharField):
 
 
 class Restaurant(models.Model):
-    restaurant_name = models.CharField(max_length=100, unique=True)
+    restaurant_name = models.CharField(max_length=100)
     restaurant_color = ColorField(default='#ffffff')
     restaurant_menu_link = models.URLField(max_length=300, null=True, blank=True)
+    restaurant_for_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('restaurant_for_team', 'restaurant_name',)
 
     def __str__(self):
         return self.restaurant_name
@@ -23,3 +28,4 @@ class Restaurant(models.Model):
 
 class ColorWidget(Input):
     input_type = 'color'
+2

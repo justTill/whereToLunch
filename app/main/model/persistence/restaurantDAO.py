@@ -4,8 +4,8 @@ from main.model.models import Restaurant
 
 class RestaurantDAO:
 
-    def get_all_restaurants(self):
-        return Restaurant.objects.order_by(Lower('restaurant_name'))
+    def get_all_restaurants_from_team(self, team):
+        return Restaurant.objects.filter(restaurant_for_team=team).order_by(Lower('restaurant_name'))
 
     def get_restaurants_with_ids(self, restaurant_ids):
         restaurants = [

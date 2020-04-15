@@ -25,7 +25,7 @@ class RestaurantLogicTest(TestCase):
 
     def test_restaurantsWithVotes(self):
         restaurantLogic = RestaurantLogic()
-        restaurantSet = restaurantLogic.get_restaurants_with_votes()
+        restaurantSet = restaurantLogic.get_restaurants_with_votes_from_team()
         first_restaurant = Restaurant.objects.get(restaurant_name='first_restaurant')
         second_restaurant = Restaurant.objects.get(restaurant_name='second_restaurant')
         third_restaurant = Restaurant.objects.get(restaurant_name='third_restaurant')

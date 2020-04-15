@@ -9,19 +9,19 @@ class RestaurantLogic:
     restaurant_dao = RestaurantDAO()
     vote_dao = VoteDAO()
 
-    def get_all_restaurants(self):
+    def get_all_restaurants_from_team(self, team):
         logger.debug("get all restaurants")
-        return self.restaurant_dao.get_all_restaurants()
+        return self.restaurant_dao.get_all_restaurants_from_team(team)
 
     def get_restaurants_with_ids(self, restaurants_ids):
         logger.debug("get restaurant with ids: %s" % restaurants_ids)
         return self.restaurant_dao.get_restaurants_with_ids(restaurants_ids)
 
-    def get_restaurants_with_votes(self):
+    def get_restaurants_with_votes_from_team(self, team):
         logger.debug("get restaurants with number of votes")
         restaurant_dict = {
             restaurant: self.get_votes_for_restaurant_with_id(restaurant.id)
-            for restaurant in self.get_all_restaurants()
+            for restaurant in self.get_all_restaurants_from_team(team)
         }
         return self.sort_restaurant_dict(restaurant_dict)
 

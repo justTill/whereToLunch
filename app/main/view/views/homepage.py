@@ -16,7 +16,9 @@ customize_logic = CustomizeLogic()
 logger = structlog.getLogger(__name__)
 
 
+@staff_member_required
 def index(request):
+    team = request.user.team
     template = loader.get_template('templates/index.html')
     choice_of_the_day = vote_logic.choice_of_the_day()
     voted_restaurants = vote_logic.get_voted_restaurants_from_user(
@@ -29,7 +31,7 @@ def index(request):
     background_image_url = customize_logic.get_background_image_url()
     longest_absence_list = get_longest_list([user_that_have_not_voted, user_that_do_not_care, user_that_are_out])
     context = {
-        'restaurant_list': restaurant_logic.get_restaurants_with_votes(),
+        'restaurant_list': restaurant_logic.get_restaurants_with_votes_from_team(team),
         'choice_of_the_day': choice_of_the_day,
         'voted_restaurants': voted_restaurants,
         'supporters': supporters,
