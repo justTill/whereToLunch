@@ -1,10 +1,12 @@
 import datetime
 from unittest import TestCase
-from django.contrib.auth.models import User
 from main.model.models import Absence, Vote, Restaurant, ChoicesOfTheWeek
 from utils.enum import Reasons
 from utils.date import dateManager
 from utils import resetVotes
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class TestResetVotes(TestCase):

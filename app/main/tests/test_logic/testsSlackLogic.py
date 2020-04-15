@@ -1,9 +1,11 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 from main.controller.logic import SlackLogic
 from main.model.models import Customize, Forecast
 from utils.enum import CustomizeChoices
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class SetUpTestsp(TestCase):

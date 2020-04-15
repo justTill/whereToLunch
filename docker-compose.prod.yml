@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   lunchapp:
-    image: justtill/where_to_eat:where_to_eat_v.1.2.1
+    image: justtill/where_to_eat:where_to_eat_v.1.0.0
     build:
       context: ./app
       dockerfile: Dockerfile.prod

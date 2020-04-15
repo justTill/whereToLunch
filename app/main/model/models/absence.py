@@ -1,5 +1,6 @@
 import datetime
-from django.contrib.auth.models import User
+
+from django.contrib.auth import get_user_model
 from django.db import models
 from utils.enum import Reasons
 
@@ -11,7 +12,7 @@ class Absence(models.Model):
         (Reasons.DONOTCARE.value, 'i am out'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     absenceFrom = models.DateField(default=datetime.date.today)
     absenceTo = models.DateField(default=datetime.date.today)
     reason = models.CharField(choices=ABSENCE_CHOICES, default=ABSENCE_CHOICES, max_length=20)

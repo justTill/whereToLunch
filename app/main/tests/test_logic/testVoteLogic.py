@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from main.controller.logic import VoteLogic
 from main.model.models import Restaurant, Vote
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class VoteLogicTest(TestCase):

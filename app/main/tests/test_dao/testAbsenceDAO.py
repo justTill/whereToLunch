@@ -1,9 +1,11 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from main.model.persistence import AbsenceDAO
 from main.model.models import Absence
 from utils.enum import Reasons
 from utils.date import dateManager
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class AbsenceDaoTest(TestCase):
