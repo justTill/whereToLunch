@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class SetUpTestsp(TestCase):
+class SlackLogicTest(TestCase):
     slack = SlackLogic()
 
     def test_get_random_slack_message_with_users(self):
@@ -19,7 +19,7 @@ class SetUpTestsp(TestCase):
         user.set_password('12345')
         user.save()
 
-        user.profile.slack_member_id = "12345"
+        user.slack_member_id = "12345"
 
         new_message = self.slack.get_random_slack_message_with_users([user])
         self.assertIn("12345", new_message)

@@ -14,3 +14,5 @@ class User(AbstractUser):
         db_table = 'auth_user'
 
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+    slack_member_id = models.CharField(max_length=100, blank=True)
+    user_image = models.ImageField(upload_to='images/', blank=True)

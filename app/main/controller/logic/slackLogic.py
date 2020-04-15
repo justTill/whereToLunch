@@ -17,8 +17,8 @@ class SlackLogic:
         member_ids = ""
         if slack_users:
             for user in slack_users:
-                if user.profile.slack_member_id:
-                    member_ids = member_ids + "<@" + user.profile.slack_member_id + "> "
+                if user.slack_member_id:
+                    member_ids = member_ids + "<@" + user.slack_member_id + "> "
             if member_ids:
                 switcher = {
                     1: member_ids + "are to slow. They do not get any kind of food today",
@@ -34,8 +34,8 @@ class SlackLogic:
 
     def send_vote_notification_to_slack_channel(self):
         logger.debug('send notification to slack channel')
-        user_that_voted = self.userLogic.get_users_that_not_voted_yet()
-        message = self.get_random_slack_message_with_users(user_that_voted)
+        user_that_not_voted = self.userLogic.get_users_that_not_voted_yet()
+        message = self.get_random_slack_message_with_users(user_that_not_voted)
         url = self.customize_logic.get_website_url()
 
         self.send_message_to_slack_channel(message + " " + url)

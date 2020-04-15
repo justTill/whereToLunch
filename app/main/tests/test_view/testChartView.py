@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from main.model.models import ChoicesOfTheWeek, Restaurant, Vote, Profile
+from main.model.models import ChoicesOfTheWeek, Restaurant, Vote
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -13,16 +13,13 @@ class ChartView(TestCase):
 
         testUser = User.objects.create(username='testUser', is_staff=True)
         testUser.set_password('12345')
+        testUser.slack_member_id = "member_id"
+        testUser.user_image = "image_url"
         testUser.save()
 
         ChoicesOfTheWeek.objects.create(restaurant=first_restaurant)
         ChoicesOfTheWeek.objects.create(restaurant=first_restaurant)
         ChoicesOfTheWeek.objects.create(restaurant=second_restaurant)
-
-        profile = Profile.objects.get(user=testUser)
-        profile.slack_member_id = "member_id"
-        profile.userImage = "image_url"
-        profile.save()
 
         Vote.objects.create(restaurant=first_restaurant, user=testUser)
 
