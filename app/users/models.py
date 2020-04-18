@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Team(models.Model):
     team_name = models.CharField(max_length=100, unique=True)
+    slack_channel = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.team_name

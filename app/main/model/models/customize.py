@@ -13,7 +13,6 @@ class Customize(models.Model):
         (CustomizeChoices.BACKGROUND_IMAGE.value, 'background_image'),
         (CustomizeChoices.OPENWEATHERMAP_API_KEY.value, 'openweathermap_api_key'),
         (CustomizeChoices.SLACK_APP_API_KEY.value, 'slack_app_api_key'),
-        (CustomizeChoices.SLACK_CHANNEL.value, 'slack_channel'),
         (CustomizeChoices.CITY_FOR_WEATHER.value, 'city_for_weather'),
         (CustomizeChoices.WEBSITE_URL.value, 'website_url'),
         (CustomizeChoices.TIMEZONE.value, 'timezone')
