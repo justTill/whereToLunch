@@ -17,6 +17,7 @@ vote_logic = VoteLogic()
 customize_logic = CustomizeLogic()
 
 
+@staff_member_required
 def index(request):
     template = loader.get_template('templates/absenceIndex.html')
     context = get_standard_context(request)
