@@ -54,19 +54,21 @@ class SlackLogic:
 
     def send_vote_notification_to_slack_channels(self):
         logger.debug('send notification to slack channel')
+        url = self.customize_logic.get_website_url()
         for team in Team.objects.all():
             user_that_not_voted = self.userLogic.get_users_from_team_that_not_voted_yet(team)
             message = self.get_random_slack_message_with_users(user_that_not_voted)
-            url = self.customize_logic.get_website_url()
             slack_channel = team.slack_channel
             self.send_message_to_slack_channel(slack_channel, message + " " + url)
 
     def send_weather_forecast_to_slack_channels(self):
         url = self.customize_logic.get_website_url()
-        slack_channel = ""
-        message = self.get_weather_forecast()
-        if message:
-            self.send_message_to_slack_channel(slack_channel, message + " " + url)
+        for team in Team.objects.all():
+            slack_channel = team.slack_channel
+            if slack_channel:
+                message = self.get_weather_forecast()
+                if message:
+                    self.send_message_to_slack_channel(slack_channel, message + " " + url)
 
     def send_message_to_slack_channel(self, slack_channel, message):
         logger.debug('send message: %s to slack channel' % message)
