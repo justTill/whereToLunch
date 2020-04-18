@@ -17,10 +17,13 @@ vote_logic = VoteLogic()
 customize_logic = CustomizeLogic()
 
 
-@staff_member_required
 def index(request):
-    template = loader.get_template('templates/absenceIndex.html')
-    context = get_standard_context(request)
+    if not request.user.is_anonymous:
+        template = loader.get_template('templates/absenceIndex.html')
+        context = get_standard_context(request)
+    else:
+        template = loader.get_template('templates/anonymousPage.html')
+        context = get_standard_context(request)
     return HttpResponse(template.render(context, request))
 
 
