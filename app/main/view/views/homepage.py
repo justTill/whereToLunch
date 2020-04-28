@@ -17,6 +17,7 @@ logger = structlog.getLogger(__name__)
 
 
 def index(request):
+    default_context = get_default_context()
     if not request.user.is_anonymous:
         team = request.user.team
         template = loader.get_template('templates/index.html')
@@ -27,29 +28,22 @@ def index(request):
         user_that_have_not_voted = user_logic.get_users_from_team_that_not_voted_yet(team)
         user_that_are_out = user_logic.get_user_from_team_that_are_not_available_for_lunch(team)
         user_that_do_not_care = user_logic.get_users_from_team_that_do_not_care(team)
-        website_name = customize_logic.get_website_name()
-        background_image_url = customize_logic.get_background_image_url()
         longest_absence_list = get_longest_list([user_that_have_not_voted, user_that_do_not_care, user_that_are_out])
-        context = {
+        default_context.update({
             'restaurant_list': restaurant_logic.get_restaurants_with_votes_from_team(team),
             'choice_of_the_day': choice_of_the_day,
             'voted_restaurants': voted_restaurants,
             'supporters': supporters,
-            'is_after_noon': dateManager.is_after_noon(),
-            'weather_context': weather_context(),
             'not_voted': user_that_have_not_voted,
             'user_that_are_out': user_that_are_out,
             'user_that_do_not_care': user_that_do_not_care,
-            'website_name': website_name,
-            'background_image_url': background_image_url,
             'django_static_url': settings.MEDIA_URL,
             'longest_absence_list': longest_absence_list
-        }
+        })
         logger.debug('collected index view stuff')
     else:
         template = loader.get_template('templates/anonymousPage.html')
-        context = {}
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(default_context, request))
 
 
 @staff_member_required
@@ -84,3 +78,15 @@ def doNotCare(request):
 def get_longest_list(lists):
     longest = max(lists, key=lambda i: len(i))
     return longest
+
+
+def get_default_context():
+    #admin_information = UserLogic.get_admin_name_with_email()
+    return {
+        'website_name': customize_logic.get_website_name(),
+        'is_after_noon': dateManager.is_after_noon(),
+        'weather_context': weather_context(),
+        'background_image_url': customize_logic.get_background_image_url(),
+        'admin_name': "admin name",
+        'admin_mail': "admin email"
+    }

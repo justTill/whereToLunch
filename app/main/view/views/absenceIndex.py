@@ -18,19 +18,24 @@ customize_logic = CustomizeLogic()
 
 
 def index(request):
+    context = get_standard_context()
     if not request.user.is_anonymous:
         template = loader.get_template('templates/absenceIndex.html')
-        context = get_standard_context(request)
+        team = request.user.team
+        absences_from_users = absence_logic.get_sorted_absent_absences_for_team(team)
+        context.update({
+            'absence_form': AbsenceForm(),
+            'absences_from_users': absences_from_users,
+        })
     else:
         template = loader.get_template('templates/anonymousPage.html')
-        context = get_standard_context(request)
     return HttpResponse(template.render(context, request))
 
 
 @staff_member_required
 def save_new_absence(request):
     logger.debug("save absence")
-    context = get_standard_context(request)
+    context = get_standard_context()
     if request.method == 'POST':
         form = AbsenceForm(request.POST)
         if form.is_valid():
@@ -60,18 +65,13 @@ def delete_absences(request):
     return HttpResponseRedirect(reverse('main:absenceIndex'))
 
 
-def get_standard_context(request):
-    team = request.user.team
+def get_standard_context():
     logger.debug("get standard context things for Absences index page")
-    absences_from_users = absence_logic.get_sorted_absent_absences_for_team(team)
     website_name = customize_logic.get_website_name()
     background_image_url = customize_logic.get_background_image_url()
     return {
         'weather_context': weather_context(),
-        'absence_form': AbsenceForm(),
         'is_after_noon': dateManager.is_after_noon(),
-        'absences_from_users': absences_from_users,
         'website_name': website_name,
         'background_image_url': background_image_url,
-        'django_static_url': settings.STATIC_URL,
     }
