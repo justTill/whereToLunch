@@ -17,3 +17,6 @@ class UserDAO:
             return user.get().user_image.url
         logger.warning('could not get Image URL, check if an image is deposited')
         return None
+
+    def get_admin_user(self):
+        return User.objects.all().filter(is_superuser=True)

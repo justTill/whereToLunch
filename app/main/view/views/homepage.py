@@ -81,12 +81,12 @@ def get_longest_list(lists):
 
 
 def get_default_context():
-    #admin_information = UserLogic.get_admin_name_with_email()
+    admin_information = user_logic.get_admin_name_with_email()
     return {
         'website_name': customize_logic.get_website_name(),
         'is_after_noon': dateManager.is_after_noon(),
         'weather_context': weather_context(),
         'background_image_url': customize_logic.get_background_image_url(),
-        'admin_name': "admin name",
-        'admin_mail': "admin email"
+        'admin_name': admin_information['names'],
+        'admin_mail': admin_information['mails']
     }

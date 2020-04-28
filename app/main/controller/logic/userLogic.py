@@ -49,5 +49,16 @@ class UserLogic:
 
     def get_user_from_team_that_are_not_available_for_lunch(self, team):
         logger.debug('process users that do not care and are out for lunch')
-        users = self.get_users_from_team_that_have_a_active_absent_absence(team) + self.get_users_from_team_that_are_out(team)
+        users = self.get_users_from_team_that_have_a_active_absent_absence(
+            team) + self.get_users_from_team_that_are_out(team)
         return users
+
+    def get_admin_name_with_email(self):
+        superusers = self.user_dao.get_admin_user()
+        names = []
+        mails = []
+        for admin in superusers:
+            names.append(admin.username)
+            mails.append(admin.email)
+
+        return {'names': names, 'mails': mails}
