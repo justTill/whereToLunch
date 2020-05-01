@@ -48,9 +48,9 @@ def create_and_start_cron_jobs_with_scheduler(scheduler):
         scheduler.add_job(clearLogs.clear_debug_logs, 'interval', minutes=23, id="clear_debug_logs")
         scheduler.add_job(clearLogs.clear_audit_logs, 'interval', minutes=23, id="clear_audit_logs")
         scheduler.add_job(forecastApi.delete_old_forecasts, 'cron', hour=6, minute=00, id="delete_old_forecasts")
-        scheduler.add_job(slack.send_vote_notification_to_slack_channel, 'cron', minute=00, hour=11, day_of_week="0-4",
+        scheduler.add_job(slack.send_vote_notification_to_slack_channels, 'cron', minute=00, hour=11, day_of_week="0-4",
                           id="send_vote_notification")
-        scheduler.add_job(slack.send_weather_forecast_to_slack_channel, 'cron', minute=00, hour=15, day_of_week="0-4",
+        scheduler.add_job(slack.send_weather_forecast_to_slack_channels, 'cron', minute=00, hour=15, day_of_week="0-4",
                           id="send_weather_forecast")
         scheduler.add_job(resetVotes.reset_things_from_last_vote_day, 'cron', minute=30, hour=12, day_of_week="0-4",
                           id="reset_things")

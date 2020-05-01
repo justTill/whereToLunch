@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More than one Teams can use one running instance of the app independently
 - If you have more ideas for features, you can either open an issue/Milestone or drop a pull request
 
+## [1.1.0] - 2020-01-05
+### Added
+- A Teams
+- Users need to be in a Team
+- One app instance can be used by more than one team
 
 ## [1.0.0] - 2020-04-15
 ### Added
 - re-published project
+
 - new Folder and Database structure
 - User model now contains a Team field (does not have any effect in this version. It is Important for later versions)

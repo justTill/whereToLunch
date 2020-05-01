@@ -15,21 +15,21 @@ class AbsenceLogic:
         self.delete_old_and_current_absences_for_user(user)
         self.absence_DAO.set_absence_for_user(user, current_vote_day, current_vote_day, reason)
 
-    def get_absences_for_do_not_care(self):
+    def get_absences_from_team_that_do_not_care(self, team):
         logger.debug("get absences for do not Care")
-        return self.absence_DAO.get_absences_for_reason(Reasons.DONOTCARE)
+        return self.absence_DAO.get_absences_from_team_for_reason(Reasons.DONOTCARE, team)
 
-    def get_absences_for_out(self):
+    def get_absences_from_team_that_are_out(self, team):
         logger.debug("get absences for out")
-        return self.absence_DAO.get_absences_for_reason(Reasons.OUT)
+        return self.absence_DAO.get_absences_from_team_for_reason(Reasons.OUT, team)
 
-    def get_absent_absences(self):
+    def get_absent_absences_from_team(self, team):
         logger.debug("get absences for just being Absent")
-        return self.absence_DAO.get_absences_for_reason(Reasons.ABSENT)
+        return self.absence_DAO.get_absences_from_team_for_reason(Reasons.ABSENT, team)
 
-    def get_sorted_absent_absences(self):
+    def get_sorted_absent_absences_for_team(self, team):
         logger.debug("get sorted absent Absences from all Users")
-        absences_from_all_users = self.get_absent_absences()
+        absences_from_all_users = self.get_absent_absences_from_team(team)
         user_list = []
         logger.debug("collect all Users that have an absent Absences")
         for absence in absences_from_all_users:
@@ -45,10 +45,10 @@ class AbsenceLogic:
 
         return sorted_absences
 
-    def get_active_absent_absences(self):
+    def get_active_absent_absences_from_team(self, team):
         logger.debug("get active absent absences")
         current_vote_day = dateManager.current_vote_day()
-        absences = self.absence_DAO.get_absences_for_reason(Reasons.ABSENT)
+        absences = self.absence_DAO.get_absences_from_team_for_reason(Reasons.ABSENT, team)
         active_absences = []
         for absence in absences:
             if self.check_if_a_absence_is_active_for_date([absence], current_vote_day):

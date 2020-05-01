@@ -1,0 +1,28 @@
+{% extends './base_layout.html' %}
+
+{% block content %}
+    <div class="welcomeText" id="loginText">You need to be logged in to use the "Where To Eat" App</div>
+    <div>
+        <form class="anonymousLogin" action="{% url 'admin:index' %}" method="post">
+            {% csrf_token %}
+            <button class="loginButton" type="submit" value="Log in"> Login </button>
+        </form>
+    </div>
+    <div class="textForNewMembers">
+        <h1 class="titleForNewMember"> You are new ?</h1>
+        <span class="introductionText">
+            You want that your team to vote on "Where To Eat" to determine where to eat for lunch.
+            Write an E-mail to an admin
+            <br> <b>Admin name/s:</b> {{admin_name}}
+            <br> <b>E-mail/s:</b> {{admin_mail}}
+            <br>
+            The E-mail should contain following information
+            <ul class="emailContent">
+               <li>Team name</li>
+               <li>People that are in that Team and want to Vote</li>
+               <li>Slack channel name of the team (if you have on)</li>
+            </ul>
+            The admin will inform you, when you can use the App and give you your credentials
+        </span>
+    </div>
+{% endblock %}

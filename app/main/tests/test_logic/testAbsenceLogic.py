@@ -1,11 +1,12 @@
 import datetime
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 from main.controller.logic import AbsenceLogic
 from main.model.persistence import AbsenceDAO
 from main.model.models import Absence
+from users.models import Team
 from utils.enum import Reasons
 from utils.date import dateManager
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -20,14 +21,18 @@ class AbsenceLogicTest(TestCase):
     current_vote_date = dateManager.current_vote_day()
 
     def setUp(self):
+        team = Team.objects.create(team_name="TestTeam")
         test_user = User.objects.create(username='test_user', is_staff=True)
         test_user.set_password('12345')
+        test_user.team = team
         test_user.save()
         test_user_second = User.objects.create(username='test_user_second', is_staff=True)
         test_user_second.set_password('12345')
+        test_user_second.team = team
         test_user_second.save()
         test_user_third = User.objects.create(username='test_user_third', is_staff=True)
         test_user_third.set_password('12345')
+        test_user_third.team = team
         test_user_third.save()
 
         Absence.objects.create(user=test_user,
@@ -43,7 +48,15 @@ class AbsenceLogicTest(TestCase):
                                absenceFrom=self.yesterday,
                                absenceTo=self.yesterday,
                                reason=Reasons.OUT.value)
-
+        # other User absence with different team does not effect absences for TestTeam
+        other_team = Team.objects.create(team_name="other_team")
+        other_user = User.objects.create(username='other_user', is_staff=True)
+        other_user.set_password('12345')
+        other_user.team = team
+        Absence.objects.create(user=other_user,
+                               absenceFrom=self.today,
+                               absenceTo=self.today,
+                               reason=Reasons.OUT.value)
 
     def test_check_if_a_absence_is_active_for_date(self):
         absence = [Absence.objects.get(user__username='test_user')]
@@ -95,7 +108,7 @@ class AbsenceLogicTest(TestCase):
 
     def test_delete_absences_for_user(self):
         absences = Absence.objects.all()
-        self.assertEqual(len(absences), 3)
+        self.assertEqual(len(absences), 4)
         for a in absences:
             self.absence_logic.delete_absences_for_user(a.user, [a.__str__()])
 
@@ -103,25 +116,28 @@ class AbsenceLogicTest(TestCase):
         self.assertEqual(len(absences), 0)
 
     def test_get_active_absent_absences(self):
+        team = Team.objects.get(team_name="TestTeam")
         user = User.objects.get(username='test_user')
         absent = Absence.objects.create(user=user,
                                         absenceFrom=self.today,
                                         absenceTo=self.tomorrow,
                                         reason=Reasons.ABSENT.value)
 
-        active_absences = self.absence_logic.get_active_absent_absences()
+        active_absences = self.absence_logic.get_active_absent_absences_from_team(team)
         self.assertEqual(active_absences, [absent])
 
     def test_delete_all_inactive_absences(self):
         first_absence = Absence.objects.get(user__username='test_user')
         second_absence = Absence.objects.get(user__username='test_user_second')
         third_absence = Absence.objects.get(user__username='test_user_third')
+        other_absence = Absence.objects.get(user__username='other_user')
 
-        self.assertEquals([first_absence, second_absence, third_absence], list(Absence.objects.all()))
+        self.assertEquals([first_absence, second_absence, third_absence, other_absence], list(Absence.objects.all()))
         self.absence_logic.delete_all_inactive_absences()
         self.assertIn(second_absence, list(Absence.objects.all()))
 
     def test_get_sorted_absent_absences(self):
+        team = Team.objects.get(team_name="TestTeam")
         user = User.objects.get(username='test_user')
         user_two = User.objects.get(username='test_user_second')
 
@@ -134,7 +150,7 @@ class AbsenceLogicTest(TestCase):
                                              absenceTo=self.tomorrow,
                                              reason=Reasons.ABSENT.value)
 
-        absences = self.absence_logic.get_sorted_absent_absences()
+        absences = self.absence_logic.get_sorted_absent_absences_for_team(team)
         self.assertEqual(absences, {'test_user': [absence], 'test_user_second': [absence_two]})
 
     def test_delete_vote_absence_for_user(self):

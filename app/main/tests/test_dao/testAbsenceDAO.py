@@ -1,9 +1,10 @@
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 from main.model.persistence import AbsenceDAO
 from main.model.models import Absence
+from users.models import Team
 from utils.enum import Reasons
 from utils.date import dateManager
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -13,8 +14,10 @@ class AbsenceDaoTest(TestCase):
     today = dateManager.today()
 
     def setUp(self):
+        team = Team.objects.create(team_name="TestTeam")
         first_Test_User = User.objects.create(username='first_Test_User', is_staff=True)
         first_Test_User.set_password('12345')
+        first_Test_User.team = team
         first_Test_User.save()
 
     def test_set_absence_for_User(self):
@@ -49,6 +52,6 @@ class AbsenceDaoTest(TestCase):
                                          absenceFrom=self.today,
                                          absenceTo=self.today,
                                          reason=Reasons.ABSENT.value)
-        absences_for_reason = self.absence_dao.get_absences_for_reason(Reasons.ABSENT)
+        absences_for_reason = self.absence_dao.get_absences_from_team_for_reason(Reasons.ABSENT, user.team)
 
         self.assertEqual(absence, absences_for_reason.get())

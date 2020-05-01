@@ -27,4 +27,4 @@ class AbsenceForm(ModelForm):
         if end_date < today:
             raise forms.ValidationError("end date should be in the future or at least be today")
         if start_date < today:
-            raise forms.ValidationError("start date should be at least be today")
+            raise forms.ValidationError("start date should be at least today")
