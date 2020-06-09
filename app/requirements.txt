@@ -1,6 +1,6 @@
 anyjson==0.3.3
 APScheduler==3.6.3
-Django==2.2.10
+Django==2.2.13
 django-appconf==1.0.3
 django-compat==1.0.15
 django-compressor==2.3
