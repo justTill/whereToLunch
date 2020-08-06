@@ -28,4 +28,3 @@ class Restaurant(models.Model):
 
 class ColorWidget(Input):
     input_type = 'color'
-2

@@ -77,7 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'LightningLunch.wsgi.application'
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -157,7 +156,8 @@ LOGGING = {
         },
         'file': {
             "()": structlog.stdlib.ProcessorFormatter,
-            "processor": structlog.processors.KeyValueRenderer(key_order=['level', 'user_id', 'request_id', 'timestamp', 'event']),
+            "processor": structlog.processors.KeyValueRenderer(
+                key_order=['level', 'user_id', 'request_id', 'timestamp', 'event']),
         }
     },
     'handlers': {

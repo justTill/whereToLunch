@@ -1,5 +1,6 @@
 import structlog
 from django.contrib.auth import get_user_model
+from users.models import Team
 
 User = get_user_model()
 logger = structlog.getLogger(__name__)
@@ -20,3 +21,6 @@ class UserDAO:
 
     def get_admin_user(self):
         return User.objects.all().filter(is_superuser=True)
+
+    def get_team_with_name(self, name):
+        return Team.objects.all().filter(team_name=name)

@@ -62,3 +62,11 @@ class UserLogic:
             mails.append(admin.email)
 
         return {'names': names, 'mails': mails}
+
+    def get_team_with_name_or_none(self, name):
+        name = self.user_dao.get_team_with_name(name)
+        if name:
+            name = name[0]
+        else:
+            name = None
+        return name
