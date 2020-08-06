@@ -3,7 +3,7 @@
 {% block content %}
     <div class="welcomeText" id="loginText">You need to be logged in to use the "Where To Eat" App</div>
     <div>
-        <form class="anonymousLogin" action="{% url 'admin:index' %}" method="post">
+        <form class="anonymousLogin" action="{% url 'main:vote' %}" method="post">
             {% csrf_token %}
             <button class="loginButton" type="submit" value="Log in"> Login </button>
         </form>
