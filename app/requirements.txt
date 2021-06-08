@@ -14,7 +14,7 @@ virtualenv==16.7.7
 django-chartjs==1.5.0
 djangorestframework==3.10.3
 slacker==0.13.0
-Pillow==7.0.0
+Pillow==8.2.0
 psycopg2-binary==2.8.3
 gunicorn==19.9.0
 django-nose==1.4.6
